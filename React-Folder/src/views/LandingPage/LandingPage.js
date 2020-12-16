@@ -34,7 +34,7 @@ export default function LandingPage(props) {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="Material Kit React"
+        brand="Charity"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -43,7 +43,7 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/landing-bg.jpg")}>
+      <Parallax filter image={require("assets/img/background.jpg")}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
@@ -51,17 +51,6 @@ export default function LandingPage(props) {
               <h4>
                 Our team aims to authenticate the legitimacy of charity organisations and store a record of donations.
               </h4>
-              <br />
-              <Button
-                color="danger"
-                size="lg"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-play" />
-                Watch video
-              </Button>
             </GridItem>
           </GridContainer>
         </div>
@@ -70,10 +59,8 @@ export default function LandingPage(props) {
         <div className={classes.container}>
           <ProductSection />
           <TeamSection />
-          <WorkSection />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
