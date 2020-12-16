@@ -1,4 +1,5 @@
-/react_app/my-app/*
+/react-app/my-app/**
+/react-app/my-app/*
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,react,node,solidity,soliditytruffle,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,react,node,solidity,soliditytruffle,windows
