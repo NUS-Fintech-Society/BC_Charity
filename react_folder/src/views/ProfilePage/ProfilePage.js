@@ -9,7 +9,6 @@ import Palette from "@material-ui/icons/Palette";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
 import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -47,7 +46,7 @@ export default function ProfilePage(props) {
     <div>
       <Header
         color="transparent"
-        brand="Material Kit React"
+        brand="Charity"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -209,7 +208,6 @@ export default function ProfilePage(props) {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

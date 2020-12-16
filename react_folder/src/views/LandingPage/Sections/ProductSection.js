@@ -59,6 +59,22 @@ export default function ProductSection() {
           </GridItem>
         </GridContainer>
       </div>
+      <br></br>
+      <h2 className={classes.title}>Data</h2>
+      <div>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <h4 className={classes.title}>List of Charities</h4>
+
+
+            </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+              <h4 className={classes.title}>Transaction List</h4>
+
+
+            </GridItem>
+        </GridContainer>
+      </div>
     </div>
   );
 }
