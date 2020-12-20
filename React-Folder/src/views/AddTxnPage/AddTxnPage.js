@@ -9,8 +9,8 @@ import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 
 import profile from "assets/img/faces/christian.jpg";
 
@@ -64,13 +64,50 @@ export default function ProfilePage(props) {
                 Brief description of Charity #1.
               </p>
             </div>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                <Button simple color="success" size="lg">
-                  + Add a transaction
-                </Button>
-              </GridItem>
-            </GridContainer>
+            <div>
+                <h3>Add Transaction</h3>
+            </div>
+            <form>
+                <GridContainer>
+                    <GridItem xs={12} sm={12} md={6}>
+                        <CustomInput
+                        labelText="NRIC"
+                        id="nric"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={6}>
+                        <CustomInput
+                        labelText="Amount"
+                        id="amount"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        />
+                    </GridItem>
+                    <CustomInput
+                        labelText="Note"
+                        id="Note"
+                        formControlProps={{
+                        fullWidth: true,
+                        className: classes.textArea
+                        }}
+                        inputProps={{
+                        multiline: true,
+                        rows: 5
+                        }}
+                    />
+                </GridContainer>
+                <GridContainer justify="center">
+                    <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+                        <Button color="success">
+                            Done
+                        </Button>
+                    </GridItem>
+                </GridContainer>
+            </form>
           </div>
         </div>
       </div>

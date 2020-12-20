@@ -10,6 +10,7 @@ import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import VerifyPage from "views/VerifyPage/VerifyPage.js";
+import AddTxnPage from "views/AddTxnPage/AddTxnPage.js";
 
 var hist = createBrowserHistory();
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login-page" component={LoginPage} />
           <Route path="/component" component={Components} />
           <Route path="/verify" component={VerifyPage} />
+          <Route path="/addtxn" component={AddTxnPage} />
         </Switch>
       </Router>
     </div>
