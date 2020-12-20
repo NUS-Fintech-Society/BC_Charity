@@ -22,6 +22,10 @@ import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
+// Contracts
+import CharityChain from "../../contracts/build/CharityChain.json";
+import { getCharityChainContract } from "contracts/instance/CharityChain.js";
+
 // Web3
 const Web3 = require('web3');
 const rpcURL = "https://ropsten.infura.io/v3/7fea032eb84442f5a78945d99a0b0953";
@@ -30,6 +34,7 @@ const web3 = new Web3(rpcURL);
 // Contract deployed on Ropsten
 const contractAddress = "0xD301b7ACdeF30e7721c311Cfbd17Ba71094ec0e4";
 const walletAddress = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14"; // Wei Hong's Wallet.
+const CharityChainJSON = require('../../contracts/build/CharityChain.json');
 
 
 const dashboardRoutes = [];
@@ -40,12 +45,18 @@ export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-  //Test Web3
+  // Test Web3
   const address = "0x90e63c3d53E0Ea496845b7a03ec7548B70014A91";
   web3.eth.getBalance(address, (err, wei) => {
     var balance = web3.utils.fromWei(wei, 'ether')
     console.log(balance); // This should be 5.096220648983052418 Ether
   })
+  // Calling contract
+  const contract = new web3.eth.Contract(CharityChainJSON.abi, contractAddress);
+  const bytes = "0x0000000000000000000000000000000000000000000000000000000000000001";
+  const amt = 5;
+  const message = "0x0000000000000000000000000000000000000000000000000000000000000002";
+  console.log(contract.methods.addTransactions(bytes, amt, message));
   
   return (
     <div>
