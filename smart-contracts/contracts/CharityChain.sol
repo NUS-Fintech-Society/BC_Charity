@@ -1,4 +1,5 @@
-pragma solidity >=0.6.2 <0.8.0;
+pragma solidity >=0.5.16 <0.8.0;
+
 
 contract CharityChain {
     address admin;  // adminstrator of this charity
@@ -10,7 +11,7 @@ contract CharityChain {
     uint[] amounts;
     bytes32[] messages;
 
-    constructor(address _admin, string memory _uen) {
+    constructor(address _admin, string memory _uen) public {
         admin = _admin;
         uen = _uen;
     }
