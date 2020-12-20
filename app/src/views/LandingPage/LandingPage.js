@@ -25,7 +25,12 @@ import WorkSection from "./Sections/WorkSection.js";
 // Web3
 const Web3 = require('web3');
 const rpcURL = "https://ropsten.infura.io/v3/7fea032eb84442f5a78945d99a0b0953";
-const web3 = new Web3(rpcURL)
+const web3 = new Web3(rpcURL);
+
+// Contract deployed on Ropsten
+const contractAddress = "0xD301b7ACdeF30e7721c311Cfbd17Ba71094ec0e4";
+const walletAddress = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14"; // Wei Hong's Wallet.
+
 
 const dashboardRoutes = [];
 
