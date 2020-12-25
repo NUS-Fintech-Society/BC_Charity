@@ -23,7 +23,6 @@ import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
 // Contracts
-import CharityChain from "../../contracts/build/CharityChain.json";
 import { getCharityChainContract } from "contracts/instance/CharityChain.js";
 
 // Web3
@@ -41,6 +40,13 @@ const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
 
+async function loadBlockchainData() {
+  // Get accounts
+  const accounts = await web3.eth.getAccounts();
+  console.log(accounts);
+  
+};
+
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
@@ -51,12 +57,22 @@ export default function LandingPage(props) {
     var balance = web3.utils.fromWei(wei, 'ether')
     console.log(balance); // This should be 5.096220648983052418 Ether
   })
-  // Calling contract
+
+  loadBlockchainData();
+
+  
+
+  // 1. Calling contract
+  // 1.1 method Params
   const contract = new web3.eth.Contract(CharityChainJSON.abi, contractAddress);
   const bytes = "0x0000000000000000000000000000000000000000000000000000000000000001";
   const amt = 5;
   const message = "0x0000000000000000000000000000000000000000000000000000000000000002";
-  console.log(contract.methods.addTransactions(bytes, amt, message));
+
+// contract.methods.addTransactions(bytes, amt, message).call();
+//   console.log(contract.methods.addTransactions(bytes, amt, message));
+//   console.log(contract);
+
   
   return (
     <div>
