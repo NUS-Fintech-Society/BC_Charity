@@ -13,6 +13,12 @@ import InfoArea from "components/InfoArea/InfoArea.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 
+import Table from "../../Components/Table";
+
+// Table Stuff
+import { rowsCL, columnsCL, createDataCL } from "../../../charitieslist";
+import { rowsTL, columnsTL, createDataTL } from "../../../transactionslist";
+
 const useStyles = makeStyles(styles);
 
 export default function ProductSection() {
@@ -65,14 +71,14 @@ export default function ProductSection() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <h4 className={classes.title}>List of Charities</h4>
+            <Table rows={rowsCL} columns={columnsCL} createData={createDataCL}></Table>
 
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <h4 className={classes.title}>Transaction List</h4>
+            <Table rows={rowsTL} columns={columnsTL} createData={createDataTL}></Table>
 
-            </GridItem>
-            <GridItem xs={12} sm={12} md={6}>
-              <h4 className={classes.title}>Transaction List</h4>
-
-
-            </GridItem>
+          </GridItem>
         </GridContainer>
       </div>
     </div>
