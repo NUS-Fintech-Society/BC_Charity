@@ -20,6 +20,9 @@ contract CharityChain {
         require(msg.sender == admin, 'Only admin can access this function');
         _;
     }
+    // modifier isCharity {
+    //   require(msg.sender in)
+    // }
 
     function addTransactions(bytes32 nricHash, uint amount, bytes32 message) public isAdmin {
         nricHashes.push(nricHash);
