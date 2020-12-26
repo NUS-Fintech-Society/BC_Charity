@@ -14,9 +14,10 @@ contract Onboarding {
     _;
   }
 
-  function onboardCharity(string memory UEN, address charityAdmin) public isAdmin {
+  function onboardCharity(address charityAdmin, string memory UEN) public isAdmin returns (address) {
     address charityAddress = address(new CharityChain(charityAdmin, UEN));
     charities[UEN] = charityAddress;
+    return charityAddress;
   }
 
   function getCharities(string memory UEN) public view returns (address) {
