@@ -20,7 +20,7 @@ contract Onboarding {
     return charityAddress;
   }
 
-  function getCharities(string memory UEN) public view returns (address) {
+  function getCharityAddress(string memory UEN) public view returns (address) {
     return charities[UEN];
   }
 }
