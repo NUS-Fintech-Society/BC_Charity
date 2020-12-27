@@ -22,21 +22,34 @@ import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
+const firestore = require('../../firebase');
+// import firestore fr../../firebase";
+
 const functions = require('../../contracts/utils/functions')
+
+// const hello2 = firestore.doc(`onboarding/xmlVSpp4wO9f2TGEH0vu`);
+
 
 
 
 const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
+
 export async function hello() {
   window.web3 = await functions.getWeb3();
   // functions.addTransaction("ganache");
+  const id = firestore.firestore.doc(`onboarding/xmlVSpp4wO9f2TGEH0vu`).onSnapshot(function(doc) {
+    console.log(doc.data());
+  })
+  // console.log(id);
 }
 
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
+
+  
   
   hello();
   return (
