@@ -41,16 +41,30 @@ async function getContracts() {
   })
 }
 
+//TODO: charities list are here but structure might not be ideal.
+//TODO: additional fields like address and cause can be included in the "util/charities.js" file.
 function getCharities() {
   return charities.charities;
+}
+
+//TODO: the data format a bit messy, maybe can arrange in chronological order?
+async function getAllDonations() {
+  window.web3 = await contractFunctions.getWeb3();
+
+  const donations = await contractFunctions.getAllDonations();
+  return donations;
 }
 
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
+  // Get the list of charities.
   const charities = getCharities();
   console.log(charities);
+
+  // Get all donations.
+  getAllDonations().then(console.log);
 
   return (
     <div>

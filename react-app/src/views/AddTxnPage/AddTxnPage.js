@@ -37,18 +37,18 @@ export default function ProfilePage(props) {
   async function sampleAddDonation() {
     window.web3 = await contractFunctions.getWeb3();
 
-    // Parameters
+    // Parameters 
+    //TODO: Now dummy parameters are given, but these should be filled in with method parameter instead.
+    //TODO: rmb that nric input taken by the form should be hashed before calling this method too.
     const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
     const amount = 30;
     const date = 27122020;
     const message = "hello 3";
     const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
-    const charityContractAddress = "0x2a73825988101317F9117323A72568F79aD99f13";
+    const charityContractAddress = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
 
-    // Method call
-    // contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress).then(function(receipt){
-    //   console.log(receipt);
-    // });
+    
+
     contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress)
     .on('transactionHash', function(hash) {
       console.log("Mining this transaction: " + hash);

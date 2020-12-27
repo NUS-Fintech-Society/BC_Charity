@@ -26,16 +26,14 @@ const useStyles = makeStyles(styles);
 
 const contractFunctions = require('../../contracts/utils/functions');
 
+// TODO: this function should have a parameter: user's HASHED nric, so the hashing also need to handle.
 async function getSampleUserDonations() {
   window.web3 = await contractFunctions.getWeb3();
 
   // Parameters
   const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
-  const charityContractAddress = "0x8198f6A3172110A96CceA0B02FD8BAe5551d9f3b";
 
   // Method call
-  // const donations = await contractFunctions.getUserDonations(nricHash, charityContractAddress);
-  // console.log(donations);
   const donations = await contractFunctions.getAllUserDonations(nricHash);
   console.log(donations);
 }
