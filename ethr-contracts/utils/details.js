@@ -1,10 +1,6 @@
 module.exports = {
   // Ropsten's network
   owner: '0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14', // Wei Hong's wallet.
-  admins: [
-    '0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14', // Wei Hong's wallet 1
-    '0x3B77CEED584D5AB2B6E2279E37f22C198408C535', // Wei Hong's wallet 2
-  ],
   charities: [
     {name: 'Character & Strength Academy Limited', admin: '0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14', UEN: '199252597N'},
     {name: 'Jason & Jaffrey Childcare Centre Limited', admin: '0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14', UEN: '255921113D'},

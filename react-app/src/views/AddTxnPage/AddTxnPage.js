@@ -153,6 +153,9 @@ export default function ProfilePage(props) {
                         <Button color="success" onClick={sampleGetDonations}>
                             Get donations
                         </Button>
+                        {/* <Button color="success" onClick={getCharityAddress}>
+                            Get charityaddress
+                        </Button> */}
                     </GridItem>
                 </GridContainer>
             </form>
