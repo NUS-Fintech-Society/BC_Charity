@@ -21,7 +21,7 @@ import database from "firebase.js";
 
 const useStyles = makeStyles(styles);
 
-const functions = require('../../contracts/utils/functions')
+const contractFunctions = require('../../contracts/utils/functions')
 
 export default function ProfilePage(props) {
   const classes = useStyles();
@@ -35,21 +35,21 @@ export default function ProfilePage(props) {
 
 
   async function sampleAddDonation() {
-    window.web3 = await functions.getWeb3();
+    window.web3 = await contractFunctions.getWeb3();
 
     // Parameters
     const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
-    const amount = 20;
+    const amount = 30;
     const date = 27122020;
-    const message = "hello 2";
+    const message = "hello 3";
     const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
-    const charityContractAddress = "0x8198f6A3172110A96CceA0B02FD8BAe5551d9f3b";
+    const charityContractAddress = "0x2a73825988101317F9117323A72568F79aD99f13";
 
     // Method call
-    functions.addDonation(nricHash, amount, date, message, sendFrom, charityContractAddress).then(function(receipt){
-      console.log(receipt);
-    });
-    functions.addDonation(nricHash, amount, date, message, sendFrom, charityContractAddress)
+    // contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress).then(function(receipt){
+    //   console.log(receipt);
+    // });
+    contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress)
     .on('transactionHash', function(hash) {
       console.log("Mining this transaction: " + hash);
     })
@@ -59,17 +59,6 @@ export default function ProfilePage(props) {
     .on('receipt', function(receipt) {
       console.log(receipt);
     });
-  }
-  async function sampleGetDonations() {
-    window.web3 = await functions.getWeb3();
-
-    // Parameters
-    const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
-    const charityContractAddress = "0x8198f6A3172110A96CceA0B02FD8BAe5551d9f3b";
-
-    // Method call
-    const donations = await functions.getDonations(nricHash, charityContractAddress);
-    console.log(donations);
   }
 
   return (
@@ -149,9 +138,6 @@ export default function ProfilePage(props) {
                         </Button>
                         <Button color="success" onClick={sampleAddDonation}>
                             Add donations
-                        </Button>
-                        <Button color="success" onClick={sampleGetDonations}>
-                            Get donations
                         </Button>
                         {/* <Button color="success" onClick={getCharityAddress}>
                             Get charityaddress

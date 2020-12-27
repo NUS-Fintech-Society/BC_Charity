@@ -4,7 +4,8 @@ pragma solidity >=0.5.16 <0.8.0;
 contract CharityChain {
     address admin;  // Charity's admin
     string public uen; // Charity's UEN
-    uint constant MAX_LENGTH = 50; // max number of transactions returned for a search by donor
+    bytes32[] donors; //Charity donors;
+    // uint constant MAX_LENGTH = 50; // max number of transactions returned for a search by donor
 
     struct Donation {
       uint amount; // Amount in cents
@@ -20,6 +21,7 @@ contract CharityChain {
 
     // Maps each donor's nricHashes with the table of donations
     mapping(bytes32 => mapping(uint256 => Donation)) donations;
+    
 
     constructor(address _admin, string memory _uen) public {
         admin = _admin;
@@ -54,6 +56,9 @@ contract CharityChain {
       Donation memory newDonation = Donation(amount, date, message);
       uint size = donationCounts[nricHash];
       donations[nricHash][size] = newDonation;
+      if (donationCounts[nricHash] == 0) {
+        donors.push(nricHash);
+      }
       donationCounts[nricHash] = size + 1;
     }
 
@@ -64,6 +69,10 @@ contract CharityChain {
     function getDonation(bytes32 nricHash, uint index) public view returns (uint, uint, string memory) {
       Donation memory donation = donations[nricHash][index];
       return (donation.amount, donation.date, donation.message);
+    }
+
+    function getDonors() public view returns (bytes32[] memory) {
+      return donors;
     }
 }
 
