@@ -63,10 +63,10 @@ export function onboardCharity(adminAddress, UEN, sendFrom, networkID) {
  * @param {*} UEN Charity's UEN
  * @returns {Promise} the PromiEvent of the method called
  */
-export function getCharityAddress(UEN) {
+export function getCharityAddress(UEN, networkID) {
   if (window.web3) {
     const onboardingContract = new window.web3.eth.Contract(OnboardingJSON.abi, CharityChainJSON.networks[networkID].address);
-    return onboardingContract.methods.onboardCharity(adminAddress, UEN).call();
+    return onboardingContract.methods.getCharityAddress(UEN).call();
   } else {
     alert("Ethereum is not enabled!");
   }

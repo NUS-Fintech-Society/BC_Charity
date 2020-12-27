@@ -31,7 +31,7 @@ const dashboardRoutes = [];
 const useStyles = makeStyles(styles);
 export async function hello() {
   window.web3 = await functions.getWeb3();
-  functions.addTransaction("ganache");
+  // functions.addTransaction("ganache");
 }
 
 export default function LandingPage(props) {
