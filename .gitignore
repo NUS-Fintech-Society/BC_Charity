@@ -228,7 +228,7 @@ sketch
 # testing
 
 # production
-build
+# build
 build_webpack
 
 # misc

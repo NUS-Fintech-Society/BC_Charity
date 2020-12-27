@@ -9,6 +9,6 @@ module.exports = function (deployer) {
   deployer.deploy(Onboarding, owner).then((onboarding) => {
     onboarding.onboardCharity(charities[0].admin, charities[0].UEN);
     onboarding.onboardCharity(charities[1].admin, charities[1].UEN);
-    onboarding.onboardCharity(charities[1].admin, charities[1].UEN);
+    onboarding.onboardCharity(charities[2].admin, charities[2].UEN);
   })
 };
