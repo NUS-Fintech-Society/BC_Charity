@@ -24,6 +24,20 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 const useStyles = makeStyles(styles);
 
+const contractFunctions = require('../../contracts/utils/functions');
+
+// TODO: this function should have a parameter: user's HASHED nric, so the hashing also need to handle.
+async function getSampleUserDonations() {
+  window.web3 = await contractFunctions.getWeb3();
+
+  // Parameters
+  const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
+
+  // Method call
+  const donations = await contractFunctions.getAllUserDonations(nricHash);
+  console.log(donations);
+}
+
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
@@ -68,6 +82,9 @@ export default function ProfilePage(props) {
               <CardFooter className={classes.cardFooter}>
                 <Button simple color="success" size="lg">
                     Submit
+                </Button>
+                <Button simple color="success" size="lg" onClick={getSampleUserDonations}>
+                    Get Sample User Donations
                 </Button>
             </CardFooter>
             </GridContainer>

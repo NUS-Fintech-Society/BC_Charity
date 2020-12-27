@@ -21,6 +21,8 @@ import database from "firebase.js";
 
 const useStyles = makeStyles(styles);
 
+const contractFunctions = require('../../contracts/utils/functions')
+
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
@@ -30,6 +32,35 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
+
+  async function sampleAddDonation() {
+    window.web3 = await contractFunctions.getWeb3();
+
+    // Parameters 
+    //TODO: Now dummy parameters are given, but these should be filled in with method parameter instead.
+    //TODO: rmb that nric input taken by the form should be hashed before calling this method too.
+    const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
+    const amount = 30;
+    const date = 27122020;
+    const message = "hello 3";
+    const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
+    const charityContractAddress = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
+
+    
+
+    contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress)
+    .on('transactionHash', function(hash) {
+      console.log("Mining this transaction: " + hash);
+    })
+    .on('confirmation', function(confirmationNumber, receipt) {
+      console.log("No: " + confirmationNumber + ", receipt: " + receipt);
+    })
+    .on('receipt', function(receipt) {
+      console.log(receipt);
+    });
+  }
+
   return (
     <div>
       <Header
@@ -105,6 +136,12 @@ export default function ProfilePage(props) {
                         <Button color="success">
                             Done
                         </Button>
+                        <Button color="success" onClick={sampleAddDonation}>
+                            Add donations
+                        </Button>
+                        {/* <Button color="success" onClick={getCharityAddress}>
+                            Get charityaddress
+                        </Button> */}
                     </GridItem>
                 </GridContainer>
             </form>
