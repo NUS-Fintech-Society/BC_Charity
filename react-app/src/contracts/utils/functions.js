@@ -57,7 +57,6 @@ export function onboardCharity(adminAddress, UEN, sendFrom, networkID) {
   }
 }
 
-
 /**
  * Get the Charity's address.
  * @param {*} UEN Charity's UEN
@@ -65,17 +64,10 @@ export function onboardCharity(adminAddress, UEN, sendFrom, networkID) {
  */
 export function getCharityAddress(UEN, networkID) {
   if (window.web3) {
-    const onboardingContract = new window.web3.eth.Contract(OnboardingJSON.abi, CharityChainJSON.networks[networkID].address);
+    const onboardingContract = new window.web3.eth.Contract(OnboardingJSON.abi, OnboardingJSON.networks[networkID].address);
     return onboardingContract.methods.getCharityAddress(UEN).call();
   } else {
     alert("Ethereum is not enabled!");
   }
 }
 
-// export function onboardCharity() {
-//   if (window.web3) {
-//     // hello
-//   } else {
-//     alert("Ethereum is not enabled!");
-//   }
-// }

@@ -21,6 +21,8 @@ import database from "firebase.js";
 
 const useStyles = makeStyles(styles);
 
+const functions = require('../../contracts/utils/functions')
+
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
@@ -30,6 +32,12 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
+  async function addTransaction() {
+    window.web3 = await functions.getWeb3();
+    functions.getCharityAddress("001", "3").then(console.log);
+  }
+
   return (
     <div>
       <Header
@@ -102,7 +110,7 @@ export default function ProfilePage(props) {
                 </GridContainer>
                 <GridContainer justify="center">
                     <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                        <Button color="success">
+                        <Button color="success" onClick={addTransaction}>
                             Done
                         </Button>
                     </GridItem>
