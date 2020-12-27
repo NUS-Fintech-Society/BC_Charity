@@ -12,6 +12,9 @@ contract CharityChain {
       string message; // Any message
     }
 
+    // Table of all owners
+    mapping(address => bool) owners;
+
     // Maps each donor's nricHashes with the total donation counts 
     mapping(bytes32 => uint256) donationCounts;
 
@@ -21,14 +24,33 @@ contract CharityChain {
     constructor(address _admin, string memory _uen) public {
         admin = _admin;
         uen = _uen;
+        owners[_admin] = true;
+
     }
 
     modifier isAdmin {
-        require(msg.sender == admin, 'Only admin can access this function');
-        _;
+      require(msg.sender == admin, 'Only admin can access this function');
+      _;
+    }
+    
+    modifier isOwners {
+    require(owners[msg.sender], 'Only owners can access this function');
+      _;
     }
 
-    function addDonation(bytes32 nricHash, uint amount, uint date, string memory message) public isAdmin {
+    function addOwner(address owner) public isAdmin {
+      owners[owner] = true;
+    }
+
+    function checkOwner(address owner) public view returns (bool) {
+      return owners[owner];
+    } 
+
+    function removeOwner(address owner) public isAdmin {
+      owners[owner] = false;
+    }
+
+    function addDonation(bytes32 nricHash, uint amount, uint date, string memory message) public isOwners {
       Donation memory newDonation = Donation(amount, date, message);
       uint size = donationCounts[nricHash];
       donations[nricHash][size] = newDonation;
