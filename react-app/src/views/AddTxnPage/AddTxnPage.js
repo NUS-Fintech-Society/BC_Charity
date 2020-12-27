@@ -33,9 +33,43 @@ export default function ProfilePage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-  async function addTransaction() {
+
+  async function sampleAddDonation() {
     window.web3 = await functions.getWeb3();
-    functions.getCharityAddress("001", "3").then(console.log);
+
+    // Parameters
+    const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
+    const amount = 20;
+    const date = 27122020;
+    const message = "hello 2";
+    const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
+    const charityContractAddress = "0x8198f6A3172110A96CceA0B02FD8BAe5551d9f3b";
+
+    // Method call
+    functions.addDonation(nricHash, amount, date, message, sendFrom, charityContractAddress).then(function(receipt){
+      console.log(receipt);
+    });
+    functions.addDonation(nricHash, amount, date, message, sendFrom, charityContractAddress)
+    .on('transactionHash', function(hash) {
+      console.log("Mining this transaction: " + hash);
+    })
+    .on('confirmation', function(confirmationNumber, receipt) {
+      console.log("No: " + confirmationNumber + ", receipt: " + receipt);
+    })
+    .on('receipt', function(receipt) {
+      console.log(receipt);
+    });
+  }
+  async function sampleGetDonations() {
+    window.web3 = await functions.getWeb3();
+
+    // Parameters
+    const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
+    const charityContractAddress = "0x8198f6A3172110A96CceA0B02FD8BAe5551d9f3b";
+
+    // Method call
+    const donations = await functions.getDonations(nricHash, charityContractAddress);
+    console.log(donations);
   }
 
   return (
@@ -110,8 +144,14 @@ export default function ProfilePage(props) {
                 </GridContainer>
                 <GridContainer justify="center">
                     <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                        <Button color="success" onClick={addTransaction}>
+                        <Button color="success">
                             Done
+                        </Button>
+                        <Button color="success" onClick={sampleAddDonation}>
+                            Add donations
+                        </Button>
+                        <Button color="success" onClick={sampleGetDonations}>
+                            Get donations
                         </Button>
                     </GridItem>
                 </GridContainer>

@@ -71,3 +71,33 @@ export function getCharityAddress(UEN, networkID) {
   }
 }
 
+export function addDonation(nricHash, amount, date, message, sendFrom, charityContractAddress) {
+  if (window.web3) {
+    const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
+    return charityChainContract.methods.addDonation(nricHash, amount, date, message).send({from: sendFrom});
+  } else {
+    alert("Ethereum is not enabled!");
+  }
+}
+
+export async function getDonations(nricHash, charityContractAddress) {
+  if (window.web3) {
+    const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
+    const donationCount = await charityChainContract.methods.getDonationCount(nricHash).call();
+    
+    var donations = [];
+    for (let i = 0; i < donationCount; i++) {
+      const donationResult = await charityChainContract.methods.getDonation(nricHash, i).call();
+      const donation = {
+        amount: donationResult[0],
+        date: donationResult[1],
+        message: donationResult[2],
+      }
+      donations.push(donation);
+    }
+    return donations;
+  } else {
+    alert("Ethereum is not enabled!");
+  }
+}
+
