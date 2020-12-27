@@ -26,28 +26,31 @@ const firestore = require('../../firebase');
 const charities = require('../../util/charities');
 const contractFunctions = require('../../contracts/utils/functions');
 
-// const hello2 = firestore.doc(`onboarding/xmlVSpp4wO9f2TGEH0vu`);
-
-
-
-
 const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
 
-export async function hello() {
+/**
+ * Only used when new contracts are deployed to get addresses.
+ */
+async function getContracts() {
   window.web3 = await contractFunctions.getWeb3();
-  // functions.addTransaction("ganache");
-  const id = firestore.firestore.doc(`onboarding/xmlVSpp4wO9f2TGEH0vu`).onSnapshot(function(doc) {
-    console.log(doc.data());
+  charities.charities.forEach( async charity => {
+    const contract = await contractFunctions.getCharityAddress(charity.UEN, 3);
+    console.log("UEN: " + charity.UEN + ", contract: " + contract);
   })
+}
+
+function getCharities() {
+  return charities.charities;
 }
 
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-  console.log(charities.charities);
+  const charities = getCharities();
+  console.log(charities);
 
   return (
     <div>
