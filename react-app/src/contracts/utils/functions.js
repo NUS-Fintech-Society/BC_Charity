@@ -1,22 +1,37 @@
 const Web3 = require('web3');
+var Contract = require('web3-eth-contract');
 const infura = require('./infura');
-const web3 = new Web3(infura.rpcURL);
 const CharityChainJSON = require('../build/CharityChain.json');
 const OnboardingJSON = require('../build/Onboarding.json');
 // const charityFunctions = require('../../util/functions');
 const charities = require('../../util/charities');
 
 /**
- * Get current Web3 Provider and return configured Web3 instance.
+ * !: window.web3 is deprecated so use Web3 only.
+ * Use either Metamask or infura as providers to return new Web3 instance.
  */
 export async function getWeb3() {
-  if (window.ethereum) {
-    window.web3 = new Web3(window.web3.currentProvider);
-    await window.ethereum.enable();
-    return window.web3;
+  
+  // Use Metamask as Web3 provider if extension is enabled.
+  const web3 = new Web3(Web3.givenProvider);
+  if (web3.currentProvider && web3.currentProvider.isMetaMask) {
+    return new Web3(window.web3.currentProvider);
+
+  // Else use Infura as provider.
   } else {
-    alert("Please install an Ethereum-compatible browser or extension like MetaMask to use this dApp!");
+    const infuraProvider = new Web3.providers.HttpProvider(infura.rpcURL);
+    return new Web3(infuraProvider);
+    
   }
+
+  // if (window.ethereum) {
+  //   window.web3 = new Web3(window.web3.currentProvider);
+  //   console.log("url : " + window.web3.rpcURL);
+  //   await window.ethereum.enable();
+  //   return window.web3;
+  // } else {
+  //   alert("Please install an Ethereum-compatible browser or extension like MetaMask to use this dApp!");
+  // }
 }
 
 /**
@@ -129,40 +144,37 @@ export async function getAllUserDonations(nricHash) {
 /**
  * Get all donations from all charities.
  */
-export async function getAllDonations() {
-  if (window.web3) {
+export async function getAllDonations(web3) {
 
-    var allDonations = [];
+  var allDonations = [];
 
-    // For each charity
-    charities.charities.forEach(async charity => {
-      const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charity.contract);
-      
-      // For each donor
-      const donors = await charityChainContract.methods.getDonors().call();
-      donors.forEach(async donor => {
-        const donationCount = await charityChainContract.methods.getDonationCount(donor).call();
-
-        // Get donations
-        for (let i = 0; i < donationCount; i++) {
-          const donationResult = await charityChainContract.methods.getDonation(donor, i).call();
-          const donation = {
-            amount: donationResult[0],
-            date: donationResult[1],
-            message: donationResult[2],
-            donor: donor,
-            charity: charity
-          }
-          allDonations.push(donation);
-        }
-      });
-
-    })
-    return allDonations;
+  // For each charity
+  charities.charities.forEach(async charity => {
+    // Contract.setProvider(infura.rpcURL);
+    // const charityChainContract = new Contract(CharityChainJSON.abi, charity.contract);
+    const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charity.contract);
     
-  } else {
-    alert("Ethereum is not enabled!");
-  }
+    // For each donor
+    const donors = await charityChainContract.methods.getDonors().call();
+    donors.forEach(async donor => {
+      const donationCount = await charityChainContract.methods.getDonationCount(donor).call();
+
+      // Get donations
+      for (let i = 0; i < donationCount; i++) {
+        const donationResult = await charityChainContract.methods.getDonation(donor, i).call();
+        const donation = {
+          amount: donationResult[0],
+          date: donationResult[1],
+          message: donationResult[2],
+          donor: donor,
+          charity: charity
+        }
+        allDonations.push(donation);
+      }
+    });
+
+  })
+  return allDonations;
 }
 
 /**
