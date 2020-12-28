@@ -33,6 +33,17 @@ export default function ProfilePage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
+  async function addOwner() {
+    window.web3 = await contractFunctions.getWeb3();
+
+
+    const seanAddr = "0x1b13746A46FCC474e3d71Cd6678813C97fA945b1";
+    // const charityContract = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
+    const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
+
+    contractFunctions.addAllContractOwner(seanAddr, sendFrom);
+  }
+
 
   async function sampleAddDonation() {
     window.web3 = await contractFunctions.getWeb3();
@@ -139,9 +150,9 @@ export default function ProfilePage(props) {
                         <Button color="success" onClick={sampleAddDonation}>
                             Add donations
                         </Button>
-                        {/* <Button color="success" onClick={getCharityAddress}>
-                            Get charityaddress
-                        </Button> */}
+                        <Button color="success" onClick={addOwner}>
+                            add owner
+                        </Button>
                     </GridItem>
                 </GridContainer>
             </form>

@@ -199,3 +199,34 @@ export async function getCharityDonations(charityContract) {
   }
 }
 
+/**
+ * For Admin to add owner of a specific charity.
+ * @param {string} walletAddress 
+ * @param {string} contract Charity's contract
+ * @param {string} sendFrom 
+ */
+export async function addContractOwner(walletAddress, contract, sendFrom) {
+  if (window.web3) {
+    const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, contract);
+    charityChainContract.methods.addOwner(walletAddress).send({from: sendFrom});
+  } else {
+    alert("Ethereum is not enabled!");
+  }
+}
+
+/**
+ * For Admin to add owner to all charities
+ * @param {string} walletAddress 
+ */
+export async function addAllContractOwner(walletAddress, sendFrom) {
+  if (window.web3) {
+    charities.charities.forEach(charity => {
+      const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charity.contract);
+      charityChainContract.methods.addOwner(walletAddress).send({from: sendFrom});;
+    });
+  } else {
+    alert("Ethereum is not enabled!");
+  }
+}
+
+
