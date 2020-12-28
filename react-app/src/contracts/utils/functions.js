@@ -43,6 +43,7 @@ export function onboardCharity(adminAddress, UEN, sendFrom, networkID, web3) {
  * Get the Charity's address.
  * @param {string} UEN Charity's UEN
  * @param {Number} networkID Ethereum's network ID
+ * @param {Web3} web3 Web3 instance
  * @returns {Promise} the PromiEvent of the method called
  */
 export function getCharityAddress(UEN, networkID, web3) {
@@ -58,6 +59,7 @@ export function getCharityAddress(UEN, networkID, web3) {
  * @param {string} message message
  * @param {string} sendFrom address of user making the transaction
  * @param {string} charityContractAddress charity's smart contract
+ * @param {Web3} web3 Web3 instance
  */
 export function addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress, web3) {
   const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
@@ -68,9 +70,10 @@ export function addUserDonation(nricHash, amount, date, message, sendFrom, chari
  * Gets user's donations for a specific charity
  * @param {string} nricHash NRIC of hash in bytes32 format.
  * @param {string} charityContractAddress charity's smart contract
+ * @param {Web3} web3 Web3 instance
  */
 export async function getUserDonations(nricHash, charityContractAddress, web3) {
-  const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
+  const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
   const donationCount = await charityChainContract.methods.getDonationCount(nricHash).call();
   
   var donations = [];
@@ -89,7 +92,8 @@ export async function getUserDonations(nricHash, charityContractAddress, web3) {
 /**
  * Gets user's donations across all charities.
  * This will be used in verify page.
- * @param {*} nricHash NRIC of hash in bytes32 format.
+ * @param {string} nricHash NRIC of hash in bytes32 format.
+ * @param {Web3} web3 Web3 instance
  */
 export async function getAllUserDonations(nricHash, web3) {
   var allDonations = [];
@@ -114,6 +118,7 @@ export async function getAllUserDonations(nricHash, web3) {
 
 /**
  * Get all donations from all charities.
+ * @param {Web3} web3 Web3 instance
  */
 export async function getAllDonations(web3) {
 
@@ -149,6 +154,7 @@ export async function getAllDonations(web3) {
 /**
  * Get Charity's donations.
  * @param {string} charityContract charity's contract
+ * @param {Web3} web3 Web3 instance
  */
 export async function getCharityDonations(charityContract, web3) {
   const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charityContract);
@@ -180,6 +186,7 @@ export async function getCharityDonations(charityContract, web3) {
  * @param {string} walletAddress 
  * @param {string} contract Charity's contract
  * @param {string} sendFrom 
+ * @param {Web3} web3 Web3 instance
  */
 export async function addContractOwner(walletAddress, contract, sendFrom, web3) {
   const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, contract);
@@ -189,6 +196,7 @@ export async function addContractOwner(walletAddress, contract, sendFrom, web3) 
 /**
  * For Admin to add owner to all charities
  * @param {string} walletAddress 
+ * @param {Web3} web3 Web3 instance
  */
 export async function addAllContractOwner(walletAddress, sendFrom, web3) {
   charities.charities.forEach(charity => {
