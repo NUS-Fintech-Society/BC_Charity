@@ -7,7 +7,7 @@ const OnboardingJSON = require('../build/Onboarding.json');
 const charities = require('../../util/charities');
 
 /**
- * !: window.web3 is deprecated so use Web3 only.
+ * ! window.web3 is not used.
  * Use either Metamask or infura as providers to return new Web3 instance.
  */
 export function getWeb3() {
@@ -21,6 +21,24 @@ export function getWeb3() {
   } else {
     const infuraProvider = new Web3.providers.HttpProvider(infura.rpcURL);
     return new Web3(infuraProvider);
+  }
+}
+
+
+/**
+ * ! window.ethereum.enable() is deprecated so not used.
+ * Get user first wallet address in Metamask.
+ * @param {*} web3 
+ */
+export async function getWalletAddress(web3) {
+
+  // Error if Metamask not enabled.
+  if (!window.ethereum || !web3|| !web3.eth) {
+    alert("This action requires ether but Metamask or other wallet providers are not enabled.");
+  } else {
+    
+    const walletAddress = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    return walletAddress[0];
   }
 }
 

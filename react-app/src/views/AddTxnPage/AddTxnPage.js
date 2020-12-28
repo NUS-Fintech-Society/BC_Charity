@@ -54,10 +54,10 @@ export default function ProfilePage(props) {
     const amount = 30;
     const date = 27122020;
     const message = "hello 3";
-    const sendFrom = "0x1b13746A46FCC474e3d71Cd6678813C97fA945b1";
+    const sendFrom = await contractFunctions.getWalletAddress(web3);
     const charityContractAddress = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
 
-    contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress)
+    contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress, web3)
     .on('transactionHash', function(hash) {
       console.log("Mining this transaction: " + hash);
     })
@@ -65,6 +65,10 @@ export default function ProfilePage(props) {
       console.log("No: " + confirmationNumber + ", receipt: " + receipt);
     })
     .on('receipt', function(receipt) {
+      console.log(receipt);
+    })
+    .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      alert("Transaction rejected! Check that this waller address have the permission or have enough ethers.");
       console.log(receipt);
     });
   }
