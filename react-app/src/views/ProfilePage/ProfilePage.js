@@ -17,13 +17,13 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 const useStyles = makeStyles(styles);
 const contractFunctions = require('../../contracts/utils/functions');
+const web3 = contractFunctions.getWeb3();
 
 //TODO: ultimately each charity page should has its own route, so maybe the path differentiation can use UEN or contract address.
 //TODO: this method should also take in the contract address of the current charity page.
 async function getCharityDonations() {
-  window.web3 = await contractFunctions.getWeb3();
   const sampleContract = "0xC897d46a255004c3E2b46FbD5Ac726d866Ebf5d7";
-  return contractFunctions.getCharityDonations(sampleContract);
+  return contractFunctions.getCharityDonations(sampleContract, web3);
 }
 
 export default function ProfilePage(props) {

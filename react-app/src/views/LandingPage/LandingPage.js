@@ -24,6 +24,7 @@ import Web3 from 'web3';
 const firestore = require('../../firebase');
 const charities = require('../../util/charities');
 const contractFunctions = require('../../contracts/utils/functions');
+const web3 = contractFunctions.getWeb3();
 
 const dashboardRoutes = [];
 
@@ -33,7 +34,6 @@ const useStyles = makeStyles(styles);
  * Only used when new contracts are deployed to get addresses.
  */
 async function getContracts() {
-  window.web3 = await contractFunctions.getWeb3();
   charities.charities.forEach( async charity => {
     const contract = await contractFunctions.getCharityAddress(charity.UEN, 3);
     console.log("UEN: " + charity.UEN + ", contract: " + contract);
@@ -48,18 +48,6 @@ function getCharities() {
 
 //TODO: the data format a bit messy, maybe can arrange in chronological order?
 async function getAllDonations() {
-  // window.web3 = await contractFunctions.getWeb3();
-  const web3 = await contractFunctions.getWeb3();
-  // const infuraURL = 'https://ropsten.infura.io/v3/7fea032eb84442f5a78945d99a0b0953';
-  // const infuraProvider = new Web3.providers.HttpProvider(infuraURL);
-  // const web3 = new Web3(infuraProvider);
-  // const accounts = await web3.eth.getAccounts();
-  // console.log(accounts);
-  // const web3 = await contractFunctions.getWeb3();
-  // const web3 = new Web3(Web3.givenProvider);
-  // console.log(web3.currentProvider);
-  // console.log(web3.currentProvider.isMetaMask);
-
   const donations = await contractFunctions.getAllDonations(web3);
   return donations;
 }

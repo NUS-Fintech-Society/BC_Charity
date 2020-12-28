@@ -22,6 +22,7 @@ import database from "firebase.js";
 const useStyles = makeStyles(styles);
 
 const contractFunctions = require('../../contracts/utils/functions')
+const web3 = contractFunctions.getWeb3();
 
 export default function ProfilePage(props) {
   const classes = useStyles();
@@ -33,20 +34,18 @@ export default function ProfilePage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
+  /**
+   * Used by Wei Hong to add owner hehe.
+   */
   async function addOwner() {
-    window.web3 = await contractFunctions.getWeb3();
-
-
     const seanAddr = "0x1b13746A46FCC474e3d71Cd6678813C97fA945b1";
     // const charityContract = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
     const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
-
-    contractFunctions.addAllContractOwner(seanAddr, sendFrom);
+    contractFunctions.addAllContractOwner(seanAddr, sendFrom, web3);
   }
 
 
   async function sampleAddDonation() {
-    window.web3 = await contractFunctions.getWeb3();
 
     // Parameters 
     //TODO: Now dummy parameters are given, but these should be filled in with method parameter instead.
@@ -57,9 +56,6 @@ export default function ProfilePage(props) {
     const message = "hello 3";
     const sendFrom = "0x1b13746A46FCC474e3d71Cd6678813C97fA945b1";
     const charityContractAddress = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
-    
-
-    
 
     contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress)
     .on('transactionHash', function(hash) {

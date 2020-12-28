@@ -10,7 +10,7 @@ const charities = require('../../util/charities');
  * !: window.web3 is deprecated so use Web3 only.
  * Use either Metamask or infura as providers to return new Web3 instance.
  */
-export async function getWeb3() {
+export function getWeb3() {
   
   // Use Metamask as Web3 provider if extension is enabled.
   const web3 = new Web3(Web3.givenProvider);
