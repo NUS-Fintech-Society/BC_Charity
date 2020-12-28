@@ -21,17 +21,7 @@ export async function getWeb3() {
   } else {
     const infuraProvider = new Web3.providers.HttpProvider(infura.rpcURL);
     return new Web3(infuraProvider);
-    
   }
-
-  // if (window.ethereum) {
-  //   window.web3 = new Web3(window.web3.currentProvider);
-  //   console.log("url : " + window.web3.rpcURL);
-  //   await window.ethereum.enable();
-  //   return window.web3;
-  // } else {
-  //   alert("Please install an Ethereum-compatible browser or extension like MetaMask to use this dApp!");
-  // }
 }
 
 /**
@@ -41,29 +31,23 @@ export async function getWeb3() {
  * @param {string} UEN Charity's UEN
  * @param {string} sendFrom Wallet address of admin making this transaction
  * @param {string} network Ethereum network ID
+ * @param {Web3} web3 Web3 instance
  * @returns {Promise} the PromiEvent of the method called
  */
-export function onboardCharity(adminAddress, UEN, sendFrom, networkID) {
-  if (window.web3) {
-    const onboardingContract = new window.web3.eth.Contract(OnboardingJSON.abi, CharityChainJSON.networks[networkID].address);
-    return onboardingContract.methods.onboardCharity(adminAddress, UEN).send({from: sendFrom});
-  } else {
-    alert("Ethereum is not enabled!");
-  }
+export function onboardCharity(adminAddress, UEN, sendFrom, networkID, web3) {
+  const onboardingContract = new web3.eth.Contract(OnboardingJSON.abi, CharityChainJSON.networks[networkID].address);
+  return onboardingContract.methods.onboardCharity(adminAddress, UEN).send({from: sendFrom});
 }
 
 /**
  * Get the Charity's address.
- * @param {*} UEN Charity's UEN
+ * @param {string} UEN Charity's UEN
+ * @param {Number} networkID Ethereum's network ID
  * @returns {Promise} the PromiEvent of the method called
  */
-export function getCharityAddress(UEN, networkID) {
-  if (window.web3) {
-    const onboardingContract = new window.web3.eth.Contract(OnboardingJSON.abi, OnboardingJSON.networks[networkID].address);
-    return onboardingContract.methods.getCharityAddress(UEN).call();
-  } else {
-    alert("Ethereum is not enabled!");
-  }
+export function getCharityAddress(UEN, networkID, web3) {
+  const onboardingContract = new web3.eth.Contract(OnboardingJSON.abi, OnboardingJSON.networks[networkID].address);
+  return onboardingContract.methods.getCharityAddress(UEN).call();
 }
 
 /**
@@ -75,13 +59,9 @@ export function getCharityAddress(UEN, networkID) {
  * @param {string} sendFrom address of user making the transaction
  * @param {string} charityContractAddress charity's smart contract
  */
-export function addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress) {
-  if (window.web3) {
-    const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
-    return charityChainContract.methods.addDonation(nricHash, amount, date, message).send({from: sendFrom});
-  } else {
-    alert("Ethereum is not enabled!");
-  }
+export function addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress, web3) {
+  const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
+  return charityChainContract.methods.addDonation(nricHash, amount, date, message).send({from: sendFrom});
 }
 
 /**
@@ -89,25 +69,21 @@ export function addUserDonation(nricHash, amount, date, message, sendFrom, chari
  * @param {string} nricHash NRIC of hash in bytes32 format.
  * @param {string} charityContractAddress charity's smart contract
  */
-export async function getUserDonations(nricHash, charityContractAddress) {
-  if (window.web3) {
-    const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
-    const donationCount = await charityChainContract.methods.getDonationCount(nricHash).call();
-    
-    var donations = [];
-    for (let i = 0; i < donationCount; i++) {
-      const donationResult = await charityChainContract.methods.getDonation(nricHash, i).call();
-      const donation = {
-        amount: donationResult[0],
-        date: donationResult[1],
-        message: donationResult[2],
-      }
-      donations.push(donation);
+export async function getUserDonations(nricHash, charityContractAddress, web3) {
+  const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
+  const donationCount = await charityChainContract.methods.getDonationCount(nricHash).call();
+  
+  var donations = [];
+  for (let i = 0; i < donationCount; i++) {
+    const donationResult = await charityChainContract.methods.getDonation(nricHash, i).call();
+    const donation = {
+      amount: donationResult[0],
+      date: donationResult[1],
+      message: donationResult[2],
     }
-    return donations;
-  } else {
-    alert("Ethereum is not enabled!");
+    donations.push(donation);
   }
+  return donations;
 }
 
 /**
@@ -115,30 +91,25 @@ export async function getUserDonations(nricHash, charityContractAddress) {
  * This will be used in verify page.
  * @param {*} nricHash NRIC of hash in bytes32 format.
  */
-export async function getAllUserDonations(nricHash) {
-  if (window.web3) {
-    var allDonations = [];
+export async function getAllUserDonations(nricHash, web3) {
+  var allDonations = [];
 
-    charities.charities.forEach(async charity => {
-      const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charity.contract);
-      const donationCount = await charityChainContract.methods.getDonationCount(nricHash).call();
+  charities.charities.forEach(async charity => {
+    const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charity.contract);
+    const donationCount = await charityChainContract.methods.getDonationCount(nricHash).call();
 
-      for (let i = 0; i < donationCount; i++) {
-        const donationResult = await charityChainContract.methods.getDonation(nricHash, i).call();
-        const donation = {
-          amount: donationResult[0],
-          date: donationResult[1],
-          message: donationResult[2],
-          charity: charity
-        }
-        allDonations.push(donation);
+    for (let i = 0; i < donationCount; i++) {
+      const donationResult = await charityChainContract.methods.getDonation(nricHash, i).call();
+      const donation = {
+        amount: donationResult[0],
+        date: donationResult[1],
+        message: donationResult[2],
+        charity: charity
       }
-    });
-    return allDonations;
-
-  } else {
-    alert("Ethereum is not enabled!");
-  }
+      allDonations.push(donation);
+    }
+  });
+  return allDonations;
 }
 
 /**
@@ -150,8 +121,6 @@ export async function getAllDonations(web3) {
 
   // For each charity
   charities.charities.forEach(async charity => {
-    // Contract.setProvider(infura.rpcURL);
-    // const charityChainContract = new Contract(CharityChainJSON.abi, charity.contract);
     const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charity.contract);
     
     // For each donor
@@ -181,34 +150,29 @@ export async function getAllDonations(web3) {
  * Get Charity's donations.
  * @param {string} charityContract charity's contract
  */
-export async function getCharityDonations(charityContract) {
-  if (window.web3) {
-    const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charityContract);
-    var allDonations = [];
+export async function getCharityDonations(charityContract, web3) {
+  const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charityContract);
+  var allDonations = [];
 
-    // For each donor
-    const donors = await charityChainContract.methods.getDonors().call();
-    donors.forEach(async donor => {
-      const donationCount = await charityChainContract.methods.getDonationCount(donor).call();
+  // For each donor
+  const donors = await charityChainContract.methods.getDonors().call();
+  donors.forEach(async donor => {
+    const donationCount = await charityChainContract.methods.getDonationCount(donor).call();
 
-      // Get donations
-      for (let i = 0; i < donationCount; i++) {
-        const donationResult = await charityChainContract.methods.getDonation(donor, i).call();
-        const donation = {
-          amount: donationResult[0],
-          date: donationResult[1],
-          message: donationResult[2],
-          donor: donor
-        }
-        allDonations.push(donation);
+    // Get donations
+    for (let i = 0; i < donationCount; i++) {
+      const donationResult = await charityChainContract.methods.getDonation(donor, i).call();
+      const donation = {
+        amount: donationResult[0],
+        date: donationResult[1],
+        message: donationResult[2],
+        donor: donor
       }
-    });
+      allDonations.push(donation);
+    }
+  });
 
-    return allDonations;
-
-  } else {
-    alert("Ethereum is not enabled!");
-  }
+  return allDonations;
 }
 
 /**
@@ -217,28 +181,20 @@ export async function getCharityDonations(charityContract) {
  * @param {string} contract Charity's contract
  * @param {string} sendFrom 
  */
-export async function addContractOwner(walletAddress, contract, sendFrom) {
-  if (window.web3) {
-    const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, contract);
-    charityChainContract.methods.addOwner(walletAddress).send({from: sendFrom});
-  } else {
-    alert("Ethereum is not enabled!");
-  }
+export async function addContractOwner(walletAddress, contract, sendFrom, web3) {
+  const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, contract);
+  charityChainContract.methods.addOwner(walletAddress).send({from: sendFrom});
 }
 
 /**
  * For Admin to add owner to all charities
  * @param {string} walletAddress 
  */
-export async function addAllContractOwner(walletAddress, sendFrom) {
-  if (window.web3) {
-    charities.charities.forEach(charity => {
-      const charityChainContract = new window.web3.eth.Contract(CharityChainJSON.abi, charity.contract);
-      charityChainContract.methods.addOwner(walletAddress).send({from: sendFrom});;
-    });
-  } else {
-    alert("Ethereum is not enabled!");
-  }
+export async function addAllContractOwner(walletAddress, sendFrom, web3) {
+  charities.charities.forEach(charity => {
+    const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charity.contract);
+    charityChainContract.methods.addOwner(walletAddress).send({from: sendFrom});;
+  });
 }
 
 
