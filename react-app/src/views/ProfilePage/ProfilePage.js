@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -16,6 +17,7 @@ import profile from "assets/img/faces/christian.jpg";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 const useStyles = makeStyles(styles);
+const { charities } = require('../../util/charities');
 const contractFunctions = require('../../contracts/utils/functions');
 const web3 = contractFunctions.getWeb3();
 
@@ -24,6 +26,15 @@ const web3 = contractFunctions.getWeb3();
 async function getCharityDonations() {
   const sampleContract = "0xC897d46a255004c3E2b46FbD5Ac726d866Ebf5d7";
   return contractFunctions.getCharityDonations(sampleContract, web3);
+}
+
+function getOrgInfo(uen) {
+  const matches = charities.filter(charity => charity.UEN === uen);
+  if (matches.length != 1) {
+    return -1;
+  } else {
+    return matches[0];
+  }
 }
 
 export default function ProfilePage(props) {
@@ -35,6 +46,9 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  const { uen } = useParams();
+  const org = getOrgInfo(uen);
+  console.log(org);
 
   getCharityDonations().then(console.log);
 
@@ -62,7 +76,7 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Charity #1</h3>
+                    <h3 className={classes.title}>{org.name}</h3>
                   </div>
                 </div>
               </GridItem>
