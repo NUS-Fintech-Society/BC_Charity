@@ -22,6 +22,7 @@ import database from "firebase.js";
 const useStyles = makeStyles(styles);
 
 const contractFunctions = require('../../contracts/utils/functions')
+const web3 = contractFunctions.getWeb3();
 
 export default function ProfilePage(props) {
   const classes = useStyles();
@@ -33,9 +34,18 @@ export default function ProfilePage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
+  /**
+   * Used by Wei Hong to add owner hehe.
+   */
+  async function addOwner() {
+    const seanAddr = "0x1b13746A46FCC474e3d71Cd6678813C97fA945b1";
+    // const charityContract = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
+    const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
+    contractFunctions.addAllContractOwner(seanAddr, sendFrom, web3);
+  }
+
 
   async function sampleAddDonation() {
-    window.web3 = await contractFunctions.getWeb3();
 
     // Parameters 
     //TODO: Now dummy parameters are given, but these should be filled in with method parameter instead.
@@ -44,13 +54,10 @@ export default function ProfilePage(props) {
     const amount = 30;
     const date = 27122020;
     const message = "hello 3";
-    const sendFrom = "0x1b13746A46FCC474e3d71Cd6678813C97fA945b1";
+    const sendFrom = await contractFunctions.getWalletAddress(web3);
     const charityContractAddress = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
-    
 
-    
-
-    contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress)
+    contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress, web3)
     .on('transactionHash', function(hash) {
       console.log("Mining this transaction: " + hash);
     })
@@ -58,6 +65,10 @@ export default function ProfilePage(props) {
       console.log("No: " + confirmationNumber + ", receipt: " + receipt);
     })
     .on('receipt', function(receipt) {
+      console.log(receipt);
+    })
+    .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      alert("Transaction rejected! Check that this waller address have the permission or have enough ethers.");
       console.log(receipt);
     });
   }
@@ -140,9 +151,9 @@ export default function ProfilePage(props) {
                         <Button color="success" onClick={sampleAddDonation}>
                             Add donations
                         </Button>
-                        {/* <Button color="success" onClick={getCharityAddress}>
-                            Get charityaddress
-                        </Button> */}
+                        <Button color="success" onClick={addOwner}>
+                            add owner
+                        </Button>
                     </GridItem>
                 </GridContainer>
             </form>

@@ -25,16 +25,16 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 const useStyles = makeStyles(styles);
 
 const contractFunctions = require('../../contracts/utils/functions');
+const web3 = contractFunctions.getWeb3();
 
 // TODO: this function should have a parameter: user's HASHED nric, so the hashing also need to handle.
 async function getSampleUserDonations() {
-  window.web3 = await contractFunctions.getWeb3();
 
   // Parameters
   const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
 
   // Method call
-  const donations = await contractFunctions.getAllUserDonations(nricHash);
+  const donations = await contractFunctions.getAllUserDonations(nricHash, web3);
   console.log(donations);
 }
 
