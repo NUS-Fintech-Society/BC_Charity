@@ -1,0 +1,72 @@
+{
+  "contractName": "Onboarding",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_admin",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "charityAdmin",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "UEN",
+          "type": "string"
+        }
+      ],
+      "name": "onboardCharity",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "UEN",
+          "type": "string"
+        }
+      ],
+      "name": "getCharityAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0x417703BDc5009554EBa1B63B8A3374ad075bff3f",
+      "transactionHash": "0x4f7ef654ac52772919b556318edfcb1408f2dbebd661d316a8bb6cf3d41058d5"
+    }
+  }
+}
