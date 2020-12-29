@@ -19,9 +19,11 @@
     "react-dom": "16.13.1",
     "react-router-dom": "5.2.0",
     "react-scripts": "3.4.1",
+    "react-scroll-table": "^1.0.8",
     "react-slick": "0.26.1",
     "react-swipeable-views": "0.13.9",
-    "react-table-scrollbar": "^0.1.9"
+    "react-table-scrollbar": "^0.1.9",
+    "reactfire": "^3.0.0-rc.0"
   },
   "devDependencies": {
     "@babel/cli": "7.10.1",
