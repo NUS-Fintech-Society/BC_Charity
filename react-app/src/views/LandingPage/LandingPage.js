@@ -19,9 +19,12 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 
+import Web3 from 'web3';
+
 const firestore = require('../../firebase');
 const charities = require('../../util/charities');
 const contractFunctions = require('../../contracts/utils/functions');
+const web3 = contractFunctions.getWeb3();
 
 const dashboardRoutes = [];
 
@@ -31,7 +34,6 @@ const useStyles = makeStyles(styles);
  * Only used when new contracts are deployed to get addresses.
  */
 async function getContracts() {
-  window.web3 = await contractFunctions.getWeb3();
   charities.charities.forEach( async charity => {
     const contract = await contractFunctions.getCharityAddress(charity.UEN, 3);
     console.log("UEN: " + charity.UEN + ", contract: " + contract);
@@ -46,9 +48,7 @@ function getCharities() {
 
 //TODO: the data format a bit messy, maybe can arrange in chronological order?
 async function getAllDonations() {
-  window.web3 = await contractFunctions.getWeb3();
-
-  const donations = await contractFunctions.getAllDonations();
+  const donations = await contractFunctions.getAllDonations(web3);
   return donations;
 }
 
