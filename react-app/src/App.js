@@ -21,7 +21,7 @@ function App() {
       <Router history={hist}>
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <Route path="/profile-page" component={ProfilePage} />
+          <Route path="/org/:uen" component={ProfilePage} />
           <Route path="/login-page" component={LoginPage} />
           <Route path="/component" component={Components} />
           <Route path="/verify" component={VerifyPage} />

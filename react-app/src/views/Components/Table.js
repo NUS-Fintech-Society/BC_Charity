@@ -9,42 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
-// const columns = [
-//     { id: 'name', label: 'Name', minWidth: 170 },
-//     {
-//         id: 'cause',
-//         label: 'Cause',
-//         minWidth: 170,
-//         align: 'left',
-//         format: (value) => value.toLocaleString('en-US'),
-//     },
-//     {
-//         id: 'website',
-//         label: 'Website',
-//         minWidth: 170,
-//         align: 'left',
-//         format: (value) => value.toLocaleString('en-US'),
-//     },
-//     {
-//         id: 'address',
-//         label: 'Address',
-//         minWidth: 170,
-//         align: 'right',
-//         format: (value) => value.toLocaleString('en-US'),
-//     },
-// ];
-
-// function createData(name, cause, website, address) {
-//     return { name, cause, website, address };
-// }
-
-// const rows = [
-//     createData("Singapore Cancer Society", "Fighting Cancer", "http://www.singaporecancersociety.org.sg/", "15 Enggor Street #04-01/04 Realty Centre, Singapore 079716"),
-//     createData("Children’s Cancer Foundation", "Fighting Cancer", "https://www.ccf.org.sg/", "8 Sinaran Drive #03-01 Oasia Hotel Novena, Singapore 307470"),
-//     createData("HCA Hospice Care", "Hospice Care", "http://www.hca.org.sg", "705 Serangoon Road #03-01 Kwong Wai Shiu Hospital, Singapore 328127 "),
-//     createData("Movement for the Intellectually Disabled of Singapore (MINDS)", "Persons with Intellectual Disability", "http://www.minds.org.sg", "800 Margaret Drive, Singapore 149310")
-// ];
-
 const useStyles = makeStyles({
     root: {
         width: '100%',
