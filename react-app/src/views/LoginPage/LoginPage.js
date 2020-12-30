@@ -24,6 +24,8 @@ import firebase from "firebase";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/background2.jpg";
+import { useState } from 'react';
+import { Redirect } from "react-router"
 
 const useStyles = makeStyles(styles);
 
@@ -34,6 +36,36 @@ export default function LoginPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const signInWithEmailAndPasswordHandler =
+    (event, email, password) => {
+      event.preventDefault();
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((user) => {
+          // Signed in 
+          // ...
+          console.log("Signed in");
+          props.history.push("/");
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(errorCode + ": " + errorMessage);
+        });
+    };
+
+  const onChangeHandler = (event) => {
+    const { name, value } = event.currentTarget;
+
+    if (name === 'email') {
+      setEmail(value);
+    }
+    else if (name === 'password') {
+      setPassword(value);
+    }
+  };
   return (
     <div>
       <Header
@@ -60,7 +92,10 @@ export default function LoginPage(props) {
                     <h4>Login</h4>
                   </CardHeader>
                   <CardBody>
-                    <CustomInput
+                    <p>Email: </p>
+                    <input
+                      onChange={(event) => onChangeHandler(event)}
+                      name="email"
                       labelText="Username"
                       id="first"
                       formControlProps={{
@@ -75,7 +110,11 @@ export default function LoginPage(props) {
                         )
                       }}
                     />
-                    <CustomInput
+                    <p>Password: </p>
+                    <input
+                      onChange={(event) => onChangeHandler(event)}
+                      name="password"
+                      type="password"
                       labelText="Password"
                       id="pass"
                       formControlProps={{
@@ -95,7 +134,7 @@ export default function LoginPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
+                    <Button simple color="primary" size="lg" onClick={(event) => { signInWithEmailAndPasswordHandler(event, email, password) }}>
                       Let's Go
                     </Button>
                   </CardFooter>
