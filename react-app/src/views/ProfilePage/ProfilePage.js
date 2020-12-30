@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -15,16 +16,14 @@ import profile from "assets/img/faces/christian.jpg";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
+// Table
+import DonationsTable from "../Components/DonationsTable.js";
+
 const useStyles = makeStyles(styles);
-const contractFunctions = require('../../contracts/utils/functions');
-const web3 = contractFunctions.getWeb3();
+const { charities } = require('../../util/charities');
 
 //TODO: ultimately each charity page should has its own route, so maybe the path differentiation can use UEN or contract address.
 //TODO: this method should also take in the contract address of the current charity page.
-async function getCharityDonations() {
-  const sampleContract = "0xC897d46a255004c3E2b46FbD5Ac726d866Ebf5d7";
-  return contractFunctions.getCharityDonations(sampleContract, web3);
-}
 
 export default function ProfilePage(props) {
   const classes = useStyles();
@@ -34,9 +33,17 @@ export default function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-  getCharityDonations().then(console.log);
+  const { uen } = useParams();
+  const getOrgInfo = () => {
+    const matches = charities.filter(charity => charity.UEN === uen);
+    if (matches.length != 1) {
+      return -1;
+    } else {
+      return matches[0];
+    }
+  }
+  const org = getOrgInfo(uen);
 
   return (
     <div>
@@ -62,7 +69,7 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Charity #1</h3>
+                    <h3 className={classes.title}>{org.name}</h3>
                   </div>
                 </div>
               </GridItem>
@@ -71,6 +78,11 @@ export default function ProfilePage(props) {
               <p>
                 Brief description of Charity #1.
               </p>
+            </div>
+            <h2 className={classes.title}>Record of Donations</h2>
+            <div>
+              {/* <Table rows={donations} columns={DonationsTable.columnHeaders} ></Table> */}
+              <DonationsTable.RecordsTable contract={org.contract} ></DonationsTable.RecordsTable>
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
