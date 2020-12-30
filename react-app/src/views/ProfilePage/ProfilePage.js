@@ -17,7 +17,7 @@ import profile from "assets/img/faces/christian.jpg";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 // Table
-import DonationsTable from "../Components/DonationsTable.js";
+import { OrgRecordTable } from "../Components/DonationsTable.js";
 
 const useStyles = makeStyles(styles);
 const { charities } = require('../../util/charities');
@@ -37,7 +37,7 @@ export default function ProfilePage(props) {
   const { uen } = useParams();
   const getOrgInfo = () => {
     const matches = charities.filter(charity => charity.UEN === uen);
-    if (matches.length != 1) {
+    if (matches.length !== 1) {
       return -1;
     } else {
       return matches[0];
@@ -82,7 +82,7 @@ export default function ProfilePage(props) {
             <h2 className={classes.title}>Record of Donations</h2>
             <div>
               {/* <Table rows={donations} columns={DonationsTable.columnHeaders} ></Table> */}
-              <DonationsTable.RecordsTable contract={org.contract} ></DonationsTable.RecordsTable>
+              <OrgRecordTable contract={org.contract} ></OrgRecordTable>
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>

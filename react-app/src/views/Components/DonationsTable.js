@@ -5,82 +5,62 @@ import Table from "./Table";
 const contractFunctions = require('../../contracts/utils/functions');
 const web3 = contractFunctions.getWeb3();
 
-const columnHeader= [
-    // Amount Date Donor Message
-    {
-        id: 'donor',
-        label: 'Donor',
-        minWidth: 170,
-        align: 'left',
-    },
-    { 
-        id: 'amount',
-        label: 'Amount', 
-        minWidth: 170,
-        align: 'right',
-    },
-    {
-        id: 'date',
-        label: 'Date',
-        minWidth: 170,
-        align: 'left',
-    },
-    {
-        id: 'message',
-        label: 'Message',
-        minWidth: 170,
-        align: 'left',
-    },
-];
+export class OrgRecordTable extends React.Component {
 
-class RecordsTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             contract: props.contract,
-            donations: []
+            donations: [],
         };
-        console.log(this.state);
-        console.log("Displayed Records Table state");
     }
     
     async componentDidMount() {
-        const result = await contractFunctions.getCharityDonations(this.state.contract, web3)
-        console.log(result);
-        this.setState({ donations: result});
-        console.log(this.state);
-        console.log("Displayed Records Table state");
+        if (this.state.donations.length === 0) {
+            console.log("awaiting");
+            const result = await contractFunctions.getCharityDonations(this.state.contract, web3)
+            await setTimeout(() => {
+                this.setState({ donations: result});
+                //TODO: Have this work without the 2000 ms
+            }, 2000);
+        }
     }
 
     render() {
-        console.log(this.state);
-        console.log("Rerendered Records Table state");
-        const test = [
+        const columnHeader= [
+            // Amount Date Donor Message
             {
-                amount: '20',
-                date: '27122020',
-                donor: 'tssgd',
-                message: 'hello 2',
+                id: 'donor',
+                label: 'Donor',
+                minWidth: 170,
+                align: 'left',
+            },
+            { 
+                id: 'amount',
+                label: 'Amount', 
+                minWidth: 170,
+                align: 'right',
             },
             {
-                amount: "10",
-                date: "27122020",
-                donor: "sdfsdf",
-                message: "hello 1",
+                id: 'date',
+                label: 'Date',
+                minWidth: 170,
+                align: 'left',
             },
             {
-                amount: "30",
-                date: "27122020",
-                donor: "sdfsfd",
-                message: "hello 3",
+                id: 'message',
+                label: 'Message',
+                minWidth: 170,
+                align: 'left',
             },
         ];
-        const test2 = this.state.donations;
-        console.log(test);
-        console.log(test2);
-        // return <Table rows={this.state.donations} columns={columnHeader} ></Table>
-        return <Table rows={test2} columns={columnHeader} ></Table>
+
+        return (
+            <div>
+                <Table rows={this.state.donations} columns={columnHeader} ></Table>
+            </div>
+        )
     }
 }
 
-export default {columnHeader, RecordsTable};
+export default { OrgRecordTable };
