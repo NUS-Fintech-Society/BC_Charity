@@ -17,10 +17,10 @@ import profile from "assets/img/faces/christian.jpg";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 // Table
-import DonationsTable from "../Components/DonationsTable.js";
+import { OrgRecordTable } from "../Components/DonationsTable.js";
 
 const useStyles = makeStyles(styles);
-const { charities } = require('../../util/charities');
+const { charities } = require("../../util/charities");
 
 //TODO: ultimately each charity page should has its own route, so maybe the path differentiation can use UEN or contract address.
 //TODO: this method should also take in the contract address of the current charity page.
@@ -36,13 +36,13 @@ export default function ProfilePage(props) {
 
   const { uen } = useParams();
   const getOrgInfo = () => {
-    const matches = charities.filter(charity => charity.UEN === uen);
-    if (matches.length != 1) {
+    const matches = charities.filter((charity) => charity.UEN === uen);
+    if (matches.length !== 1) {
       return -1;
     } else {
       return matches[0];
     }
-  }
+  };
   const org = getOrgInfo(uen);
 
   return (
@@ -54,7 +54,7 @@ export default function ProfilePage(props) {
         fixed
         changeColorOnScroll={{
           height: 200,
-          color: "white"
+          color: "white",
         }}
         {...rest}
       />
@@ -75,21 +75,24 @@ export default function ProfilePage(props) {
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p>
-                Brief description of Charity #1.
-              </p>
+              <p>Brief description of Charity #1.</p>
             </div>
             <h2 className={classes.title}>Record of Donations</h2>
             <div>
               {/* <Table rows={donations} columns={DonationsTable.columnHeaders} ></Table> */}
-              <DonationsTable.RecordsTable contract={org.contract} ></DonationsTable.RecordsTable>
+              <OrgRecordTable contract={org.contract}></OrgRecordTable>
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                <Button simple color="success" size="lg" onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href='/addtxn';
-                }}>
+                <Button
+                  simple
+                  color="success"
+                  size="lg"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = "/addtxn";
+                  }}
+                >
                   + Add a transaction
                 </Button>
               </GridItem>
