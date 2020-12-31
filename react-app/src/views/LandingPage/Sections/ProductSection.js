@@ -14,6 +14,7 @@ import InfoArea from "components/InfoArea/InfoArea.js";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 
 import Table from "../../Components/Table";
+import { AllDonationsTable } from "../../Components/DonationsTable";
 
 // Table Stuff
 import { rowsCL, columnsCL, createDataCL } from "../../../charitieslist";
@@ -76,8 +77,7 @@ export default function ProductSection() {
           </GridItem>
           <GridItem xs={12} sm={12} md={6}>
             <h4 className={classes.title}>Transaction List</h4>
-            <Table rows={rowsTL} columns={columnsTL} createData={createDataTL}></Table>
-
+            <AllDonationsTable></AllDonationsTable>
           </GridItem>
         </GridContainer>
       </div>
