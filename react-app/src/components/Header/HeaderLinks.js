@@ -23,9 +23,21 @@ import Button from "components/CustomButtons/Button.js";
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 
 const useStyles = makeStyles(styles);
+import firebase from "firebase";
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+  var user = firebase.auth().currentUser;
+
+  const onLogoutClick = e => firebase.auth().signOut().then(function () {
+    // Sign-out successful.
+    console.log("Signing out")
+    // Refresh navbar
+    window.location.reload(false);
+  }).catch(function (error) {
+    // An error happened.
+    console.log(error)
+  });
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -46,15 +58,27 @@ export default function HeaderLinks(props) {
           <CheckCircleIcon className={classes.icons} /> Verify
         </Button>
       </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="login-page"
-          color="transparent"
-          className={classes.navLink}
-        >
-          <LockIcon className={classes.icons} /> Charity Log In
+      { user ?
+        <ListItem className={classes.listItem}>
+          <Button
+            onClick={onLogoutClick}
+            color="transparent"
+            className={classes.navLink}
+          >
+            <LockIcon className={classes.icons} /> Charity Log Out
+      </Button>
+        </ListItem>
+        :
+        <ListItem className={classes.listItem}>
+          <Button
+            href="login-page"
+            color="transparent"
+            className={classes.navLink}
+          >
+            <LockIcon className={classes.icons} /> Charity Log In
         </Button>
-      </ListItem>
+        </ListItem>
+      }
     </List>
   );
 }

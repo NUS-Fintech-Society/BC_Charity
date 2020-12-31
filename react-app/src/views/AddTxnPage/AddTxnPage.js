@@ -58,19 +58,21 @@ export default function ProfilePage(props) {
     const charityContractAddress = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
 
     contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress, web3)
-    .on('transactionHash', function(hash) {
-      console.log("Mining this transaction: " + hash);
-    })
-    .on('confirmation', function(confirmationNumber, receipt) {
-      console.log("No: " + confirmationNumber + ", receipt: " + receipt);
-    })
-    .on('receipt', function(receipt) {
-      console.log(receipt);
-    })
-    .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
-      alert("Transaction rejected! Check that this waller address have the permission or have enough ethers.");
-      console.log(receipt);
-    });
+      .on('transactionHash', function (hash) {
+        alert("Mining transaction...");
+        console.log("Mining this transaction: " + hash);
+      })
+      .on('confirmation', function (confirmationNumber, receipt) {
+        console.log("No: " + confirmationNumber + ", receipt: " + receipt);
+      })
+      .on('receipt', function (receipt) {
+        alert("Success! Transaction has been completed.");
+        console.log(receipt);
+      })
+      .on('error', function (error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+        alert("Transaction rejected! Check that this waller address have the permission or have enough ethers.");
+        console.log(receipt);
+      });
   }
 
   return (
@@ -108,54 +110,54 @@ export default function ProfilePage(props) {
               </p>
             </div>
             <div>
-                <h3>Add Transaction</h3>
+              <h3>Add Transaction</h3>
             </div>
             <form>
-                <GridContainer>
-                    <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                        labelText="NRIC"
-                        id="nric"
-                        formControlProps={{
-                            fullWidth: true
-                        }}
-                        />
-                    </GridItem>
-                    <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                        labelText="Amount"
-                        id="amount"
-                        formControlProps={{
-                            fullWidth: true
-                        }}
-                        />
-                    </GridItem>
-                    <CustomInput
-                        labelText="Note"
-                        id="Note"
-                        formControlProps={{
-                        fullWidth: true,
-                        className: classes.textArea
-                        }}
-                        inputProps={{
-                        multiline: true,
-                        rows: 5
-                        }}
-                    />
-                </GridContainer>
-                <GridContainer justify="center">
-                    <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                        <Button color="success">
-                            Done
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="NRIC"
+                    id="nric"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Amount"
+                    id="amount"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <CustomInput
+                  labelText="Note"
+                  id="Note"
+                  formControlProps={{
+                    fullWidth: true,
+                    className: classes.textArea
+                  }}
+                  inputProps={{
+                    multiline: true,
+                    rows: 5
+                  }}
+                />
+              </GridContainer>
+              <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+                  <Button color="success">
+                    Done
                         </Button>
-                        <Button color="success" onClick={sampleAddDonation}>
-                            Add donations
+                  <Button color="success" onClick={sampleAddDonation}>
+                    Add donations
                         </Button>
-                        <Button color="success" onClick={addOwner}>
-                            add owner
+                  <Button color="success" onClick={addOwner}>
+                    add owner
                         </Button>
-                    </GridItem>
-                </GridContainer>
+                </GridItem>
+              </GridContainer>
             </form>
           </div>
         </div>
