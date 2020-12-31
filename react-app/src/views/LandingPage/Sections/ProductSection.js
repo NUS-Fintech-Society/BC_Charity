@@ -73,6 +73,7 @@ export default function ProductSection() {
             <h4 className={classes.title}>List of Charities</h4>
             <Table rows={rowsCL} columns={columnsCL} createData={createDataCL}></Table>
 
+
           </GridItem>
           <GridItem xs={12} sm={12} md={6}>
             <h4 className={classes.title}>Transaction List</h4>
