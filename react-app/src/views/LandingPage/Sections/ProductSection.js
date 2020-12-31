@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Chat from "@material-ui/icons/Chat";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import Fingerprint from "@material-ui/icons/Fingerprint";
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -30,8 +31,8 @@ export default function ProductSection() {
         <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>So why the need for Charity?</h2>
           <h5 className={classes.description}>
-            Our team has identified several issues which arise from the current charity donation practices and Charity aims
-            to solve these issues.
+            Our team has identified several issues which arise from the current
+            charity donation practices and Charity aims to solve these issues.
           </h5>
         </GridItem>
       </GridContainer>
@@ -72,8 +73,11 @@ export default function ProductSection() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <h4 className={classes.title}>List of Charities</h4>
-            <Table rows={rowsCL} columns={columnsCL} createData={createDataCL}></Table>
-
+            <Table
+              rows={rowsCL}
+              columns={columnsCL}
+              createData={createDataCL}
+            ></Table>
           </GridItem>
           <GridItem xs={12} sm={12} md={6}>
             <h4 className={classes.title}>Transaction List</h4>
