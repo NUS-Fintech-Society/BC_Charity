@@ -3,7 +3,7 @@
 
 ## Table of Contents
 
-- [JoblessGoWhere](#charity)
+- [Charity](#charity)
   - [Table of Contents](#table-of-contents)
   - [BuildSetup](#buildsetup)
   - [Features](#features)
