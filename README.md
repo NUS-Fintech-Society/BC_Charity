@@ -1,5 +1,6 @@
-# Blockchain_Charity
+# Charity
 
+Fintech is beginning to disrupt the financial world as we know it. The financial industry is now more focused than ever on technological innovation than at any other time. Since the large majority of Fintech companies deal with high volumes of fund movements, this results in a higher vulnerability to theft of funds. This is especially prevalent in donations to charity organisations, where donations are slowly shifting away from physical donations to digitalised.
 
 ## Table of Contents
 
