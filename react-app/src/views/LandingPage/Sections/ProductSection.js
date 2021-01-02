@@ -3,7 +3,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 
@@ -29,44 +28,41 @@ export default function ProductSection() {
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>So why the need for Charity?</h2>
+          <h2 className={classes.title}>About us.</h2>
           <h5 className={classes.description}>
-            Our team has identified several issues which arise from the current
-            charity donation practices and Charity aims to solve these issues.
+          Fintech is beginning to disrupt the financial world as we know it. 
+          The financial industry is now more focused than ever on technological innovation than at any other time.
+          Since the large majority of Fintech companies deal with high volumes of fund movements, this results in 
+          a higher vulnerability to theft of funds. This is especially prevalent in donations to charity organisations, 
+          where donations are slowly shifting away from physical donations to digitalised.
           </h5>
         </GridItem>
       </GridContainer>
-      <div>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <InfoArea
-              title="Donation Log"
-              description="Description"
-              icon={Chat}
-              iconColor="info"
-              vertical
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <InfoArea
-              title="Security"
-              description="Description"
-              icon={VerifiedUser}
-              iconColor="success"
-              vertical
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <InfoArea
-              title="idk smth"
-              description="Description"
-              icon={Fingerprint}
-              iconColor="danger"
-              vertical
-            />
-          </GridItem>
-        </GridContainer>
-      </div>
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={12} md={8}>
+          <h3 className={classes.title}>We aim to be:</h3>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={6}>
+              <InfoArea
+                title="Secure"
+                description="<insert description here>"
+                icon={VerifiedUser}
+                iconColor="success"
+                vertical
+              />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+              <InfoArea
+                title="Unique"
+                description="<insert description here>"
+                icon={Fingerprint}
+                iconColor="danger"
+                vertical
+              />
+            </GridItem>
+          </GridContainer>
+        </GridItem>
+      </GridContainer>
       <br></br>
       <h2 className={classes.title}>Data</h2>
       <div>
