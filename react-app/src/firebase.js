@@ -15,4 +15,12 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const firestore = firebaseApp.firestore();
 export const auth = firebase.auth();
-// export const firestore = firebase.firestore();
+
+var allCharities = [];
+
+//Retrieve list of charities from firestore
+firestore.collection("onboarding/main/charities").get().then(function (querySnapshot) {
+  querySnapshot.forEach(function (doc) {
+    allCharities.push(doc.data());
+  });
+});
