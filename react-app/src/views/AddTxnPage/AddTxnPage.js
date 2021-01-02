@@ -17,7 +17,6 @@ import profile from "assets/img/faces/christian.jpg";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 import firebase from "firebase";
-import database from "firebase.js";
 
 const useStyles = makeStyles(styles);
 
