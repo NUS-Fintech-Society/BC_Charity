@@ -34,7 +34,7 @@ const useStyles = makeStyles(styles);
  * Only used when new contracts are deployed to get addresses.
  */
 async function getContracts() {
-  charities.charities.forEach( async charity => {
+  charities.charities.forEach(async charity => {
     const contract = await contractFunctions.getCharityAddress(charity.UEN, 3);
     console.log("UEN: " + charity.UEN + ", contract: " + contract);
   })
