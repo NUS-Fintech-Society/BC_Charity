@@ -1,3 +1,4 @@
+import { searchByUEN } from "firebase";
 import React from "react";
 import Table from "./Table";
 
@@ -31,30 +32,10 @@ export class OrgRecordTable extends React.Component {
   render() {
     const columnHeader = [
       // Amount Date Donor Message
-      {
-        id: "donor",
-        label: "Donor",
-        minWidth: 170,
-        align: "left",
-      },
-      {
-        id: "amount",
-        label: "Amount",
-        minWidth: 170,
-        align: "right",
-      },
-      {
-        id: "date",
-        label: "Date",
-        minWidth: 170,
-        align: "left",
-      },
-      {
-        id: "message",
-        label: "Message",
-        minWidth: 170,
-        align: "left",
-      },
+      { id: "donor", label: "Donor", minWidth: 170, align: "left" },
+      { id: "amount", label: "Amount", minWidth: 170, align: "right" },
+      { id: "date", label: "Date", minWidth: 170, align: "left" },
+      { id: "message", label: "Message", minWidth: 170, align: "left" },
     ];
 
     return (
@@ -94,36 +75,11 @@ export class AllDonationsTable extends React.Component {
   render() {
     const columnHeader = [
       // Amount Date Donor Message
-      {
-        id: "charityName",
-        label: "Charity",
-        minWidth: 170,
-        align: "left",
-      },
-      // {
-      //     id: 'donor',
-      //     label: 'Donor',
-      //     minWidth: 170,
-      //     align: 'left',
-      // },
-      {
-        id: "amount",
-        label: "Amount",
-        minWidth: 170,
-        align: "right",
-      },
-      {
-        id: "date",
-        label: "Date",
-        minWidth: 170,
-        align: "left",
-      },
-      {
-        id: "message",
-        label: "Message",
-        minWidth: 170,
-        align: "left",
-      },
+      { id: "charityName", label: "Charity", minWidth: 170, align: "left" },
+      // { id: 'donor', label: 'Donor', minWidth: 170, align: 'left', },
+      { id: "amount", label: "Amount", minWidth: 170, align: "right" },
+      { id: "date", label: "Date", minWidth: 170, align: "left" },
+      { id: "message", label: "Message", minWidth: 170, align: "left" },
     ];
 
     return (
