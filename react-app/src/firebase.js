@@ -1,8 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { isVariableStatement } from "typescript";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyBWdeiAxDlaFnERx6DshIytm0g27pl0uHU",
   authDomain: "team2-blockchain.firebaseapp.com",
   projectId: "team2-blockchain",
@@ -18,9 +19,20 @@ export const auth = firebase.auth();
 
 var allCharities = [];
 
-//Retrieve list of charities from firestore
+//Populate list of all charities from firestore into allCharities
 firestore.collection("onboarding/main/charities").get().then(function (querySnapshot) {
   querySnapshot.forEach(function (doc) {
     allCharities.push(doc.data());
   });
 });
+
+//To retrieve a specific UEN
+export function searchByUEN(uen) {
+  var charity = [];
+  firestore.collection("onboarding/main/charities").where("UEN", "==", uen).get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+      charity.push(doc.data());
+    });
+  });
+  return charity;
+};
