@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -20,45 +20,25 @@ import firebase from "firebase";
 
 const useStyles = makeStyles(styles);
 
-let state = {
+const state = {
   nric: "",
-  amount: "",
+
   note: "",
   nricError: "",
   amountError: "Invalid Amount. Amount must be greater than 0.00 e.g. 1.23",
   noteError:"Max 32 characters. Only accepts a-z,A-Z,0-9 and the following special characters: , ! . ? ; : - '"
 }
 
-function handleSubmit() {
-  const isValid = validate();
-  if (isValid) {
-    console.log(state);
-  }
-}
 
-function handleNricChange(value) {
-  console.log(value + " nric error value");
-  state.nric = value;
 
-}
-
-function handleAmountChange(value) {
-  this.setState({
-    amount: value
-  });
-}
-
-function handleNoteChange(value) {
-  this.setState({
-    note: value
-  });
-}
 
 function validateNric(nric){
+
   let nricArr = nric.split('');
   let start = 0;
   var value;
   if (nricArr.length !== 9) {
+
     return false;
   }
   for (value of nric.split('')) {
@@ -68,38 +48,63 @@ function validateNric(nric){
         return false;
       }
       start = start + 1;
+      continue;
     }
     if (start === 8) {
       // check if last letter = capital letter
       if (!(/[A-Z]/.test(value))) {
+
         return false;
       }
       return true;
     }
     if (isNaN(value)) {
+
       return false;
     }
     start = start + 1;
 
   }
+
 }
 
+Number.prototype.countDecimals = function () {
+  if(Math.floor(this.valueOf()) === this.valueOf()) return 0;
+  return this.toString().split(".")[1].length || 0;
+};
 
-function validate() {
-  let nricError: "";
-//    let amountError: "";
-//    let noteError:"";
 
-  if (validateNric(state.nric)) {
-    nricError = "Invalid NRIC. e.g. S1234567X";
-  }
-  if (nricError) {
-    this.setState({nricError})
+function validateAmt(amt) {
+  const num = Number(amt);
+  if (isNaN(num)) {
+    return false;
+  } else if (num < 0) {
+    return false;
+  } else if ( num.countDecimals() !== 2 ){
+    return false;
+  } else {
+      return true;
+  };
+
+}
+
+function validateNote(note) {
+  let noteArr = note.split('');
+  let value;
+
+  if (noteArr.length > 32) {
     return false;
   }
-
+  for (value of noteArr) {
+      if (!(/[a-zA-Z0-9,!.?;:\-']/.test(value))) {
+        return false;
+      }
+  }
   return true;
 }
+
+
+
 
 
 const contractFunctions = require('../../contracts/utils/functions')
@@ -113,9 +118,106 @@ export default function ProfilePage(props) {
       classes.imgRoundedCircle,
       classes.imgFluid
   );
+    const [nric, setNric] = useState('');
+    const [nricError, setNricError] = useState('');
+    const nricErrorMessageRef = useRef('');
+
+    const [amt, setAmt] = useState('');
+    const [amtError, setAmtError] = useState('');
+    const amtErrorMessageRef = useRef('');
+
+    const [note, setNote] = useState('');
+    const [noteError, setNoteError] = useState('');
+    const noteErrorMessageRef = useRef('');
 
 
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
+    const onChangeHandlerNric = (event) => {
+      const {name, value} = event.currentTarget;
+        setNric(value);
+    };
+
+    const onChangeHandlerAmount = (event) => {
+      const {name, value} = event.currentTarget;
+      setAmt(value);
+    };
+
+    const onChangeHandlerNote = (event) => {
+      const {name, value} = event.currentTarget;
+      setNote(value);
+    };
+
+    const validateHelperNric = () => {
+
+
+    if (!(validateNric(nric))) {
+        nricErrorMessageRef.current = 'Currently Entered NRIC: ' + nric + '\nInvalid NRIC. e.g. S1234567X';
+         setNricError('Invalid NRIC. e.g. S1234567X');
+      console.log(nricErrorMessageRef.current);
+    }
+
+    if (nricErrorMessageRef.current !== '') {
+      return false;
+    }
+
+    return true;
+  };
+
+    const validateHelperAmt = () => {
+      if (!(validateAmt(amt))) {
+        amtErrorMessageRef.current = "Current Entered Amount: " + amt + "\nInvalid Amount. Amount must be greater than 0.00 e.g. 1.23";
+        setAmtError("Invalid Amount. Amount must be greater than 0.00 e.g. 1.23");
+        console.log(amtErrorMessageRef.current);
+      }
+      if (amtErrorMessageRef.current !== '') {
+        return false;
+      }
+
+      return true;
+    };
+
+    const validateHelperNote = () => {
+
+      if (!(validateNote(note))) {
+        noteErrorMessageRef.current = "Max 32 characters. Only accepts a-z,A-Z,0-9 and the following special characters: , ! . ? ; : - '";
+        setNoteError("Max 32 characters. Only accepts a-z,A-Z,0-9 and the following special characters: , ! . ? ; : - '");
+        console.log(noteErrorMessageRef.current);
+      }
+
+      if (noteErrorMessageRef.current !== '') {
+        return false;
+      }
+
+      return true;
+    };
+
+
+
+  function handleSubmit() {
+    const isValidNric = validateHelperNric();
+    const isValidAmt = validateHelperAmt();
+    const isValidNote = validateHelperNote();
+
+    if (isValidNric) {
+      console.log("Successful NRIC: " + nric);
+      // clear forms
+      setNricError('');
+    }
+    if (isValidAmt) {
+      console.log("Successful Amount: " + amt);
+      setAmtError('');
+    }
+    if (isValidNote) {
+      console.log("Note: " + note);
+      setNoteError('');
+    }
+
+    nricErrorMessageRef.current ='';
+    amtErrorMessageRef.current = '';
+    noteErrorMessageRef.current = '';
+  }
+
 
   /**
    * Used by Wei Hong to add owner hehe.
@@ -196,34 +298,37 @@ export default function ProfilePage(props) {
                 <h3>Add Transaction</h3>
               </div>
 
-              <form onSubmit={handleSubmit} >
+              <form>
                 <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
+                  <GridItem xs={12} sm={12} md={6} >
+                    <input
                         labelText="NRIC (Case Sensitive)"
                         id="nric"
+                        name = "nric"
                         formControlProps={{
                           fullWidth: true
                         }}
-                        onChange={e => handleNricChange(e.target.value)}
+                        onChange={(e) => onChangeHandlerNric(e)}
                     />
-                    <div style ={{fontSize:12 , color: "red"}}>{state.nricError}</div>
+                    <div style ={{fontSize:12 , color: "red"}}>{nricError}</div>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
+                    <input
                         labelText="Amount"
                         id="amount"
+                        name = "amount"
                         formControlProps={{
                           fullWidth: true
                         }}
-                        onChange={e => handleAmountChange(e.target.value)}
+                        onChange={(e) => onChangeHandlerAmount(e)}
 
                     />
-                    <div style ={{fontSize:12 , color: "red"}}>{state.amountError}</div>
+                    <div style ={{fontSize:12 , color: "red"}}>{amtError}</div>
                   </GridItem>
-                  <CustomInput
+                  <input
                       labelText="Note"
                       id="note"
+                      name = "note"
                       formControlProps={{
                         fullWidth: true,
                         className: classes.textArea
@@ -232,9 +337,9 @@ export default function ProfilePage(props) {
                         multiline: true,
                         rows: 5
                       }}
-                      onChange={e => handleNoteChange(e.target.value)}
+                      onChange={e => onChangeHandlerNote(e)}
                   />
-                  <div style ={{fontSize:12 , color: "red"}}>{state.noteError}</div>
+                  <div style ={{fontSize:12 , color: "red"}}>{noteError}</div>
 
                   {/*<div className="alert alert-danger">*/}
                   {/*    <div className="container-fluid">*/}
@@ -262,7 +367,7 @@ export default function ProfilePage(props) {
                 </GridContainer>
                 <GridContainer justify="center">
                   <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                    <Button color="success" onClick={handleSubmit}>
+                    <Button color="success" onClick ={handleSubmit}>
                       Done
                     </Button>
                   </GridItem>

@@ -2,45 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6df27f34-d3b1-4132-bd9a-deb9a3ed02a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/build/contracts/CharityChain.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/build/contracts/Migrations.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/build/contracts/Onboarding.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/contracts/CharityChain.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/contracts/Migrations.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/contracts/Onboarding.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/migrations/1_initial_migration.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/migrations/2_deploy_charity.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/test/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/truffle-config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ethr-contracts/utils/details.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-app/public/apple-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-app/src/contracts/build/CharityChain.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-app/src/contracts/build/Onboarding.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-app/src/contracts/instance/CharityChain.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-app/src/contracts/utils/functions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-app/src/contracts/utils/infura.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-app/src/util/charities.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-app/src/views/AddTxnPage/Example.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-app/src/views/Components/DonationsTable.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-data/sample-uen-hashed.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/src/components/Header/HeaderLinks.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/components/Header/HeaderLinks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/src/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/firebase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/src/views/Components/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/Components/Table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/src/views/LandingPage/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/LandingPage/LandingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/src/views/LandingPage/Sections/ProductSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/LandingPage/Sections/ProductSection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/src/views/LoginPage/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/LoginPage/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/src/views/ProfilePage/ProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/ProfilePage/ProfilePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-app/src/views/VerifyPage/VerifyPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/VerifyPage/VerifyPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/fakeUENs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/test-data/fakeUENs.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/sample-transactions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/test-data/sample-transactions.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/transaction_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/test-data/transaction_gen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-app/src/views/AddTxnPage/AddTxnPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/AddTxnPage/AddTxnPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +37,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\garyl\Desktop\COMMITMENTS\NUSFINTECH\charity_chain\Blockchain_Charity\node_modules\prettier" />
   </component>
@@ -102,7 +71,8 @@
       <workItem from="1608049566215" duration="33000" />
       <workItem from="1608049600124" duration="2435000" />
       <workItem from="1609077145619" duration="13375000" />
-      <workItem from="1609509109025" duration="6220000" />
+      <workItem from="1609509109025" duration="12460000" />
+      <workItem from="1609668248963" duration="18322000" />
     </task>
     <servers />
   </component>
@@ -114,5 +84,21 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="276" key="FileChooserDialogImpl/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1608049596809" />
+    <state width="1899" height="106" key="GridCell.Tab.0.bottom" timestamp="1609595759082">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="106" key="GridCell.Tab.0.bottom/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1609595759082" />
+    <state width="1899" height="106" key="GridCell.Tab.0.center" timestamp="1609595759082">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="106" key="GridCell.Tab.0.center/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1609595759082" />
+    <state width="1899" height="106" key="GridCell.Tab.0.left" timestamp="1609595759082">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="106" key="GridCell.Tab.0.left/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1609595759082" />
+    <state width="1899" height="106" key="GridCell.Tab.0.right" timestamp="1609595759082">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="106" key="GridCell.Tab.0.right/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1609595759082" />
   </component>
 </project>
