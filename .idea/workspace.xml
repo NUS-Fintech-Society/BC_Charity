@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6df27f34-d3b1-4132-bd9a-deb9a3ed02a8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/react-app/src/views/AddTxnPage/AddTxnPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/AddTxnPage/AddTxnPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +71,7 @@
       <workItem from="1608049600124" duration="2435000" />
       <workItem from="1609077145619" duration="13375000" />
       <workItem from="1609509109025" duration="12460000" />
-      <workItem from="1609668248963" duration="21787000" />
+      <workItem from="1609668248963" duration="22095000" />
     </task>
     <servers />
   </component>

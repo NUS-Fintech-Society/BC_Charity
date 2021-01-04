@@ -66,7 +66,7 @@ Number.prototype.countDecimals = function () {
 
 function validateAmt(amt) {
   const num = Number(amt);
-  const decimals = num.countDecimals();
+
 
   if (isNaN(num)) {
     return false;
@@ -74,6 +74,7 @@ function validateAmt(amt) {
     return false;
   }
 
+  const decimals = num.countDecimals();
 
   if ( decimals === 2 || decimals === 0 || decimals === 1) {
     return true;
