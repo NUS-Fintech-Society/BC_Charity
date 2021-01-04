@@ -17,19 +17,9 @@ import profile from "assets/img/faces/christian.jpg";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 import firebase from "firebase";
+import Input from "@material-ui/core/Input";
 
 const useStyles = makeStyles(styles);
-
-const state = {
-  nric: "",
-
-  note: "",
-  nricError: "",
-  amountError: "Invalid Amount. Amount must be greater than 0.00 e.g. 1.23",
-  noteError:"Max 32 characters. Only accepts a-z,A-Z,0-9 and the following special characters: , ! . ? ; : - '"
-}
-
-
 
 
 function validateNric(nric){
@@ -76,15 +66,20 @@ Number.prototype.countDecimals = function () {
 
 function validateAmt(amt) {
   const num = Number(amt);
+  const decimals = num.countDecimals();
+
   if (isNaN(num)) {
     return false;
-  } else if (num < 0) {
+  } else if (num <= 0) {
     return false;
-  } else if ( num.countDecimals() !== 2 ){
-    return false;
+  }
+
+
+  if ( decimals === 2 || decimals === 0 || decimals === 1) {
+    return true;
   } else {
-      return true;
-  };
+      return false;
+  }
 
 }
 
@@ -96,7 +91,7 @@ function validateNote(note) {
     return false;
   }
   for (value of noteArr) {
-      if (!(/[a-zA-Z0-9,!.?;:\-']/.test(value))) {
+      if (!(/[a-zA-Z0-9,!.?;:\-'\s]/.test(value))) {
         return false;
       }
   }
@@ -298,13 +293,14 @@ export default function ProfilePage(props) {
                 <h3>Add Transaction</h3>
               </div>
 
-              <form>
+
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={6} >
-                    <input
+                    <Input
                         labelText="NRIC (Case Sensitive)"
                         id="nric"
                         name = "nric"
+                        placeholder = "NRIC (Case Sensitive)"
                         formControlProps={{
                           fullWidth: true
                         }}
@@ -313,10 +309,11 @@ export default function ProfilePage(props) {
                     <div style ={{fontSize:12 , color: "red"}}>{nricError}</div>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
-                    <input
+                    <Input
                         labelText="Amount"
                         id="amount"
                         name = "amount"
+                        placeholder = "Amount"
                         formControlProps={{
                           fullWidth: true
                         }}
@@ -325,10 +322,15 @@ export default function ProfilePage(props) {
                     />
                     <div style ={{fontSize:12 , color: "red"}}>{amtError}</div>
                   </GridItem>
-                  <input
+                </GridContainer>
+              <GridContainer>
+                  <GridItem alignItems="stretch">
+                  <Input
                       labelText="Note"
                       id="note"
                       name = "note"
+                      placeholder = "Note"
+                      multiline = "true"
                       formControlProps={{
                         fullWidth: true,
                         className: classes.textArea
@@ -340,31 +342,8 @@ export default function ProfilePage(props) {
                       onChange={e => onChangeHandlerNote(e)}
                   />
                   <div style ={{fontSize:12 , color: "red"}}>{noteError}</div>
-
-                  {/*<div className="alert alert-danger">*/}
-                  {/*    <div className="container-fluid">*/}
-                  {/*        <div className="alert-icon">*/}
-                  {/*            <i className="material-icons">error_outline</i>*/}
-                  {/*        </div>*/}
-                  {/*        <button type="button" className="close" data-dismiss="alert" aria-label="Close">*/}
-                  {/*            <span aria-hidden="true"><i className="material-icons">clear</i></span>*/}
-                  {/*        </button>*/}
-                  {/*           <div>*/}
-                  {/*               <b>Error:</b> Please check the following inputs.*/}
-                  {/*           </div>*/}
-                  {/*        <div>*/}
-                  {/*            NRIC: Valid NRIC (Case Sensitive) e.g. S1234567X*/}
-                  {/*        </div>*/}
-                  {/*        <div>*/}
-                  {/*            Amount: Amount must be greater than 0.00 e.g. 1.23*/}
-                  {/*        </div>*/}
-                  {/*        <div>*/}
-                  {/*        Note: Max 32 characters. Only accepts a-z,A-Z,0-9 and the following special characters: , ! . ? ; : - '*/}
-                  {/*        </div>*/}
-                  {/*    </div>*/}
-                  {/*</div>*/}
-
-                </GridContainer>
+                  </GridItem>
+              </GridContainer>
                 <GridContainer justify="center">
                   <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
                     <Button color="success" onClick ={handleSubmit}>
@@ -372,7 +351,7 @@ export default function ProfilePage(props) {
                     </Button>
                   </GridItem>
                 </GridContainer>
-              </form>
+
             </div>
           </div>
         </div>
