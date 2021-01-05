@@ -79,7 +79,6 @@ export default function ProfilePage(props) {
             </div>
             <h2 className={classes.title}>Record of Donations</h2>
             <div>
-              {/* <Table rows={donations} columns={DonationsTable.columnHeaders} ></Table> */}
               <OrgRecordTable contract={org.contract}></OrgRecordTable>
             </div>
             <GridContainer justify='center'>
