@@ -23,55 +23,28 @@ const useStyles = makeStyles(styles);
 
 function validateNric(nric) {
   let nricArr = nric.split("");
-  let start = 0;
-  var value;
   if (nricArr.length !== 9) {
     return false;
   }
-  for (value of nric.split("")) {
-    if (start === 0) {
+  for (let i = 0; i < nricArr.length; i++) {
+    let value = nricArr[i];
+    if (i === 0 || i === 8) {
       // check if value = capital letter
       if (!/[A-Z]/.test(value)) {
         return false;
       }
-      start = start + 1;
-      continue;
-    }
-    if (start === 8) {
-      // check if last letter = capital letter
-      if (!/[A-Z]/.test(value)) {
-        return false;
-      }
-      return true;
-    }
-    if (isNaN(value)) {
+    } else if (isNaN(value)) {
       return false;
     }
-    start = start + 1;
   }
+  return true;
 }
 
-Number.prototype.countDecimals = function () {
-  if (Math.floor(this.valueOf()) === this.valueOf()) return 0;
-  return this.toString().split(".")[1].length || 0;
-};
-
 function validateAmt(amt) {
-  const num = Number(amt);
-
-  if (isNaN(num)) {
-    return false;
-  } else if (num <= 0) {
+  if (isNaN(amt) || amt <= 0 || amt - Math.floor(amt) !== 0) {
     return false;
   }
-
-  const decimals = num.countDecimals();
-
-  if (decimals === 2 || decimals === 0 || decimals === 1) {
-    return true;
-  } else {
-    return false;
-  }
+  return true;
 }
 
 function validateNote(note) {
@@ -115,17 +88,17 @@ export default function ProfilePage(props) {
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
   const onChangeHandlerNric = (event) => {
-    const { name, value } = event.currentTarget;
+    const { value } = event.currentTarget;
     setNric(value);
   };
 
   const onChangeHandlerAmount = (event) => {
-    const { name, value } = event.currentTarget;
-    setAmt(value);
+    const { value } = event.currentTarget;
+    setAmt(Number(value) * 100);
   };
 
   const onChangeHandlerNote = (event) => {
-    const { name, value } = event.currentTarget;
+    const { value } = event.currentTarget;
     setNote(value);
   };
 
@@ -156,7 +129,6 @@ export default function ProfilePage(props) {
     if (amtErrorMessageRef.current !== "") {
       return false;
     }
-
     return true;
   };
 
@@ -183,8 +155,8 @@ export default function ProfilePage(props) {
     const isValidNote = validateHelperNote();
 
     if (isValidNric) {
+      //TODO: clear form
       console.log("Successful NRIC: " + nric);
-      // clear forms
       setNricError("");
     }
     if (isValidAmt) {
