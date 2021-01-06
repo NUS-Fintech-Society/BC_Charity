@@ -16,6 +16,7 @@ import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { UserRecordTable } from "views/Components/DonationsTable";
+import { useState } from 'react';
 
 const useStyles = makeStyles(styles);
 
@@ -23,10 +24,9 @@ const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
 // TODO: this function should have a parameter: user's HASHED nric, so the hashing also need to handle.
-async function getSampleUserDonations() {
+async function getSampleUserDonations(nric) {
   // Parameters
-  const nricHash =
-    "0x0000000000000000000000000000000000000000000000000000000000000001";
+  const nricHash = web3.utils.sha3(nric.toUpperCase());
 
   // Method call
   const donations = await contractFunctions.getAllUserDonations(nricHash, web3);
@@ -42,6 +42,15 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  const [nric, setNric] = useState('');
+  const onChangeHandler = (event) => {
+    const { name, value } = event.currentTarget;
+
+    if (name === 'nric') {
+      setNric(value);
+    }
+  };
+
   return (
     <div>
       <Header
@@ -66,9 +75,13 @@ export default function ProfilePage(props) {
               <br></br>
               <br></br>
               <GridItem xs={12} sm={12} md={8}>
-                <CustomInput
+                <p>NRIC: </p>
+                <input
                   labelText='Your NRIC'
                   id='nric'
+                  onChange={(event) => onChangeHandler(event)}
+                  name="nric"
+                  type="text"
                   formControlProps={{
                     fullWidth: true,
                   }}
@@ -82,16 +95,16 @@ export default function ProfilePage(props) {
                   simple
                   color='success'
                   size='lg'
-                  onClick={getSampleUserDonations}
+                  onClick={getSampleUserDonations(nric)}
                 >
                   Get Sample User Donations
                 </Button>
               </CardFooter>
             </GridContainer>
-            <UserRecordTable nricHash='0x0000000000000000000000000000000000000000000000000000000000000001'></UserRecordTable>
+            <UserRecordTable nricHash={web3.utils.sha3(nric.toUpperCase())}></UserRecordTable>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
