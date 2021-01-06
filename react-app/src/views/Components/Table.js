@@ -32,10 +32,20 @@ export default function StickyHeadTable(props) {
     setPage(0);
   };
 
+  const handleClick = (uen, column, isRedirect) => {
+    return (e) => {
+      e.preventDefault();
+      // console.log(`You clicked on row with uen ${uen}, in column ${column}.`);
+      if (isRedirect) {
+        window.location.href = `/org/${uen}`;
+      }
+
+    }
+  }
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label='sticky table'>
+        <Table stickyHeader aria-label='sticky table' >
           <TableHead>
             <TableRow>
               {props.columns.map((column) => (
@@ -58,7 +68,9 @@ export default function StickyHeadTable(props) {
                     {props.columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align}
+                          onClick={handleClick(row.UEN, column.label, props.isRedirect)}
+                        >
                           {column.format && typeof value === "number"
                             ? column.format(value)
                             : value}
