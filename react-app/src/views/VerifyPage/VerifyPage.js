@@ -41,15 +41,35 @@ export default function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  const [nric, setNric] = useState('');
-  const onChangeHandler = (event) => {
-    const { name, value } = event.currentTarget;
-
-    if (name === 'nric') {
-      setNric(value);
-    }
+  const sampleNRICHash =
+    "0x0000000000000000000000000000000000000000000000000000000000000001";
+  const [submitCount, setSubmitCount] = useState(0);
+  const [nric, setNric] = useState(
+    urlNRICHash !== undefined ? urlNRICHash : ""
+  );
+  const [submittedNRICHash, setNRICHash] = useState(
+    "0x0000000000000000000000000000000000000000000000000000000000000000"
+  );
+  const onChangeHandlerNRIC = async (event) => {
+    console.log("onChangeHandlerNRIC");
+    await setNric(event.target.value);
+    console.log(nric);
+    console.log("fin: onChangeHandlerNRIC");
   };
+
+  function onSubmitNRIC() {
+    console.log("onSubmitNRIC");
+    setNRICHash(web3.utils.sha3(nric.toUpperCase()));
+    console.log("fin: onSubmitNRIC");
+  }
+
+  function onSubmitSampleNRIC() {
+    console.log("onSubmitSampleNRIC");
+    setNRICHash(sampleNRICHash);
+    console.log(nric);
+    console.log(submittedNRICHash);
+    console.log("fin: onSubmitSampleNRIC");
+    }
 
   return (
     <div>
@@ -79,32 +99,34 @@ export default function ProfilePage(props) {
                 <input
                   labelText='Your NRIC'
                   id='nric'
-                  onChange={(event) => onChangeHandler(event)}
-                  name="nric"
-                  type="text"
+                  onChange={onChangeHandlerNRIC}
+                  name='nric'
+                  type='text'
                   formControlProps={{
                     fullWidth: true,
                   }}
                 />
               </GridItem>
               <CardFooter className={classes.cardFooter}>
-                <Button simple color='success' size='lg'>
+                <Button simple color='success' size='lg' onClick={onSubmitNRIC}>
                   Submit
                 </Button>
                 <Button
                   simple
                   color='success'
                   size='lg'
-                  onClick={getSampleUserDonations(nric)}
+                  onClick={onSubmitSampleNRIC}
                 >
                   Get Sample User Donations
                 </Button>
               </CardFooter>
             </GridContainer>
-            <UserRecordTable nricHash={web3.utils.sha3(nric.toUpperCase())}></UserRecordTable>
+            <h2>{nric}</h2>
+            <h4>{console.log(submittedNRICHash)}</h4>
+            <UserRecordTable nricHash={submittedNRICHash}></UserRecordTable>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
