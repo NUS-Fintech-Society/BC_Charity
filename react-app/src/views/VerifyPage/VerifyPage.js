@@ -87,26 +87,69 @@ export default function ProfilePage(props) {
               <br></br>
               <br></br>
               <GridItem xs={12} sm={12} md={8}>
-                <h4>Your NRIC: </h4>
-                <input
-                  labelText='Your NRIC'
-                  id='nric'
-                  onChange={onChangeHandlerNRIC}
-                  name='nric'
-                  type='text'
-                  formControlProps={{
-                    fullWidth: true,
+                <GridContainer
+                  style={{
+                    width: "420px",
                   }}
-                />
-              </GridItem>
-              <CardFooter className={classes.cardFooter}>
-                <Button color='success' size='lg' onClick={onSubmitNRIC}>
+                >
+                  <div
+                    style={{
+                      width: "80px",
+                      marginTop: "auto",
+                      marginBottom: "auto",
+                      marginLeft: "16px",
+                    }}
+                  >
+                    Your NRIC:
+                  </div>
+                  <input
+                    style={{
+                      height: "24",
+                      width: "120px",
+                      marginTop: "auto",
+                      marginLeft: "20px",
+                      marginBottom: "auto",
+                    }}
+                    labelText='Your NRIC'
+                    id='nric'
+                    onChange={onChangeHandlerNRIC}
+                    name='nric'
+                    type='text'
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                </GridContainer>
+                <br></br>
+                <Button
+                  style={{
+                    height: "12px",
+                    width: "240px",
+                    marginTop: "auto",
+                    marginBottom: "auto",
+                  }}
+                  color='success'
+                  size='lg'
+                  onClick={onSubmitNRIC}
+                >
                   Hash NRIC and Search
                 </Button>
-                <Button color='success' size='lg' onClick={onSubmitSampleNRIC}>
+                <br></br>
+                <Button
+                  style={{
+                    height: "12px",
+                    width: "240px",
+                    marginTop: "auto",
+                    marginBottom: "auto",
+                  }}
+                  simple
+                  color='success'
+                  size='lg'
+                  onClick={onSubmitSampleNRIC}
+                >
                   Get Sample User Donations
                 </Button>
-              </CardFooter>
+              </GridItem>
             </GridContainer>
             <h4>Currently searching for: {submittedNRICHash}</h4>
             <UserRecordTable nricHash={submittedNRICHash}></UserRecordTable>
