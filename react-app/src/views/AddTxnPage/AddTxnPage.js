@@ -22,6 +22,7 @@ import database from "firebase.js";
 const useStyles = makeStyles(styles);
 
 const contractFunctions = require('../../contracts/utils/functions')
+const charities = require('../../util/charities');
 const web3 = contractFunctions.getWeb3();
 
 export default function ProfilePage(props) {
@@ -44,18 +45,63 @@ export default function ProfilePage(props) {
     contractFunctions.addAllContractOwner(seanAddr, sendFrom, web3);
   }
 
+  /**
+   * Generate multiple sample donations based on sample data in charities.js.
+   * Used by Wei Hong
+   */
+  async function addMultipleSampleDonations() {
+    const addAmount = 50;
+    for (let i = 0; i < addAmount; i++) {
+      const sendFrom = await contractFunctions.getWalletAddress(web3);
 
-  async function sampleAddDonation() {
+      const sampleNRICs = charities.sampleNRICs;
+      const nricIndex = Math.floor(Math.random() * sampleNRICs.length);
+      const nricHash = sampleNRICs[nricIndex].nricHash;
+      
+      const sampleAmounts = charities.sampleAmounts;
+      const amountIndex = Math.floor(Math.random() * sampleAmounts.length);
+      const amount = sampleAmounts[amountIndex];
 
+      const charityIndex = Math.floor(Math.random() * charities.charities.length);
+      const charityContract = charities.charities[charityIndex].contract;
+
+      const sampleDates = charities.sampleDates;
+      const dateIndex = Math.floor(Math.random() * sampleDates.length);
+      const date = sampleDates[dateIndex];
+
+      const sampleMessages = charities.sampleMessages;
+      const messageIndex = Math.floor(Math.random() * sampleMessages.length);
+      const message = sampleAmounts[messageIndex];
+
+      contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContract, web3)
+      .on('transactionHash', function(hash) {
+        console.log("Mining this transaction: " + hash);
+      })
+      .on('confirmation', function(confirmationNumber, receipt) {
+        console.log("No: " + confirmationNumber + ", receipt: " + receipt);
+      })
+      .on('receipt', function(receipt) {
+        console.log(receipt);
+      })
+      .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+        alert("Transaction rejected! Check that this waller address have the permission or have enough ethers.");
+        console.log(receipt);
+      });
+
+    }
+  }
+
+
+  async function addSampleDonation() {
     // Parameters 
     //TODO: Now dummy parameters are given, but these should be filled in with method parameter instead.
     //TODO: rmb that nric input taken by the form should be hashed before calling this method too.
-    const nricHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
-    const amount = 30;
-    const date = 27122020;
-    const message = "hello 3";
+    const nricHash = "0xded8af907adb3643df2490d59d1713f2a162e15864220503fdc6441e2b114ee7";
+    const amount = 95000;
+    const date = '02052021';
+    const message = "by John Apple Seed daddy";
     const sendFrom = await contractFunctions.getWalletAddress(web3);
-    const charityContractAddress = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
+    const charityContractAddress = "0xde3653964686daAC5a96A14bfD096706022aE5cA";
 
     contractFunctions.addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress, web3)
     .on('transactionHash', function(hash) {
@@ -148,7 +194,7 @@ export default function ProfilePage(props) {
                         <Button color="success">
                             Done
                         </Button>
-                        <Button color="success" onClick={sampleAddDonation}>
+                        <Button color="success" onClick={addSampleDonation}>
                             Add donations
                         </Button>
                         <Button color="success" onClick={addOwner}>

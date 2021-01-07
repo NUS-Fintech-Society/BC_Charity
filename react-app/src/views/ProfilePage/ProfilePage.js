@@ -22,7 +22,7 @@ const web3 = contractFunctions.getWeb3();
 //TODO: ultimately each charity page should has its own route, so maybe the path differentiation can use UEN or contract address.
 //TODO: this method should also take in the contract address of the current charity page.
 async function getCharityDonations() {
-  const sampleContract = "0xC897d46a255004c3E2b46FbD5Ac726d866Ebf5d7";
+  const sampleContract = "0x6c262aa3a7333933BC33f9F7019D7A59021F9dC1";
   return contractFunctions.getCharityDonations(sampleContract, web3);
 }
 
