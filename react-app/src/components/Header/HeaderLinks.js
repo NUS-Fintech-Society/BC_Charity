@@ -51,7 +51,7 @@ export default function HeaderLinks(props) {
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button href='verify' color='transparent' className={classes.navLink}>
+        <Button href='/verify' color='transparent' className={classes.navLink}>
           <CheckCircleIcon className={classes.icons} /> Verify
         </Button>
       </ListItem>
@@ -68,7 +68,7 @@ export default function HeaderLinks(props) {
       ) : (
         <ListItem className={classes.listItem}>
           <Button
-            href='login-page'
+            href='/login-page'
             color='transparent'
             className={classes.navLink}
           >
