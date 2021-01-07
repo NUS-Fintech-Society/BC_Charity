@@ -70,6 +70,9 @@ export default function StickyHeadTable(props) {
                       return (
                         <TableCell key={column.id} align={column.align}
                           onClick={handleClick(row.UEN, column.label, props.isRedirect)}
+                          style={{ cursor: props.isRedirect ? 'pointer' : 'auto' }}
+                        //TODO: FIGURE OUT HOW TO STYLE THE HOVER COLOR
+                        // classes={{hover:}}
                         >
                           {column.format && typeof value === "number"
                             ? column.format(value)

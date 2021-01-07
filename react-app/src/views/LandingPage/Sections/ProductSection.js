@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -18,11 +18,21 @@ import { AllDonationsTable } from "../../Components/DonationsTable";
 
 // Table Stuff
 import { charities, onboarding, columns } from "../../../util/charities"
+import { getCharities } from "../../../firebase"
 
 const useStyles = makeStyles(styles);
 
 export default function ProductSection() {
   const classes = useStyles();
+
+  // const allCharities = getCharities();
+
+  // useEffect(async () => {
+  //   const allCharities = await getCharities();
+  //   console.log(allCharities);
+  //   console.log("done")
+  // })
+
   return (
     <div className={classes.section}>
       <GridContainer justify="center">
