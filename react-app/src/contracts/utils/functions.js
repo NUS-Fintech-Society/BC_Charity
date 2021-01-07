@@ -11,13 +11,13 @@ const charities = require('../../util/charities');
  * Use either Metamask or infura as providers to return new Web3 instance.
  */
 export function getWeb3() {
-  
+
   // Use Metamask as Web3 provider if extension is enabled.
   const web3 = new Web3(Web3.givenProvider);
   if (web3.currentProvider && web3.currentProvider.isMetaMask) {
     return new Web3(window.web3.currentProvider);
 
-  // Else use Infura as provider.
+    // Else use Infura as provider.
   } else {
     const infuraProvider = new Web3.providers.HttpProvider(infura.rpcURL);
     return new Web3(infuraProvider);
@@ -33,10 +33,10 @@ export function getWeb3() {
 export async function getWalletAddress(web3) {
 
   // Error if Metamask not enabled.
-  if (!window.ethereum || !web3|| !web3.eth) {
+  if (!window.ethereum || !web3 || !web3.eth) {
     alert("This action requires ether but Metamask or other wallet providers are not enabled.");
   } else {
-    
+
     const walletAddress = await window.ethereum.request({ method: 'eth_requestAccounts' });
     return walletAddress[0];
   }
@@ -54,7 +54,7 @@ export async function getWalletAddress(web3) {
  */
 export function onboardCharity(adminAddress, UEN, sendFrom, networkID, web3) {
   const onboardingContract = new web3.eth.Contract(OnboardingJSON.abi, CharityChainJSON.networks[networkID].address);
-  return onboardingContract.methods.onboardCharity(adminAddress, UEN).send({from: sendFrom});
+  return onboardingContract.methods.onboardCharity(adminAddress, UEN).send({ from: sendFrom });
 }
 
 /**
@@ -81,7 +81,7 @@ export function getCharityAddress(UEN, networkID, web3) {
  */
 export function addUserDonation(nricHash, amount, date, message, sendFrom, charityContractAddress, web3) {
   const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
-  return charityChainContract.methods.addDonation(nricHash, amount, date, message).send({from: sendFrom});
+  return charityChainContract.methods.addDonation(nricHash, amount, date, message).send({ from: sendFrom });
 }
 
 /**
@@ -93,7 +93,7 @@ export function addUserDonation(nricHash, amount, date, message, sendFrom, chari
 export async function getUserDonations(nricHash, charityContractAddress, web3) {
   const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charityContractAddress);
   const donationCount = await charityChainContract.methods.getDonationCount(nricHash).call();
-  
+
   var donations = [];
   for (let i = 0; i < donationCount; i++) {
     const donationResult = await charityChainContract.methods.getDonation(nricHash, i).call();
@@ -145,7 +145,7 @@ export async function getAllDonations(web3) {
   // For each charity
   charities.charities.forEach(async charity => {
     const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charity.contract);
-    
+
     // For each donor
     const donors = await charityChainContract.methods.getDonors().call();
     donors.forEach(async donor => {
@@ -208,7 +208,7 @@ export async function getCharityDonations(charityContract, web3) {
  */
 export async function addContractOwner(walletAddress, contract, sendFrom, web3) {
   const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, contract);
-  charityChainContract.methods.addOwner(walletAddress).send({from: sendFrom});
+  charityChainContract.methods.addOwner(walletAddress).send({ from: sendFrom });
 }
 
 /**
@@ -219,7 +219,7 @@ export async function addContractOwner(walletAddress, contract, sendFrom, web3) 
 export async function addAllContractOwner(walletAddress, sendFrom, web3) {
   charities.charities.forEach(charity => {
     const charityChainContract = new web3.eth.Contract(CharityChainJSON.abi, charity.contract);
-    charityChainContract.methods.addOwner(walletAddress).send({from: sendFrom});;
+    charityChainContract.methods.addOwner(walletAddress).send({ from: sendFrom });;
   });
 }
 
