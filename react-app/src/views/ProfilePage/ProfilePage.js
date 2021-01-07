@@ -37,6 +37,7 @@ export default function ProfilePage(props) {
   const { uen } = useParams();
   const getOrgInfo = () => {
     const matches = charities.filter((charity) => charity.UEN === uen);
+    console.log(matches);
     if (matches.length !== 1) {
       return -1;
     } else {
@@ -44,12 +45,15 @@ export default function ProfilePage(props) {
     }
   };
   const org = getOrgInfo(uen);
+  if (org == -1) {
+    window.location.href = "/invalid-uen"
+  }
 
   return (
     <div>
       <Header
-        color="transparent"
-        brand="Charity"
+        color='transparent'
+        brand='Charity'
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -62,11 +66,11 @@ export default function ProfilePage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
-            <GridContainer justify="center">
+            <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={profile} alt="..." className={imageClasses} />
+                    <img src={profile} alt='...' className={imageClasses} />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{org.name}</h3>
@@ -79,15 +83,14 @@ export default function ProfilePage(props) {
             </div>
             <h2 className={classes.title}>Record of Donations</h2>
             <div>
-              {/* <Table rows={donations} columns={DonationsTable.columnHeaders} ></Table> */}
               <OrgRecordTable contract={org.contract}></OrgRecordTable>
             </div>
-            <GridContainer justify="center">
+            <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
                 <Button
                   simple
-                  color="success"
-                  size="lg"
+                  color='success'
+                  size='lg'
                   onClick={(e) => {
                     e.preventDefault();
                     window.location.href = "/addtxn";
