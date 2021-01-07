@@ -37,6 +37,7 @@ export default function ProfilePage(props) {
   const { uen } = useParams();
   const getOrgInfo = () => {
     const matches = charities.filter((charity) => charity.UEN === uen);
+    console.log(matches);
     if (matches.length !== 1) {
       return -1;
     } else {
@@ -44,6 +45,9 @@ export default function ProfilePage(props) {
     }
   };
   const org = getOrgInfo(uen);
+  if (org == -1) {
+    window.location.href = "/invalid-uen"
+  }
 
   return (
     <div>
