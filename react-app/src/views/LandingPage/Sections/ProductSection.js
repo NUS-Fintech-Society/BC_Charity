@@ -26,25 +26,23 @@ export default function ProductSection() {
         <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>About us.</h2>
           <h5 className={classes.description}>
-            Fintech is beginning to disrupt the financial world as we know it.
-            The financial industry is now more focused than ever on
-            technological innovation than at any other time. Since the large
-            majority of Fintech companies deal with high volumes of fund
-            movements, this results in a higher vulnerability to theft of funds.
-            This is especially prevalent in donations to charity organisations,
-            where donations are slowly shifting away from physical donations to
-            digitalised.
+            Charities need your support, and we want to help them give you full
+            confidence in your donations. With our blockchain solution,
+            charities can publicly and irrevocably commit the reciept of the
+            donation for the world to see. Donors can rest easy knowing that
+            their donation was recieved and is accounted for as a matter of
+            public record.
           </h5>
         </GridItem>
       </GridContainer>
       <GridContainer justify='center'>
         <GridItem xs={12} sm={12} md={8}>
-          <h3 className={classes.title}>We aim to be:</h3>
+          <h3 className={classes.title}>Our solution is</h3>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
               <InfoArea
                 title='Secure'
-                description='<insert description here>'
+                description="Only the charity's designated wallet can add transactions. Once made, transactions cannot be modified or revoked."
                 icon={VerifiedUser}
                 iconColor='success'
                 vertical
@@ -52,8 +50,8 @@ export default function ProductSection() {
             </GridItem>
             <GridItem xs={12} sm={12} md={6}>
               <InfoArea
-                title='Unique'
-                description='<insert description here>'
+                title='Private'
+                description='Donors can find their transactions using their NRIC, without the blockchain revealing their NRIC to the public.'
                 icon={Fingerprint}
                 iconColor='danger'
                 vertical
@@ -63,7 +61,7 @@ export default function ProductSection() {
         </GridItem>
       </GridContainer>
       <br></br>
-      <h2 className={classes.title}>Data</h2>
+      <h2 className={classes.title}>Sample Records</h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
