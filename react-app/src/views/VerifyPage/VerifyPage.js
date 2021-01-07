@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -16,7 +17,6 @@ import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { UserRecordTable } from "views/Components/DonationsTable";
-import { useState } from 'react';
 
 const useStyles = makeStyles(styles);
 
@@ -24,14 +24,6 @@ const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
 // TODO: this function should have a parameter: user's HASHED nric, so the hashing also need to handle.
-async function getSampleUserDonations(nric) {
-  // Parameters
-  const nricHash = web3.utils.sha3(nric.toUpperCase());
-
-  // Method call
-  const donations = await contractFunctions.getAllUserDonations(nricHash, web3);
-  console.log(donations);
-}
 
 export default function ProfilePage(props) {
   const classes = useStyles();
@@ -44,9 +36,7 @@ export default function ProfilePage(props) {
   const sampleNRICHash =
     "0x0000000000000000000000000000000000000000000000000000000000000001";
   const [submitCount, setSubmitCount] = useState(0);
-  const [nric, setNric] = useState(
-    urlNRICHash !== undefined ? urlNRICHash : ""
-  );
+  const [nric, setNric] = useState("");
   const [submittedNRICHash, setNRICHash] = useState(
     "0x0000000000000000000000000000000000000000000000000000000000000000"
   );
@@ -59,7 +49,9 @@ export default function ProfilePage(props) {
 
   function onSubmitNRIC() {
     console.log("onSubmitNRIC");
-    setNRICHash(web3.utils.sha3(nric.toUpperCase()));
+    if (String(nric).length > 0) {
+      setNRICHash(web3.utils.sha3(nric.toUpperCase()));
+    }
     console.log("fin: onSubmitNRIC");
   }
 
@@ -69,7 +61,7 @@ export default function ProfilePage(props) {
     console.log(nric);
     console.log(submittedNRICHash);
     console.log("fin: onSubmitSampleNRIC");
-    }
+  }
 
   return (
     <div>
@@ -95,7 +87,7 @@ export default function ProfilePage(props) {
               <br></br>
               <br></br>
               <GridItem xs={12} sm={12} md={8}>
-                <p>NRIC: </p>
+                <h4>Your NRIC: </h4>
                 <input
                   labelText='Your NRIC'
                   id='nric'
@@ -108,21 +100,15 @@ export default function ProfilePage(props) {
                 />
               </GridItem>
               <CardFooter className={classes.cardFooter}>
-                <Button simple color='success' size='lg' onClick={onSubmitNRIC}>
-                  Submit
+                <Button color='success' size='lg' onClick={onSubmitNRIC}>
+                  Hash NRIC and Search
                 </Button>
-                <Button
-                  simple
-                  color='success'
-                  size='lg'
-                  onClick={onSubmitSampleNRIC}
-                >
+                <Button color='success' size='lg' onClick={onSubmitSampleNRIC}>
                   Get Sample User Donations
                 </Button>
               </CardFooter>
             </GridContainer>
-            <h2>{nric}</h2>
-            <h4>{console.log(submittedNRICHash)}</h4>
+            <h4>Currently searching for: {submittedNRICHash}</h4>
             <UserRecordTable nricHash={submittedNRICHash}></UserRecordTable>
           </div>
         </div>
