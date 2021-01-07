@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6df27f34-d3b1-4132-bd9a-deb9a3ed02a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-app/src/views/AddTxnPage/AddTxnPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/AddTxnPage/AddTxnPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +75,8 @@
       <workItem from="1609668248963" duration="22241000" />
       <workItem from="1609824573274" duration="859000" />
       <workItem from="1609849158972" duration="5000" />
-      <workItem from="1610015032175" duration="3163000" />
+      <workItem from="1610015032175" duration="11467000" />
+      <workItem from="1610042245720" duration="1361000" />
     </task>
     <servers />
   </component>
