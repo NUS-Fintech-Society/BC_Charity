@@ -120,6 +120,7 @@ export class AllDonationsTable extends React.Component {
 export class UserRecordTable extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       nricHash: props.nricHash,
       donations: [],
@@ -127,24 +128,36 @@ export class UserRecordTable extends React.Component {
   }
 
   async componentDidMount() {
-    if (this.state.donations.length === 0) {
-      console.log("awaiting");
-      const result = await contractFunctions.getAllUserDonations(
-        this.state.nricHash,
-        web3
-      );
-      await setTimeout(() => {
-        const processed = processDonationRecords(result);
-        this.setState({ donations: processed });
-        //TODO: Have this work without the 2000 ms
-      }, 2000);
-    }
+    await this.refreshDonations();
+  }
+
+  async refreshDonations() {
+    await this.setState({ nricHash: this.props.nricHash });
+    const result = await contractFunctions.getAllUserDonations(
+      this.state.nricHash,
+      web3
+    );
+    await setTimeout(() => {
+      const processed = processDonationRecords(result);
+      this.setState({ donations: processed });
+      //TODO: Have this work without the 2000 ms
+    }, 2000);
   }
 
   render() {
+    console.log(this.props.nricHash);
+    console.log(this.props.nricHash === this.state.nricHash);
+    if (this.props.nricHash !== this.state.nricHash) {
+      this.refreshDonations();
+    }
+    console.log(
+      "0x0000000000000000000000000000000000000000000000000000000000000001" ===
+        this.state.nricHash
+    );
+    console.log(this.state.nricHash);
     const columnHeader = [
       // Amount Date Donor Message
-      { id: "donor", label: "Donor", minWidth: 170, align: "left" },
+      // { id: "donor", label: "Donor", minWidth: 170, align: "left" },
       { id: "strAmount", label: "Amount", minWidth: 170, align: "right" },
       { id: "strDate", label: "Date", minWidth: 170, align: "left" },
       { id: "message", label: "Message", minWidth: 170, align: "left" },
@@ -152,7 +165,11 @@ export class UserRecordTable extends React.Component {
 
     return (
       <div>
-        <Table rows={this.state.donations} columns={columnHeader}></Table>
+        <Table
+          rows={this.state.donations}
+          columns={columnHeader}
+          nricHash={this.props.nricHash}
+        ></Table>
       </div>
     );
   }
