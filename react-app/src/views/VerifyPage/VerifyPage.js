@@ -79,7 +79,12 @@ export default function ProfilePage(props) {
       <Parallax small filter image={require("assets/img/background3.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
-          <div className={classes.container}>
+          <div
+            className={classes.container}
+            style={{
+              padding: "24px",
+            }}
+          >
             <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={6}>
                 <h2 className={classes.title}>Verify your transaction.</h2>
@@ -87,6 +92,11 @@ export default function ProfilePage(props) {
               <br></br>
               <br></br>
               <GridItem xs={12} sm={12} md={8}>
+                <div>
+                  Currently searching for: {"\n"}
+                  {submittedNRICHash}
+                </div>
+                <br></br>
                 <GridContainer
                   style={{
                     width: "420px",
@@ -151,8 +161,10 @@ export default function ProfilePage(props) {
                 </Button>
               </GridItem>
             </GridContainer>
-            <h4>Currently searching for: {submittedNRICHash}</h4>
-            <UserRecordTable nricHash={submittedNRICHash}></UserRecordTable>
+            <UserRecordTable
+              nricHash={submittedNRICHash}
+              style={{ padding: "24px" }}
+            ></UserRecordTable>
           </div>
         </div>
       </div>
