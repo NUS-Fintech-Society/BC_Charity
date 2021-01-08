@@ -24,10 +24,21 @@ import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js
 
 const useStyles = makeStyles(styles);
 import firebase from "firebase";
+import { useState } from "react";
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
-  var user = firebase.auth().currentUser;
+  const [loggedIn, setLoggedIn] = useState("");
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      // User is signed in.
+      console.log("IS SIGNED IN");
+      setLoggedIn(user);
+    } else {
+      // No user is signed in.
+      console.log("IS SIGNED OUT");
+    }
+  });
 
   const onLogoutClick = e => firebase.auth().signOut().then(function () {
     // Sign-out successful.
@@ -58,7 +69,7 @@ export default function HeaderLinks(props) {
           <CheckCircleIcon className={classes.icons} /> Verify
         </Button>
       </ListItem>
-      { user ?
+      { loggedIn ?
         <ListItem className={classes.listItem}>
           <Button
             onClick={onLogoutClick}
