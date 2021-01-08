@@ -22,6 +22,10 @@ function processDonationRecords(records) {
   ];
   records.sort((a, b) => Number(a.date) - Number(b.date));
   records.forEach((value) => {
+    value.date = String(value.date);
+    if (value.date.length === 7) {
+      value.date = "0" + value.date;
+    }
     let day = value.date.slice(0, 2);
     let mth = value.date.slice(2, 4);
     let yr = value.date.slice(4);

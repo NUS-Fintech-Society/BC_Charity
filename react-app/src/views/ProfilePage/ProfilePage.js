@@ -46,7 +46,7 @@ export default function ProfilePage(props) {
   };
   const org = getOrgInfo(uen);
   if (org == -1) {
-    window.location.href = "/invalid-uen"
+    window.location.href = "/invalid-uen";
   }
 
   return (
