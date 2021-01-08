@@ -62,6 +62,36 @@ function validateNote(note) {
   return true;
 }
 
+function validateDate(dateString) {
+  // Validates that the input string is a valid date formatted as "dd/mm/yyyy"
+
+    // First check for the pattern
+    if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
+      return false;
+
+    // Parse the date parts to integers
+    var parts = dateString.split("/");
+    var day = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
+    var year = parseInt(parts[2], 10);
+
+    // Check the ranges of month and year
+    if(year < 1000 || year > 3000 || month == 0 || month > 12)
+      return false;
+
+    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+    // Adjust for leap years
+    if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+      monthLength[1] = 29;
+
+
+    // Check the range of the day
+    return day > 0 && day <= monthLength[month - 1];
+
+
+};
+
 const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
@@ -85,6 +115,10 @@ export default function ProfilePage(props) {
   const [noteError, setNoteError] = useState("");
   const noteErrorMessageRef = useRef("");
 
+  const [date, setDate] = useState("");
+  const [dateError, setDateError] = useState("");
+  const dateErrorMessageRef = useRef("");
+
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
   const onChangeHandlerNric = (event) => {
@@ -100,6 +134,11 @@ export default function ProfilePage(props) {
   const onChangeHandlerNote = (event) => {
     const { value } = event.currentTarget;
     setNote(value);
+  };
+
+  const onChangeHandlerDate = (event) => {
+    const { value } = event.currentTarget;
+    setDate(value);
   };
 
   const validateHelperNric = () => {
@@ -149,10 +188,28 @@ export default function ProfilePage(props) {
     return true;
   };
 
+  const validateHelperDate = () => {
+    if (!validateDate(date)) {
+      dateErrorMessageRef.current =
+          "Invalid Date. Date input should be in the format: DD/MM/YYYY";
+      setDateError(
+          "Invalid Date. Date input should be in the format: DD/MM/YYYY");
+      console.log(dateErrorMessageRef.current);
+    }
+
+    if (dateErrorMessageRef.current !== "") {
+      return false;
+    }
+
+    return true;
+  };
+
   function handleSubmit() {
     const isValidNric = validateHelperNric();
     const isValidAmt = validateHelperAmt();
     const isValidNote = validateHelperNote();
+    const isValidDate = validateHelperDate();
+    console.log(validateHelperDate());
 
     if (isValidNric) {
       //TODO: clear form
@@ -167,10 +224,19 @@ export default function ProfilePage(props) {
       console.log("Note: " + note);
       setNoteError("");
     }
+    if (isValidDate) {
+      console.log("Successful Date: " + date);
+      setDateError("");
+    }
 
     nricErrorMessageRef.current = "";
     amtErrorMessageRef.current = "";
     noteErrorMessageRef.current = "";
+    dateErrorMessageRef.current = "";
+
+    if (isValidNric && isValidAmt && isValidNote && isValidDate) {
+      addDonationHelper();
+    }
   }
 
   /**
@@ -183,15 +249,30 @@ export default function ProfilePage(props) {
     contractFunctions.addAllContractOwner(seanAddr, sendFrom, web3);
   }
 
-  async function sampleAddDonation() {
+  function addDonationHelper() {
+    const hash = web3.utils.sha3(nric)
+    //   "0x0000000000000000000000000000000000000000000000000000000000000001";
+    const amount = Number(amt);
+
+      var parts = date.split("/");
+      var day = parts[0];
+      var month = parts[1];
+      var year = parts[2];
+
+      const dateFormatted = day + month + year;
+      console.log(dateFormatted);
+
+    addDonation(hash,amount,dateFormatted,note);
+  }
+
+  async function addDonation(hashString,amt,dateFormatted,note) {
     // Parameters
     //TODO: Now dummy parameters are given, but these should be filled in with method parameter instead.
     //TODO: rmb that nric input taken by the form should be hashed before calling this method too.
-    const nricHash =
-      "0x0000000000000000000000000000000000000000000000000000000000000001";
-    const amount = 30;
-    const date = 27122020;
-    const message = "hello 3";
+    const nricHash = hashString;
+    const amount = amt;
+    const date = dateFormatted;
+    const message = note;
     const sendFrom = await contractFunctions.getWalletAddress(web3);
     const charityContractAddress = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
 
@@ -280,7 +361,7 @@ export default function ProfilePage(props) {
                   labelText='Amount'
                   id='amount'
                   name='amount'
-                  placeholder='Amount'
+                  placeholder='Amount (cents)'
                   formControlProps={{
                     fullWidth: true,
                   }}
@@ -308,6 +389,19 @@ export default function ProfilePage(props) {
                   onChange={(e) => onChangeHandlerNote(e)}
                 />
                 <div style={{ fontSize: 12, color: "red" }}>{noteError}</div>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={6}>
+                <Input
+                    labelText='Date'
+                    id='date'
+                    name='date'
+                    placeholder='Date: DD/MM/YYYY'
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    onChange={(e) => onChangeHandlerDate(e)}
+                />
+                <div style={{ fontSize: 12, color: "red" }}>{dateError}</div>
               </GridItem>
             </GridContainer>
             <GridContainer justify='center'>

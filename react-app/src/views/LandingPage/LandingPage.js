@@ -19,11 +19,11 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 
-import Web3 from 'web3';
+import Web3 from "web3";
 
-const firestore = require('../../firebase');
-const charities = require('../../util/charities');
-const contractFunctions = require('../../contracts/utils/functions');
+const firestore = require("../../firebase");
+const charities = require("../../util/charities");
+const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
 const dashboardRoutes = [];
@@ -34,10 +34,10 @@ const useStyles = makeStyles(styles);
  * Only used when new contracts are deployed to get addresses.
  */
 async function getContracts() {
-  charities.charities.forEach(async charity => {
+  charities.charities.forEach(async (charity) => {
     const contract = await contractFunctions.getCharityAddress(charity.UEN, 3);
     console.log("UEN: " + charity.UEN + ", contract: " + contract);
-  })
+  });
 }
 
 //TODO: charities list are here but structure might not be ideal.
@@ -66,14 +66,14 @@ export default function LandingPage(props) {
   return (
     <div>
       <Header
-        color="transparent"
+        color='transparent'
         routes={dashboardRoutes}
-        brand="Charity"
+        brand='Charity'
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 400,
-          color: "white"
+          color: "white",
         }}
         {...rest}
       />
@@ -83,7 +83,8 @@ export default function LandingPage(props) {
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>Welcome to Charity.</h1>
               <h4>
-                Our team aims to authenticate the legitimacy of charity organisations and store a record of donations.
+                Our team aims to authenticate the legitimacy of charity
+                organisations and store a record of donations.
               </h4>
             </GridItem>
           </GridContainer>

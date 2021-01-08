@@ -1,6 +1,9 @@
 # Charity
 
-Fintech is beginning to disrupt the financial world as we know it. The financial industry is now more focused than ever on technological innovation than at any other time. Since the large majority of Fintech companies deal with high volumes of fund movements, this results in a higher vulnerability to theft of funds. This is especially prevalent in donations to charity organisations, where donations are slowly shifting away from physical donations to digitalised.
+Charities need your support, and we want to help them give you full confidence in your donations.
+With our blockchain solution, charities can publicly and irrevocably commit the reciept of the donation for the world to see.
+Donors can rest easy knowing that their donation was recieved and is accounted for as a matter of public record.
+Never again will donors have doubts about being scammed or wonder if the donation they made really went to the charity of their choice.
 
 ## Table of Contents
 
@@ -12,8 +15,8 @@ Fintech is beginning to disrupt the financial world as we know it. The financial
   - [Questions or Feedback](#questions-or-feedback)
   - [Contributors](#contributors)
 
-
 ## BuildSetup
+
 ```
 # install dependencies
 npm install
@@ -30,20 +33,23 @@ npm run build --report
 ```
 
 ## Features
-- Feature 1 (to be updated)
-- Feature 2 (to be updated)
-- Feature 3 (to be updated)
 
+- (Verify) List all transactions made from any NRIC.
+- (Add Transaction) As a charity, call your smart contract and make the record using this website.
+- (Org Page) Find out how much charities have been recieving and see the notes and dedications that go with them.
 
 ## File Structure
+
 ```
 
- ```
+```
 
 ## Questions or Feedback
+
 If you have questions or have any feedback, do [contact us](mailto:charity@gmail.com).
 
 ## Contributors
+
 - Bharath Sudheer (Team Lead)
 - Ng Wei Hong (Assistant Team Lead)
 - Benjamin Tan
