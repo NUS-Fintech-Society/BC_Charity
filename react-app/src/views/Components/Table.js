@@ -46,7 +46,7 @@ export default function StickyHeadTable(props) {
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label='sticky table'>
           <TableHead>
-            <TableRow>
+            <TableRow >
               {props.columns.map((column) => (
                 <TableCell
                   key={column.id}

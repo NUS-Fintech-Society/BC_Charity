@@ -43,7 +43,6 @@ export default function ProfilePage(props) {
   const { uen } = useParams();
   const getOrgInfo = () => {
     const matches = charities.filter((charity) => charity.UEN === uen);
-    console.log(matches);
     if (matches.length !== 1) {
       return -1;
     } else {

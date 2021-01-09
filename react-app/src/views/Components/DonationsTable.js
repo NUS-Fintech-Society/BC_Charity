@@ -1,42 +1,25 @@
 import { searchByUEN } from "firebase";
 import React, { useState } from "react";
 import Table from "./Table";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const contractFunctions = require("../../contracts/utils/functions");
 const Web3 = require("web3");
 const web3 = contractFunctions.getWeb3();
 const firestore = require("../../firebase");
 
+function processDonationRecords(records) {
 
-async function processDonationRecords(records) {
-
-  const donations = await firestore.getDonations();
-  console.log(donations);
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
   records.forEach(async (value) => {
 
-    // Add transaction Hash in firestore records.
+    // Add transaction hash in firestore records.
     const donationHash = Web3.utils.sha3(value.donor + value.amount + value.date + value.message);
-    // firestore.getDonation(donationHash).then(donation => {console.log(donation.exists)});
     const donation = await firestore.getDonation(donationHash);
     value['transactionHash'] = (donation.exists) ? donation.data()['transactionHash'] : 'nil';
-    
 
-
-
+    // Format date into field strDate
+    const months = ["Jan","Feb","Mar","Apr","May","Jun",
+    "Jul","Aug","Sep","Oct","Nov","Dec"];
     value.date = String(value.date);
     if (value.date.length === 7) {
       value.date = "0" + value.date;
@@ -45,9 +28,10 @@ async function processDonationRecords(records) {
     let mth = value.date.slice(2, 4);
     let yr = value.date.slice(4);
     value.strDate = day + " " + months[Number(mth) - 1] + " " + yr;
+
+    // Format date into field strAmount
     let amt = value.amount;
     value.strAmount = "$" + (Number(amt) / 100).toFixed(2);
-    // console.log(value);
   });
   // records.sort((a, b) => a.strDate.slice(7) - b.strDate.slice(7));
   // records.sort((a, b) => a.strDate.slice(7) == b.strDate.slice(7) && Number(a.date.slice(2, 4)) - Number(b.date.slice(2, 4)));
@@ -64,10 +48,8 @@ export class OrgRecordTable extends React.Component {
     };
   }
 
-
   async componentDidMount() {
     if (this.state.donations.length === 0) {
-      console.log("awaiting");
 
       // old method
       const result = await contractFunctions.getCharityDonations(
@@ -77,21 +59,22 @@ export class OrgRecordTable extends React.Component {
       await setTimeout(async () => {
         const processedDonations = await processDonationRecords(result);
         this.setState({ donations: processedDonations });
-        console.log(this.state.donations);
+        console.log("set state")
         //TODO: Have this work without the 2000 ms
-      }, 5000);
+      }, 3000);
     }
   }
 
   render() {
-    console.log(this.state.donations)
+    console.log("render...")
+    console.log(this.state.donations);
     const columnHeader = [
       // Amount Date Donor Message
       { id: "donor", label: "Donor", minWidth: 170, align: "left" },
       { id: "strAmount", label: "Amount", minWidth: 170, align: "right" },
       { id: "strDate", label: "Date", minWidth: 170, align: "left" },
       { id: "message", label: "Message", minWidth: 170, align: "left" },
-      { id: "transactionHash", label: "Transaction Hash", minWidth: 170, align: "left" },
+      { id: "transactionHash", label: "Transaction Hash", minWidth: 170, align: "left", render: rowData => <div>helloo</div> }
     ];
 
     return (
