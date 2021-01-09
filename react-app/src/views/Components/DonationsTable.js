@@ -20,7 +20,7 @@ function processDonationRecords(records) {
     "Nov",
     "Dec",
   ];
-  records.sort((a, b) => Number(a.date) - Number(b.date));
+  //records.sort((a, b) => Number(a.date) - Number(b.date));
   records.forEach((value) => {
     value.date = String(value.date);
     if (value.date.length === 7) {
@@ -33,6 +33,9 @@ function processDonationRecords(records) {
     let amt = value.amount;
     value.strAmount = "$" + (Number(amt) / 100).toFixed(2);
   });
+  records.sort((a, b) => a.strDate.slice(7) - b.strDate.slice(7));
+  records.sort((a, b) => a.strDate.slice(7) == b.strDate.slice(7) && Number(a.date.slice(2, 4)) - Number(b.date.slice(2, 4)));
+  records.sort((a, b) => a.strDate.slice(7) == b.strDate.slice(7) && Number(a.date.slice(2, 4)) == Number(b.date.slice(2, 4)) && Number(a.date.slice(0, 2)) - Number(b.date.slice(0, 2)));
   return records;
 }
 
@@ -156,7 +159,7 @@ export class UserRecordTable extends React.Component {
     }
     console.log(
       "0x0000000000000000000000000000000000000000000000000000000000000001" ===
-        this.state.nricHash
+      this.state.nricHash
     );
     console.log(this.state.nricHash);
     const columnHeader = [
