@@ -92,6 +92,8 @@ function validateDate(dateString) {
 
 };
 
+const Web3 = require("web3");
+const firestore = require("../../firebase");
 const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
@@ -287,7 +289,9 @@ export default function ProfilePage(props) {
         web3
       )
       .on("transactionHash", function (hash) {
-        alert("Mining transaction...");
+        firestore.addDonation(nricHash, amount, date, message, hash).then(console.log('firebase'));
+        
+        alert("Mining transaction : " + hash);
         console.log("Mining this transaction: " + hash);
       })
       .on("confirmation", function (confirmationNumber, receipt) {
