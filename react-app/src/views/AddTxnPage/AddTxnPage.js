@@ -191,9 +191,13 @@ export default function ProfilePage(props) {
   const validateHelperDate = () => {
     if (!validateDate(date)) {
       dateErrorMessageRef.current =
-          "Invalid Date. Date input should be in the format: DD/MM/YYYY";
+          "Invalid Date. Date input should be in the format: DD/MM/YYYY." +
+          "\n" +
+          "Please include the '/'";
       setDateError(
-          "Invalid Date. Date input should be in the format: DD/MM/YYYY");
+          "Invalid Date. Date input should be in the format: DD/MM/YYYY."  +
+          "\n" +
+          "Please include the '/'");
       console.log(dateErrorMessageRef.current);
     }
 
@@ -209,7 +213,6 @@ export default function ProfilePage(props) {
     const isValidAmt = validateHelperAmt();
     const isValidNote = validateHelperNote();
     const isValidDate = validateHelperDate();
-    console.log(validateHelperDate());
 
     if (isValidNric) {
       //TODO: clear form
@@ -259,16 +262,21 @@ export default function ProfilePage(props) {
       var month = parts[1];
       var year = parts[2];
 
+      if (day.length === 1) {
+        day = "0" + day;
+      }
+      if (month.length === 1) {
+        month = "0" + month;
+      }
       const dateFormatted = day + month + year;
-      console.log(dateFormatted);
 
     addDonation(hash,amount,dateFormatted,note);
   }
 
   async function addDonation(hashString,amt,dateFormatted,note) {
     // Parameters
-    //TODO: Now dummy parameters are given, but these should be filled in with method parameter instead.
-    //TODO: rmb that nric input taken by the form should be hashed before calling this method too.
+    //DONE: Now dummy parameters are given, but these should be filled in with method parameter instead.
+    //DONE: rmb that nric input taken by the form should be hashed before calling this method too.
     const nricHash = hashString;
     const amount = amt;
     const date = dateFormatted;
