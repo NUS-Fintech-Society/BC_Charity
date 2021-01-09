@@ -20,7 +20,6 @@ function processDonationRecords(records) {
     "Nov",
     "Dec",
   ];
-  //records.sort((a, b) => Number(a.date) - Number(b.date));
   records.forEach((value) => {
     value.date = String(value.date);
     if (value.date.length === 7) {
