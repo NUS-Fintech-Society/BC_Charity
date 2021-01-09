@@ -99,7 +99,7 @@ export default function ProfilePage(props) {
                   size='lg'
                   onClick={(e) => {
                     e.preventDefault();
-                    window.location.href = "/addtxn";
+                    window.location.href = uen + "/addtxn";
                   }}
                 >
                   + Add a transaction

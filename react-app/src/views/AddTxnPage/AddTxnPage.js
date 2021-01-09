@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import { useParams } from "react-router-dom";
 // core components
 import Header from "components/Header/Header.js";
 import Button from "components/CustomButtons/Button.js";
@@ -98,6 +99,27 @@ const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
 export default function ProfilePage(props) {
+
+  const { charities } = require("../../util/charities");
+
+  //fetch routing value
+  const { uen } = useParams();
+  const getOrgInfo = () => {
+    const matches = charities.filter((charity) => charity.UEN === uen);
+    console.log(matches);
+    if (matches.length !== 1) {
+      return -1;
+    } else {
+      return matches[0];
+    }
+  };
+  const org = getOrgInfo(uen);
+  if (org == -1) {
+    window.location.href = "/invalid-uen";
+  }
+
+  //others
+
   const classes = useStyles();
   const { ...rest } = props;
   const imageClasses = classNames(
@@ -276,7 +298,7 @@ export default function ProfilePage(props) {
     const date = dateFormatted;
     const message = note;
     const sendFrom = await contractFunctions.getWalletAddress(web3);
-    const charityContractAddress = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
+    const charityContractAddress = org.contract;
 
     contractFunctions
       .addUserDonation(
@@ -334,7 +356,7 @@ export default function ProfilePage(props) {
                     <img src={profile} alt='...' className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Charity #1</h3>
+                    <h3 className={classes.title}>{org.name}</h3>
                   </div>
                 </div>
               </GridItem>
