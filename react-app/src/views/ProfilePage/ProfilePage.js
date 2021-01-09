@@ -85,7 +85,7 @@ export default function ProfilePage(props) {
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p>Brief description of Charity #1.</p>
+              <p>Brief description of Chrity #1.</p>
             </div>
             <h2 className={classes.title}>Record of Donations</h2>
             <div>
