@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -15,7 +16,11 @@ import profile from "assets/img/faces/christian.jpg";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
+// Table
+import { OrgRecordTable } from "../Components/DonationsTable.js";
+
 const useStyles = makeStyles(styles);
+const { charities } = require("../../util/charities");
 const contractFunctions = require('../../contracts/utils/functions');
 const web3 = contractFunctions.getWeb3();
 
@@ -34,20 +39,32 @@ export default function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-  getCharityDonations().then(console.log);
+  const { uen } = useParams();
+  const getOrgInfo = () => {
+    const matches = charities.filter((charity) => charity.UEN === uen);
+    console.log(matches);
+    if (matches.length !== 1) {
+      return -1;
+    } else {
+      return matches[0];
+    }
+  };
+  const org = getOrgInfo(uen);
+  if (org == -1) {
+    window.location.href = "/invalid-uen";
+  }
 
   return (
     <div>
       <Header
-        color="transparent"
-        brand="Charity"
+        color='transparent'
+        brand='Charity'
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 200,
-          color: "white"
+          color: "white",
         }}
         {...rest}
       />
@@ -55,29 +72,36 @@ export default function ProfilePage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
-            <GridContainer justify="center">
+            <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={profile} alt="..." className={imageClasses} />
+                    <img src={profile} alt='...' className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Charity #1</h3>
+                    <h3 className={classes.title}>{org.name}</h3>
                   </div>
                 </div>
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p>
-                Brief description of Charity #1.
-              </p>
+              <p>Brief description of Charity #1.</p>
             </div>
-            <GridContainer justify="center">
+            <h2 className={classes.title}>Record of Donations</h2>
+            <div>
+              <OrgRecordTable contract={org.contract}></OrgRecordTable>
+            </div>
+            <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                <Button simple color="success" size="lg" onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href='/addtxn';
-                }}>
+                <Button
+                  simple
+                  color='success'
+                  size='lg'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = "/addtxn";
+                  }}
+                >
                   + Add a transaction
                 </Button>
               </GridItem>
