@@ -33,9 +33,24 @@ function processDonationRecords(records) {
     let amt = value.amount;
     value.strAmount = "$" + (Number(amt) / 100).toFixed(2);
   });
-  // records.sort((a, b) => a.strDate.slice(7) - b.strDate.slice(7));
-  // records.sort((a, b) => a.strDate.slice(7) == b.strDate.slice(7) && Number(a.date.slice(2, 4)) - Number(b.date.slice(2, 4)));
-  // records.sort((a, b) => a.strDate.slice(7) == b.strDate.slice(7) && Number(a.date.slice(2, 4)) == Number(b.date.slice(2, 4)) && Number(a.date.slice(0, 2)) - Number(b.date.slice(0, 2)));
+
+  // Sort record in descending order of date
+  records.sort((a, b) => {
+
+    // Pad comparatees with 0 if required
+    if (a.date.length === 7) {
+      a.date = "0" + a.date;
+    }
+    if (b.date.length === 7) {
+      b.date = "0" + b.date;
+    }
+
+    // Sort in order of year, month then day
+    const oppA = a.date.slice(4) + a.date.slice(2,4) + a.date.slice(0,2)
+    const oppB = b.date.slice(4) + b.date.slice(2,4) + b.date.slice(0,2)
+    return oppB - oppA
+  }
+  );
   return records;
 }
 
