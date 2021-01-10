@@ -19,18 +19,17 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const firestore = firebaseApp.firestore();
 export const auth = firebase.auth();
 
-var allCharities = [];
+export function getCharities() {
+  var allCharities = [];
 
-//Populate list of all charities from firestore into allCharities
-firestore
-  .collection("onboarding/main/charities")
-  .get()
-  .then(function (querySnapshot) {
+  //Populate list of all charities from firestore into allCharities
+  firestore.collection("onboarding/main/charities").get().then(function (querySnapshot) {
     querySnapshot.forEach(function (doc) {
       allCharities.push(doc.data());
     });
   });
-
+  return allCharities
+}
 //To retrieve a specific UEN
 export function searchByUEN(uen) {
   var charity = [];
