@@ -70,6 +70,14 @@ export default function ProfilePage(props) {
       <Parallax small filter image={require("assets/img/background3.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
+          <Button
+            href="/" 
+            style={{
+              marginLeft: '2em',
+              marginTop: '2em'
+            }}>
+            ← back to home
+          </Button>
           <div
             className={classes.container}
             style={{

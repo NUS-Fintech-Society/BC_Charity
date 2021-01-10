@@ -19,6 +19,8 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 
+
+import Button from "components/CustomButtons/Button.js";
 import Web3 from "web3";
 
 const firestore = require("../../firebase");
@@ -79,6 +81,7 @@ export default function LandingPage(props) {
       />
       <Parallax filter image={require("assets/img/background.jpg")}>
         <div className={classes.container}>
+        
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>Welcome to CharityChain.</h1>

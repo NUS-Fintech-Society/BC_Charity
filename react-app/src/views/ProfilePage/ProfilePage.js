@@ -77,7 +77,16 @@ export default function ProfilePage(props) {
       <Parallax small filter image={require("assets/img/background.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
+        <Button
+            href="/" 
+            style={{
+              marginLeft: '2em',
+              marginTop: '2em'
+            }}>
+            ← back to home
+          </Button>
           <div className={classes.container}>
+          
             <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
@@ -90,10 +99,10 @@ export default function ProfilePage(props) {
                 </div>
               </GridItem>
             </GridContainer>
-            <div className={classes.description}>
+            {/* <div className={classes.description}>
               <p>Brief description of Chrity #1.</p>
-            </div>
-            <h2 className={classes.title}>Record of Donations</h2>
+            </div> */}
+            <h2 className={classes.title}>Donations Received</h2>
             <div>
               <OrgRecordTable contract={org.contract}></OrgRecordTable>
             </div>
