@@ -39,13 +39,12 @@ export default function StickyHeadTable(props) {
       if (isRedirect) {
         window.location.href = `/org/${uen}`;
       }
-
-    }
-  }
+    };
+  };
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label='sticky table' >
+        <Table stickyHeader aria-label='sticky table'>
           <TableHead>
             <TableRow>
               {props.columns.map((column) => (
@@ -68,11 +67,19 @@ export default function StickyHeadTable(props) {
                     {props.columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}
-                          onClick={handleClick(row.UEN, column.label, props.isRedirect)}
-                          style={{ cursor: props.isRedirect ? 'pointer' : 'auto' }}
-                        //TODO: FIGURE OUT HOW TO STYLE THE HOVER COLOR
-                        // classes={{hover:}}
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          onClick={handleClick(
+                            row.UEN,
+                            column.label,
+                            props.isRedirect
+                          )}
+                          style={{
+                            cursor: props.isRedirect
+                              ? 'pointer'
+                              : 'auto'
+                          }}
                         >
                           {column.format && typeof value === "number"
                             ? column.format(value)

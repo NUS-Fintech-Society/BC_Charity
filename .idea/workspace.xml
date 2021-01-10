@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6df27f34-d3b1-4132-bd9a-deb9a3ed02a8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-app/src/views/AddTxnPage/AddTxnPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-app/src/views/AddTxnPage/AddTxnPage.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\garyl\Desktop\COMMITMENTS\NUSFINTECH\charity_chain\Blockchain_Charity\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1lhVyAG5WRKc6H7CQEtp6uAJckV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\garyl\Desktop\COMMITMENTS\NUSFINTECH\charity_chain\Blockchain_Charity\node_modules\prettier" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6df27f34-d3b1-4132-bd9a-deb9a3ed02a8" name="Default Changelist" comment="" />
+      <created>1608049561871</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608049561871</updated>
+      <workItem from="1608049566215" duration="33000" />
+      <workItem from="1608049600124" duration="2435000" />
+      <workItem from="1609077145619" duration="13375000" />
+      <workItem from="1609509109025" duration="12460000" />
+      <workItem from="1609668248963" duration="22241000" />
+      <workItem from="1609824573274" duration="859000" />
+      <workItem from="1609849158972" duration="5000" />
+      <workItem from="1610015032175" duration="11467000" />
+      <workItem from="1610042245720" duration="1361000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1608049596809">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="276" key="FileChooserDialogImpl/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1608049596809" />
+    <state width="1899" height="106" key="GridCell.Tab.0.bottom" timestamp="1609595759082">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="106" key="GridCell.Tab.0.bottom/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1609595759082" />
+    <state width="1899" height="106" key="GridCell.Tab.0.center" timestamp="1609595759082">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="106" key="GridCell.Tab.0.center/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1609595759082" />
+    <state width="1899" height="106" key="GridCell.Tab.0.left" timestamp="1609595759082">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="106" key="GridCell.Tab.0.left/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1609595759082" />
+    <state width="1899" height="106" key="GridCell.Tab.0.right" timestamp="1609595759082">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="106" key="GridCell.Tab.0.right/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1609595759082" />
+  </component>
+</project>
