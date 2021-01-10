@@ -54,7 +54,13 @@ export default function ProfilePage(props) {
     window.location.href = "/invalid-uen";
   }
 
+  const charityLogo = {
+    'height': '10em',
+    'width': '10em'
+  }
+
   return (
+    
     <div>
       <Header
         color='transparent'
@@ -75,7 +81,7 @@ export default function ProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={profile} alt='...' className={imageClasses} />
+                    <img src={require('../../assets/img/charities/' + org.img + '.jpg')} alt='...' className={imageClasses} style={charityLogo}/>
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{org.name}</h3>
