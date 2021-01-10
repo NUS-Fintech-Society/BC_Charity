@@ -62,6 +62,11 @@ export default function ProfilePage(props) {
   const [ownerStatus, setOwnerStatus] = useState(0);
   checkOwner(org.contract, web3).then(status => setOwnerStatus(status))
 
+  function goToExplorer(contractAddress) {
+    const ropstenURL = "https://ropsten.etherscan.io/address/";
+    window.open(ropstenURL + contractAddress, '_blank');
+  }
+
   const charityLogo = {
     'height': '10em',
     'width': '10em'
@@ -103,6 +108,9 @@ export default function ProfilePage(props) {
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{org.name}</h3>
+                  </div>
+                  <div>
+                    <a href="#" onClick={() => goToExplorer(org.contract)}>view charity's contract on explorer</a>
                   </div>
                 </div>
               </GridItem>
