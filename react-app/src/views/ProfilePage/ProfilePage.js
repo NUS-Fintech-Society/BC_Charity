@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -38,6 +38,7 @@ async function checkOwner(charityContract, web3) {
 }
 
 export default function ProfilePage(props) {
+  const history = useHistory();
   const classes = useStyles();
   const { ...rest } = props;
   const imageClasses = classNames(
@@ -125,10 +126,7 @@ export default function ProfilePage(props) {
                   simple
                   color='success'
                   size='lg'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = uen + "/addtxn";
-                  }}
+                  onClick={() => history.push(org.UEN + '/addtxn')}
                 >
                   + Add a transaction
                 </Button> : 

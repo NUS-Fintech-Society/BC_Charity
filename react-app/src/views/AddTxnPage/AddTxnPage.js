@@ -353,7 +353,7 @@ export default function ProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={profile} alt='...' className={imageClasses} />
+                    <img src={require('../../assets/img/charities/' + org.img + '.jpg')} alt='...' className={imageClasses} />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{org.name}</h3>
@@ -387,7 +387,7 @@ export default function ProfilePage(props) {
                   labelText='Amount'
                   id='amount'
                   name='amount'
-                  placeholder='Amount (cents)'
+                  placeholder='Amount (dollars)'
                   formControlProps={{
                     fullWidth: true,
                   }}
