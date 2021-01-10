@@ -94,10 +94,17 @@ export default function StickyHeadTable(props) {
 
                             // Else if the cell is transaction hash and is valid, show link
                             : (column.id == "transactionHash" && row.transactionHash != "nil") 
-                            ? <a href="#" onClick={(() => goToExplorer(row.transactionHash))}>{value}</a> : 
+                            ? <a href="#" onClick={(() => goToExplorer(row.transactionHash))}>
+                              {value ? value.slice(0,10) + "..." : ""}
+                              </a> : 
+
+                            // Else if donor, shorten the donor address
+                            (column.id == "donor" ) 
+                            ? 
+                            (value.slice(0,10) + "...")
                             
                             // Else display the value itself.
-                            value
+                            : value
                           }
                         </TableCell>
                       );
