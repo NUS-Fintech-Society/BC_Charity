@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -31,6 +31,12 @@ async function getCharityDonations() {
   return contractFunctions.getCharityDonations(sampleContract, web3);
 }
 
+// check if current wallet is one of charity's owner
+async function checkOwner(charityContract, web3) {
+  const result = await contractFunctions.checkOwner(charityContract, web3);
+  return result
+}
+
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
@@ -53,6 +59,9 @@ export default function ProfilePage(props) {
   if (org == -1) {
     window.location.href = "/invalid-uen";
   }
+
+  const [ownerStatus, setOwnerStatus] = useState(0);
+  checkOwner(org.contract, web3).then(status => setOwnerStatus(status))
 
   const charityLogo = {
     'height': '10em',
@@ -108,6 +117,10 @@ export default function ProfilePage(props) {
             </div>
             <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+                <span></span>
+
+                {/* Display add transaction button if is owner */}
+                {ownerStatus == 1 ? 
                 <Button
                   simple
                   color='success'
@@ -118,7 +131,16 @@ export default function ProfilePage(props) {
                   }}
                 >
                   + Add a transaction
-                </Button>
+                </Button> : 
+
+                ownerStatus == 0 ? 
+
+                // If not owner, show message
+                "Note: You are not the admin of this charity. Please contact the CharityChain's admin if this is a mistake." :
+                
+                // If no valid Metamask or wallet provider
+                "Note: You do not have Metamask or an Ethereum wallet provider. If you are the charity admin, please configure a wallet provider."}
+
               </GridItem>
             </GridContainer>
           </div>

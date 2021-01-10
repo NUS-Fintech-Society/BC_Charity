@@ -26,7 +26,7 @@ export function getWeb3() {
 /**
  * ! window.ethereum.enable() is deprecated so not used.
  * Get user first wallet address in Metamask.
- * @param {*} web3
+ * @param {Web3} web3
  */
 export async function getWalletAddress(web3) {
   // Error if Metamask not enabled.
@@ -39,6 +39,39 @@ export async function getWalletAddress(web3) {
       method: "eth_requestAccounts",
     });
     return walletAddress[0];
+  }
+}
+
+/**
+ * Check if the current wallet is one of the charity's owner
+ * @param {string} charityContract 
+ * @param {Web3} web3 
+ * @returns {number} 1 owner, 0 not owner, -1 wallet not configured
+ */
+export async function checkOwner(charityContract, web3) {
+
+  // Check for valid metamask or wallet provider
+  if (!window.ethereum || !web3 || !web3.eth) {
+    return -1;
+
+  } else {
+
+    // Get wallet address
+    const walletAddress = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    const currentWallet =  walletAddress[0];
+
+    // Check if owner
+    const charityChainContract = new web3.eth.Contract(
+      CharityChainJSON.abi,
+      charityContract
+    );
+    const isOwner = await charityChainContract.methods
+      .checkOwner(currentWallet)
+      .call()
+
+    return isOwner ? 1 : 0
   }
 }
 
