@@ -109,9 +109,9 @@ export default function ProfilePage(props) {
                 </div>
               </GridItem>
             </GridContainer>
-            {/* <div className={classes.description}>
-              <p>Brief description of Chrity #1.</p>
-            </div> */}
+            <div className={classes.description}>
+              <p>Note: If you have recently added a donation, please wait till transaction has been mined before refreshing this page.</p>
+            </div>
             <h2 className={classes.title}>Donations Received</h2>
             <div>
               <OrgRecordTable contract={org.contract}></OrgRecordTable>

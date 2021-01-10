@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { useParams } from "react-router-dom";
 // core components
 import Header from "components/Header/Header.js";
 import Button from "components/CustomButtons/Button.js";
@@ -21,6 +21,7 @@ import firebase from "firebase";
 import Input from "@material-ui/core/Input";
 
 const useStyles = makeStyles(styles);
+
 
 function validateNric(nric) {
   let nricArr = nric.split("");
@@ -99,6 +100,7 @@ const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
 export default function ProfilePage(props) {
+  const history = useHistory();
 
   const { charities } = require("../../util/charities");
 
@@ -311,10 +313,14 @@ export default function ProfilePage(props) {
         web3
       )
       .on("transactionHash", function (hash) {
-        firestore.addDonation(nricHash, amount.toString(), date, message, hash).then(console.log('firebase'));
+
+        // Add donation (with transaction hash) into Firestore
+        firestore.addDonation(nricHash, amount.toString(), date, message, hash).then(() => {
+          const ropstenURL = "https://ropsten.etherscan.io/tx/";
+          window.open(ropstenURL + hash,'_blank');
+          history.goBack();
+        });
         
-        alert("Mining transaction : " + hash);
-        console.log("Mining this transaction: " + hash);
       })
       .on("confirmation", function (confirmationNumber, receipt) {
         console.log("No: " + confirmationNumber + ", receipt: " + receipt);
