@@ -23,6 +23,7 @@ export default function ProductSection() {
   const charitiesList = {
     cursor: 'pointer'
   }
+
   return (
     <div className={classes.section}>
       <GridContainer justify='center'>
@@ -67,11 +68,11 @@ export default function ProductSection() {
       <h2 className={classes.title}>Tamper-proof donation records</h2>
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={12}>
             <h4 className={classes.title}>Our Charities</h4>
             <Table rows={charities} columns={columns} isRedirect={true} style={charitiesList}></Table>
           </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={12}>
             <h4 className={classes.title}>Latest Donations</h4>
             <AllDonationsTable></AllDonationsTable>
           </GridItem>

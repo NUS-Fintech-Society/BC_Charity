@@ -112,8 +112,8 @@ export class AllDonationsTable extends React.Component {
   render() {
     const columnHeader = [
       // Amount Date Donor Message
-      { id: "charityName", label: "Charity", minWidth: 170, align: "left" },
-      { id: "donor", label: "Donor", minWidth: 170, align: "left" },
+      { id: "charityName", label: "Charity", minWidth: 170, align: "right" },
+      { id: "donor", label: "Donor", minWidth: 170, maxWidth: '180px', align: "right" },
       { id: "strAmount", label: "Amount", minWidth: 170, align: "right" },
       { id: "strDate", label: "Date", minWidth: 170, align: "left" },
       { id: "message", label: "Message", minWidth: 170, align: "left" },

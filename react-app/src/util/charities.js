@@ -25,7 +25,7 @@ export const charities = [
     admin: "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14",
     UEN: "199252597N",
     contract: "0xC897d46a255004c3E2b46FbD5Ac726d866Ebf5d7",
-    img: "character"
+    img: "character",
   },
   {
     name: "Jason & Jaffrey Childcare Centre Limited",
