@@ -11,19 +11,20 @@ const firestore = require("../../firebase");
 function processDonationRecords(records) {
 
   records.forEach(async (value) => {
+    if (value.date.length === 7) {
+      value.date = "0" + value.date;
+    }
 
     // Add transaction hash in firestore records.
     const donationHash = Web3.utils.sha3(value.donor + value.amount + value.date + value.message);
     const donation = await firestore.getDonation(donationHash);
+    console.log({date: value.date, amount: value.amount})
     value['transactionHash'] = (donation.exists) ? donation.data()['transactionHash'] : 'nil';
 
     // Format date into field strDate
     const months = ["Jan","Feb","Mar","Apr","May","Jun",
     "Jul","Aug","Sep","Oct","Nov","Dec"];
     value.date = String(value.date);
-    if (value.date.length === 7) {
-      value.date = "0" + value.date;
-    }
     let day = value.date.slice(0, 2);
     let mth = value.date.slice(2, 4);
     let yr = value.date.slice(4);
@@ -51,6 +52,7 @@ function processDonationRecords(records) {
     return oppB - oppA
   }
   );
+  console.log(records)
   return records;
 }
 
@@ -182,7 +184,6 @@ export class UserRecordTable extends React.Component {
     // console.log(this.state.nricHash);
     const columnHeader = [
       // Amount Date Donor Message
-      { id: "donor", label: "Donor", minWidth: 170, align: "left" },
       { id: "strAmount", label: "Amount", minWidth: 100, align: "right" },
       { id: "strDate", label: "Date", minWidth: 170, align: "left" },
       { id: "message", label: "Message", minWidth: 170, align: "left" },

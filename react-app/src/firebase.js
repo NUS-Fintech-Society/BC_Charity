@@ -71,11 +71,8 @@ export async function getDonations() {
  * @param {*} transactionHash transaction hash of mined transaction
  */
 export function addDonation(nricHash, amount, date, message, transactionHash) {
-  console.log(typeof nricHash)
-  console.log(typeof amount)
-  console.log(typeof date)
-  console.log(typeof message)
-  const donationHash = Web3.utils.sha3(nricHash + amount.toString() + date + message);
+  console.log({amount: amount, date: date})
+  const donationHash = Web3.utils.sha3(nricHash.toString() + amount.toString() + date.toString() + message.toString());
   const donationDetails = {
     nricHash: nricHash,
     amount: amount,

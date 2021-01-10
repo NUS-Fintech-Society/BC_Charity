@@ -311,7 +311,7 @@ export default function ProfilePage(props) {
         web3
       )
       .on("transactionHash", function (hash) {
-        firestore.addDonation(nricHash, amount, date, message, hash).then(console.log('firebase'));
+        firestore.addDonation(nricHash, amount.toString(), date, message, hash).then(console.log('firebase'));
         
         alert("Mining transaction : " + hash);
         console.log("Mining this transaction: " + hash);
@@ -362,10 +362,10 @@ export default function ProfilePage(props) {
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p>Brief description of Charity #1.</p>
+              <p>Note: You need to be a charity admin for the transaction to be processed successfully.</p>
             </div>
             <div>
-              <h3>Add Transaction</h3>
+              <h3>Add Donation</h3>
             </div>
 
             <GridContainer>

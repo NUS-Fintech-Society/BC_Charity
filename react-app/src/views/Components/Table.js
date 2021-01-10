@@ -101,7 +101,7 @@ export default function StickyHeadTable(props) {
                               </a> : 
 
                             // Else if donor, shorten the donor address
-                            (column.id == "donor" ) 
+                            (column.id == "donor" && value ) 
                             ? 
                             (value.slice(0,10) + "...")
                             
