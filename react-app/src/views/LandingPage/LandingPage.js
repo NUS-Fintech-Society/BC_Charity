@@ -68,7 +68,7 @@ export default function LandingPage(props) {
       <Header
         color='transparent'
         routes={dashboardRoutes}
-        brand='Charity'
+        brand='CharityChain'
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -81,7 +81,7 @@ export default function LandingPage(props) {
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Welcome to Charity.</h1>
+              <h1 className={classes.title}>Welcome to CharityChain.</h1>
               <h4>
                 Our team aims to authenticate the legitimacy of charity
                 organisations and store a record of donations.

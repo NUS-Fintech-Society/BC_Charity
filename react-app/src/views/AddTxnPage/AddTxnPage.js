@@ -336,7 +336,7 @@ export default function ProfilePage(props) {
     <div>
       <Header
         color='transparent'
-        brand='Charity'
+        brand='CharityChain'
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
