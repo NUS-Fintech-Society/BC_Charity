@@ -44,7 +44,7 @@ export default function StickyHeadTable(props) {
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label='sticky table'>
+        <Table stickyHeader aria-label='sticky table' style={props.style}>
           <TableHead>
             <TableRow >
               {props.columns.map((column) => (

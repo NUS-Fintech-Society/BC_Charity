@@ -95,7 +95,6 @@ export class AllDonationsTable extends React.Component {
 
   async componentDidMount() {
     if (this.state.donations.length === 0) {
-      console.log("awaiting");
       const result = await contractFunctions.getAllDonations(web3);
       await setTimeout(async () => {
         let processed = result.map((value) => {
@@ -105,7 +104,6 @@ export class AllDonationsTable extends React.Component {
         });
         processed = await processDonationRecords(processed);
         this.setState({ donations: processed });
-        console.log(this.state.donations);
         //TODO: Have this work without the 2000 ms
       }, 2000);
     }
@@ -133,7 +131,6 @@ export class AllDonationsTable extends React.Component {
 export class UserRecordTable extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       nricHash: props.nricHash,
       donations: [],
@@ -158,16 +155,16 @@ export class UserRecordTable extends React.Component {
   }
 
   render() {
-    console.log(this.props.nricHash);
-    console.log(this.props.nricHash === this.state.nricHash);
+    // console.log(this.props.nricHash);
+    // console.log(this.props.nricHash === this.state.nricHash);
     if (this.props.nricHash !== this.state.nricHash) {
       this.refreshDonations();
     }
-    console.log(
-      "0x0000000000000000000000000000000000000000000000000000000000000001" ===
-      this.state.nricHash
-    );
-    console.log(this.state.nricHash);
+    // console.log(
+    //   "0x0000000000000000000000000000000000000000000000000000000000000001" ===
+    //   this.state.nricHash
+    // );
+    // console.log(this.state.nricHash);
     const columnHeader = [
       // Amount Date Donor Message
       { id: "donor", label: "Donor", minWidth: 170, align: "left" },

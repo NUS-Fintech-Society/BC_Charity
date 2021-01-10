@@ -33,8 +33,6 @@ export default function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const sampleNRICHash =
-    "0x0000000000000000000000000000000000000000000000000000000000000001";
   const [submitCount, setSubmitCount] = useState(0);
   const [nric, setNric] = useState("");
   const [submittedNRICHash, setNRICHash] = useState(
@@ -55,13 +53,6 @@ export default function ProfilePage(props) {
     console.log("fin: onSubmitNRIC");
   }
 
-  function onSubmitSampleNRIC() {
-    console.log("onSubmitSampleNRIC");
-    setNRICHash(sampleNRICHash);
-    console.log(nric);
-    console.log(submittedNRICHash);
-    console.log("fin: onSubmitSampleNRIC");
-  }
 
   return (
     <div>
@@ -87,15 +78,12 @@ export default function ProfilePage(props) {
           >
             <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={6}>
-                <h2 className={classes.title}>Verify your transaction.</h2>
+                <h2 className={classes.title}>Verify your donations.</h2>
+                <p>Don't worry, your NRICs are not recorded in the chain. We store your NRIC Hash instead.</p>
               </GridItem>
               <br></br>
               <br></br>
               <GridItem xs={12} sm={12} md={8}>
-                <div>
-                  Currently searching for: {"\n"}
-                  {submittedNRICHash}
-                </div>
                 <br></br>
                 <GridContainer
                   style={{
@@ -129,6 +117,14 @@ export default function ProfilePage(props) {
                       fullWidth: true,
                     }}
                   />
+                  <div style={{
+                      marginTop: "auto",
+                      marginBottom: "auto",
+                      marginLeft: "16px",
+                    }}>
+                  Your NRIC hash : {submittedNRICHash}
+                  
+                </div>
                 </GridContainer>
                 <br></br>
                 <Button
@@ -142,10 +138,10 @@ export default function ProfilePage(props) {
                   size='lg'
                   onClick={onSubmitNRIC}
                 >
-                  Hash NRIC and Search
+                  Search
                 </Button>
-                <br></br>
-                <Button
+                
+                {/* <Button
                   style={{
                     height: "12px",
                     width: "240px",
@@ -158,9 +154,10 @@ export default function ProfilePage(props) {
                   onClick={onSubmitSampleNRIC}
                 >
                   Get Sample User Donations
-                </Button>
+                </Button> */}
               </GridItem>
             </GridContainer>
+            <br></br>
             <UserRecordTable
               nricHash={submittedNRICHash}
               style={{ padding: "24px" }}

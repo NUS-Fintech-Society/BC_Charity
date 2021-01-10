@@ -20,6 +20,9 @@ const useStyles = makeStyles(styles);
 
 export default function ProductSection() {
   const classes = useStyles();
+  const charitiesList = {
+    cursor: 'pointer'
+  }
   return (
     <div className={classes.section}>
       <GridContainer justify='center'>
@@ -61,15 +64,15 @@ export default function ProductSection() {
         </GridItem>
       </GridContainer>
       <br></br>
-      <h2 className={classes.title}>Sample Records</h2>
+      <h2 className={classes.title}>Tamper-proof donation records</h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <h4 className={classes.title}>List of Charities</h4>
-            <Table rows={charities} columns={columns} isRedirect={true}></Table>
+            <h4 className={classes.title}>Our Charities</h4>
+            <Table rows={charities} columns={columns} isRedirect={true} style={charitiesList}></Table>
           </GridItem>
           <GridItem xs={12} sm={12} md={6}>
-            <h4 className={classes.title}>Transaction List</h4>
+            <h4 className={classes.title}>Latest Donations</h4>
             <AllDonationsTable></AllDonationsTable>
           </GridItem>
         </GridContainer>
