@@ -56,17 +56,17 @@ export default function HeaderLinks(props) {
       });
   return (
     <List className={classes.list}>
-      {/* <ListItem className={classes.listItem}>
+      <ListItem className={classes.listItem}>
         <Button href='/' color='transparent' className={classes.navLink}>
           <HomeIcon className={classes.icons} /> Home
         </Button>
-      </ListItem> */}
+      </ListItem>
       <ListItem className={classes.listItem}>
         <Button href='/verify' color='transparent' className={classes.navLink}>
           <CheckCircleIcon className={classes.icons} /> Verify
         </Button>
       </ListItem>
-      { loggedIn ?
+      {/* { loggedIn ?
         (
           <ListItem className={classes.listItem}>
             <Button
@@ -87,7 +87,7 @@ export default function HeaderLinks(props) {
               <LockIcon className={classes.icons} /> Charity Log In
           </Button>
           </ListItem>
-        )}
+        )} */}
     </List>
   );
 }

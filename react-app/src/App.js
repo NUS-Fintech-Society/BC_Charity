@@ -22,7 +22,7 @@ function App() {
           <Route path='/' exact component={LandingPage} />
           <Route path='/org/:uen/addtxn' component={AddTxnPage} />
           <Route path='/org/:uen' component={ProfilePage} />
-          <Route path='/login-page' component={LoginPage} />
+          {/* <Route path='/login-page' component={LoginPage} /> */}
           <Route path='/component' component={Components} />
           <Route path='/verify' component={VerifyPage} />
           <Route path='/invalid-uen' component={InvalidPage} />
