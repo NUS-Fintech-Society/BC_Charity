@@ -1,20 +1,18 @@
 import React from "react";
 import { useState } from "react";
-// nodejs library that concatenates classes
-import classNames from "classnames";
-// @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
+
+
 // core components
 import Header from "components/Header/Header.js";
 import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import CardFooter from "components/Card/CardFooter.js";
 
+// local components
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { UserRecordTable } from "views/Components/DonationsTable";
 
@@ -22,8 +20,6 @@ const useStyles = makeStyles(styles);
 
 const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
-
-// TODO: this function should have a parameter: user's HASHED nric, so the hashing also need to handle.
 
 export default function ProfilePage(props) {
   const classes = useStyles();
@@ -39,18 +35,30 @@ export default function ProfilePage(props) {
     "0x0000000000000000000000000000000000000000000000000000000000000000"
   );
   const onChangeHandlerNRIC = async (event) => {
-    console.log("onChangeHandlerNRIC");
+    // console.log("onChangeHandlerNRIC");
     await setNric(event.target.value);
-    console.log(nric);
-    console.log("fin: onChangeHandlerNRIC");
+    // console.log(nric);
+    // console.log("fin: onChangeHandlerNRIC");
   };
 
   function onSubmitNRIC() {
-    console.log("onSubmitNRIC");
+    // console.log("onSubmitNRIC");
     if (String(nric).length > 0) {
       setNRICHash(web3.utils.sha3(nric.toUpperCase()));
     }
-    console.log("fin: onSubmitNRIC");
+    // console.log("fin: onSubmitNRIC");
+  }
+
+  // Used by Admin to add owner
+  function addNewOwner() {
+    const walletAddress = "0x7af9D93643553CbA5D1d297C3cBB451dBfAd1d09";
+    const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
+    // contractFunctions.addAllContractOwner(walletAddress, sendFrom, web3);
+    contractFunctions.checkContractOwner(walletAddress, "0xE34a7f5fC9d653Fb510494E857A387aA1426a4E4", web3 ).then(console.log);
+    contractFunctions.checkContractOwner(walletAddress, "0xda532bb1cdf942cB2802EEb70BdbB9375b9203D5", web3 ).then(console.log);
+    contractFunctions.checkContractOwner(walletAddress, "0x1Ed8BD5b9FfeC35A8F1a5fad3993bb6B8Fc3180B", web3 ).then(console.log);
+    contractFunctions.checkContractOwner(walletAddress, "0xB8746a8fad46aDbEA4FA188956ef38FDF6350960", web3 ).then(console.log);
+    contractFunctions.checkContractOwner(walletAddress, "0xe853F05E05D0ab97CD46BCAcf422384781f0Ed61", web3 ).then(console.log);
   }
 
 

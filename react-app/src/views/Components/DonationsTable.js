@@ -18,7 +18,6 @@ function processDonationRecords(records) {
     // Add transaction hash in firestore records.
     const donationHash = Web3.utils.sha3(value.donor + value.amount + value.date + value.message);
     const donation = await firestore.getDonation(donationHash);
-    console.log({date: value.date, amount: value.amount})
     value['transactionHash'] = (donation.exists) ? donation.data()['transactionHash'] : 'nil';
 
     // Format date into field strDate
@@ -52,7 +51,6 @@ function processDonationRecords(records) {
     return oppB - oppA
   }
   );
-  console.log(records)
   return records;
 }
 
@@ -76,15 +74,15 @@ export class OrgRecordTable extends React.Component {
       await setTimeout(async () => {
         const processedDonations = await processDonationRecords(result);
         this.setState({ donations: processedDonations });
-        console.log("set state")
+        // console.log("set state")
         //TODO: Have this work without the 2000 ms
       }, 3000);
     }
   }
 
   render() {
-    console.log("render...")
-    console.log(this.state.donations);
+    // console.log("render...")
+    // console.log(this.state.donations);
     const columnHeader = [
       // Amount Date Donor Message
       { id: "donor", label: "Donor", minWidth: 170, align: "left" },
@@ -177,11 +175,6 @@ export class UserRecordTable extends React.Component {
     if (this.props.nricHash !== this.state.nricHash) {
       this.refreshDonations();
     }
-    // console.log(
-    //   "0x0000000000000000000000000000000000000000000000000000000000000001" ===
-    //   this.state.nricHash
-    // );
-    // console.log(this.state.nricHash);
     const columnHeader = [
       // Amount Date Donor Message
       { id: "strAmount", label: "Amount", minWidth: 100, align: "right" },

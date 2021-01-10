@@ -19,15 +19,8 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 
-
-import Button from "components/CustomButtons/Button.js";
-import Web3 from "web3";
-
-const firestore = require("../../firebase");
 const charities = require("../../util/charities");
 const contractFunctions = require("../../contracts/utils/functions");
-const web3 = contractFunctions.getWeb3();
-
 const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
@@ -38,20 +31,12 @@ const useStyles = makeStyles(styles);
 async function getContracts() {
   charities.charities.forEach(async (charity) => {
     const contract = await contractFunctions.getCharityAddress(charity.UEN, 3);
-    console.log("UEN: " + charity.UEN + ", contract: " + contract);
+    // console.log("UEN: " + charity.UEN + ", contract: " + contract);
   });
 }
 
-//TODO: charities list are here but structure might not be ideal.
-//TODO: additional fields like address and cause can be included in the "util/charities.js" file.
 function getCharities() {
   return charities.charities;
-}
-
-//TODO: the data format a bit messy, maybe can arrange in chronological order?
-async function getAllDonations() {
-  const donations = await contractFunctions.getAllDonations(web3);
-  return donations;
 }
 
 export default function LandingPage(props) {
@@ -60,10 +45,6 @@ export default function LandingPage(props) {
 
   // Get the list of charities.
   const charities = getCharities();
-  console.log(charities);
-
-  // Get all donations.
-  getAllDonations().then(console.log);
 
   return (
     <div>

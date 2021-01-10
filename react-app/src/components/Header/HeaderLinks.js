@@ -32,11 +32,11 @@ export default function HeaderLinks(props) {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // User is signed in.
-      console.log("IS SIGNED IN");
+      // console.log("IS SIGNED IN");
       setLoggedIn(user);
     } else {
       // No user is signed in.
-      console.log("IS SIGNED OUT");
+      // console.log("IS SIGNED OUT");
     }
   });
 
@@ -46,7 +46,7 @@ export default function HeaderLinks(props) {
       .signOut()
       .then(function () {
         // Sign-out successful.
-        console.log("Signing out");
+        // console.log("Signing out");
         // Refresh navbar
         window.location.reload(false);
       })

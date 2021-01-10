@@ -315,3 +315,17 @@ export async function addAllContractOwner(walletAddress, sendFrom, web3) {
       .send({ from: sendFrom });
   });
 }
+
+/**
+ * For Admin to check if a person is an charity owner.
+ * @param {*} walletAddress person address in question
+ * @param {*} charityAddress 
+ * @param {*} web3 
+ */
+export async function checkContractOwner(walletAddress, charityAddress, web3) {
+  const charityChainContract = new web3.eth.Contract(
+    CharityChainJSON.abi,
+    charityAddress
+  );
+  return charityChainContract.methods.checkOwner(walletAddress).call();
+}

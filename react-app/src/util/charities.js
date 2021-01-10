@@ -38,14 +38,14 @@ export const charities = [
     name: "Bobby Foundation Limited",
     admin: "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14",
     UEN: "02996473B",
-    contract: "0xde3653964686daAC5a96A14bfD096706022aE5cA",
+    contract: "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150",
     img: "bobby"
   },
   {
     name: "Scent Co. Limited",
     admin: "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14",
     UEN: "251323312W",
-    contract: "0xc7474bc22eA586A01eac34951b3207d6ECf70D8c",
+    contract: "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150",
     img: "scent"
   },
   {

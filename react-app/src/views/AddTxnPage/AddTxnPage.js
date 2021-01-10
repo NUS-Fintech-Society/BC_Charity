@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
 // core components
 import Header from "components/Header/Header.js";
 import Button from "components/CustomButtons/Button.js";
@@ -11,13 +12,9 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
-import firebase from "firebase";
-import Input from "@material-ui/core/Input";
 
 const useStyles = makeStyles(styles);
 
@@ -107,7 +104,6 @@ export default function ProfilePage(props) {
   const { uen } = useParams();
   const getOrgInfo = () => {
     const matches = charities.filter((charity) => charity.UEN === uen);
-    console.log(matches);
     if (matches.length !== 1) {
       return -1;
     } else {
@@ -171,7 +167,7 @@ export default function ProfilePage(props) {
       nricErrorMessageRef.current =
         "Currently Entered NRIC: " + nric + "\nInvalid NRIC. e.g. S1234567X";
       setNricError("Invalid NRIC. e.g. S1234567X");
-      console.log(nricErrorMessageRef.current);
+      // console.log(nricErrorMessageRef.current);
     }
 
     if (nricErrorMessageRef.current !== "") {
@@ -188,7 +184,7 @@ export default function ProfilePage(props) {
         amt +
         "\nInvalid Amount. Amount must be greater than 0.00 e.g. 1.23";
       setAmtError("Invalid Amount. Amount must be greater than 0.00 e.g. 1.23");
-      console.log(amtErrorMessageRef.current);
+      // console.log(amtErrorMessageRef.current);
     }
     if (amtErrorMessageRef.current !== "") {
       return false;
@@ -203,7 +199,7 @@ export default function ProfilePage(props) {
       setNoteError(
         "Max 32 characters. Only accepts a-z,A-Z,0-9 and the following special characters: , ! . ? ; : - '"
       );
-      console.log(noteErrorMessageRef.current);
+      // console.log(noteErrorMessageRef.current);
     }
 
     if (noteErrorMessageRef.current !== "") {
@@ -219,7 +215,7 @@ export default function ProfilePage(props) {
           "Invalid Date. Date input should be in the format: DD/MM/YYYY";
       setDateError(
           "Invalid Date. Date input should be in the format: DD/MM/YYYY");
-      console.log(dateErrorMessageRef.current);
+      // console.log(dateErrorMessageRef.current);
     }
 
     if (dateErrorMessageRef.current !== "") {
@@ -234,23 +230,23 @@ export default function ProfilePage(props) {
     const isValidAmt = validateHelperAmt();
     const isValidNote = validateHelperNote();
     const isValidDate = validateHelperDate();
-    console.log(validateHelperDate());
+    // console.log(validateHelperDate());
 
     if (isValidNric) {
       //TODO: clear form
-      console.log("Successful NRIC: " + nric);
+      // console.log("Successful NRIC: " + nric);
       setNricError("");
     }
     if (isValidAmt) {
-      console.log("Successful Amount: " + amt);
+      // console.log("Successful Amount: " + amt);
       setAmtError("");
     }
     if (isValidNote) {
-      console.log("Note: " + note);
+      // console.log("Note: " + note);
       setNoteError("");
     }
     if (isValidDate) {
-      console.log("Successful Date: " + date);
+      // console.log("Successful Date: " + date);
       setDateError("");
     }
 
@@ -285,7 +281,7 @@ export default function ProfilePage(props) {
       var year = parts[2];
 
       const dateFormatted = day + month + year;
-      console.log(dateFormatted);
+      // console.log(dateFormatted);
 
     addDonation(hash,amount,dateFormatted,note);
   }
@@ -320,18 +316,18 @@ export default function ProfilePage(props) {
         
       })
       .on("confirmation", function (confirmationNumber, receipt) {
-        console.log("No: " + confirmationNumber + ", receipt: " + receipt);
+        // console.log("No: " + confirmationNumber + ", receipt: " + receipt);
       })
       .on("receipt", function (receipt) {
         alert("Success! Transaction has been completed.");
-        console.log(receipt);
+        // console.log(receipt);
       })
       .on("error", function (error, receipt) {
         // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
         alert(
           "Transaction rejected! Check that this waller address have the permission or have enough ethers."
         );
-        console.log(receipt);
+        // console.log(receipt);
       });
   }
 
