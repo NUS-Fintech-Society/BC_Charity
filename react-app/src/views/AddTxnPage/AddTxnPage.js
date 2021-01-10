@@ -292,8 +292,6 @@ export default function ProfilePage(props) {
 
   async function addDonation(hashString,amt,dateFormatted,note) {
     // Parameters
-    //TODO: Now dummy parameters are given, but these should be filled in with method parameter instead.
-    //TODO: rmb that nric input taken by the form should be hashed before calling this method too.
     const nricHash = hashString;
     const amount = amt;
     const date = dateFormatted;

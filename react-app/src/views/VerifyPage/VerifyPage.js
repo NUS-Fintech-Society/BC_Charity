@@ -148,21 +148,6 @@ export default function ProfilePage(props) {
                 >
                   Search
                 </Button>
-                
-                {/* <Button
-                  style={{
-                    height: "12px",
-                    width: "240px",
-                    marginTop: "auto",
-                    marginBottom: "auto",
-                  }}
-                  simple
-                  color='success'
-                  size='lg'
-                  onClick={onSubmitSampleNRIC}
-                >
-                  Get Sample User Donations
-                </Button> */}
               </GridItem>
             </GridContainer>
             <br></br>

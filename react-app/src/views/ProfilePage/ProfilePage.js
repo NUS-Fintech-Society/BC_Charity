@@ -22,13 +22,6 @@ const { charities } = require("../../util/charities");
 const contractFunctions = require('../../contracts/utils/functions');
 const web3 = contractFunctions.getWeb3();
 
-//TODO: ultimately each charity page should has its own route, so maybe the path differentiation can use UEN or contract address.
-//TODO: this method should also take in the contract address of the current charity page.
-async function getCharityDonations() {
-  const sampleContract = "0x6c262aa3a7333933BC33f9F7019D7A59021F9dC1";
-  return contractFunctions.getCharityDonations(sampleContract, web3);
-}
-
 // check if current wallet is one of charity's owner
 async function checkOwner(charityContract, web3) {
   const result = await contractFunctions.checkOwner(charityContract, web3);
