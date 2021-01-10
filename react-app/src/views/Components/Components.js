@@ -20,7 +20,6 @@ import SectionNavbars from "./Sections/SectionNavbars.js";
 import SectionTabs from "./Sections/SectionTabs.js";
 import SectionPills from "./Sections/SectionPills.js";
 import SectionNotifications from "./Sections/SectionNotifications.js";
-import SectionTypography from "./Sections/SectionTypography.js";
 import SectionJavascript from "./Sections/SectionJavascript.js";
 import SectionCarousel from "./Sections/SectionCarousel.js";
 import SectionCompletedExamples from "./Sections/SectionCompletedExamples.js";
@@ -69,7 +68,6 @@ export default function Components(props) {
         <SectionTabs />
         <SectionPills />
         <SectionNotifications />
-        <SectionTypography />
         <SectionJavascript />
         <SectionCarousel />
         <SectionCompletedExamples />

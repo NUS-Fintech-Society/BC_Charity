@@ -12,8 +12,6 @@ import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import profile from "assets/img/faces/christian.jpg";
-
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 // Table
@@ -34,7 +32,7 @@ async function getCharityDonations() {
 // check if current wallet is one of charity's owner
 async function checkOwner(charityContract, web3) {
   const result = await contractFunctions.checkOwner(charityContract, web3);
-  return result
+  return result;
 }
 
 export default function ProfilePage(props) {
