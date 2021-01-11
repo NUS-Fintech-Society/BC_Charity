@@ -19,13 +19,8 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 
-import Web3 from "web3";
-
-const firestore = require("../../firebase");
 const charities = require("../../util/charities");
 const contractFunctions = require("../../contracts/utils/functions");
-const web3 = contractFunctions.getWeb3();
-
 const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
@@ -36,20 +31,12 @@ const useStyles = makeStyles(styles);
 async function getContracts() {
   charities.charities.forEach(async (charity) => {
     const contract = await contractFunctions.getCharityAddress(charity.UEN, 3);
-    console.log("UEN: " + charity.UEN + ", contract: " + contract);
+    // console.log("UEN: " + charity.UEN + ", contract: " + contract);
   });
 }
 
-//TODO: charities list are here but structure might not be ideal.
-//TODO: additional fields like address and cause can be included in the "util/charities.js" file.
 function getCharities() {
   return charities.charities;
-}
-
-//TODO: the data format a bit messy, maybe can arrange in chronological order?
-async function getAllDonations() {
-  const donations = await contractFunctions.getAllDonations(web3);
-  return donations;
 }
 
 export default function LandingPage(props) {
@@ -58,17 +45,13 @@ export default function LandingPage(props) {
 
   // Get the list of charities.
   const charities = getCharities();
-  console.log(charities);
-
-  // Get all donations.
-  getAllDonations().then(console.log);
 
   return (
     <div>
       <Header
         color='transparent'
         routes={dashboardRoutes}
-        brand='Charity'
+        brand='CharityChain'
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -79,9 +62,10 @@ export default function LandingPage(props) {
       />
       <Parallax filter image={require("assets/img/background.jpg")}>
         <div className={classes.container}>
+        
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Welcome to Charity.</h1>
+              <h1 className={classes.title}>Welcome to CharityChain.</h1>
               <h4>
                 Our team aims to authenticate the legitimacy of charity
                 organisations and store a record of donations.
