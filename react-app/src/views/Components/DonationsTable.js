@@ -1,10 +1,8 @@
-import { searchByUEN } from "firebase";
-import React, { useState } from "react";
+import React from "react";
 import Table from "./Table";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const contractFunctions = require("../../contracts/utils/functions");
-const Web3 = require("web3");
+const web3Sha3 = require("web3").utils.sha3;
 const web3 = contractFunctions.getWeb3();
 const firestore = require("../../firebase");
 
@@ -15,7 +13,7 @@ function processDonationRecords(records) {
     }
 
     // Add transaction hash in firestore records.
-    const donationHash = Web3.utils.sha3(
+    const donationHash = web3Sha3(
       value.donor + value.amount + value.date + value.message
     );
     const donation = await firestore.getDonation(donationHash);

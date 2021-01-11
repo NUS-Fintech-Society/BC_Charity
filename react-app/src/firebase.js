@@ -1,8 +1,6 @@
-import { Functions } from "@material-ui/icons";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import { isVariableStatement } from "typescript";
 const Web3 = require("web3");
 
 export const firebaseConfig = {

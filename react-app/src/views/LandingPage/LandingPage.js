@@ -43,9 +43,6 @@ export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-  // Get the list of charities.
-  const charities = getCharities();
-
   return (
     <div>
       <Header

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -83,7 +83,6 @@ function validateDate(dateString) {
     return day > 0 && day <= monthLength[month - 1];
 }
 
-const Web3 = require("web3");
 const firestore = require("../../firebase");
 const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
@@ -132,8 +131,6 @@ export default function ProfilePage(props) {
   const [date, setDate] = useState("");
   const [dateError, setDateError] = useState("");
   const dateErrorMessageRef = useRef("");
-
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
   const onChangeHandlerNric = (event) => {
     const { value } = event.currentTarget;

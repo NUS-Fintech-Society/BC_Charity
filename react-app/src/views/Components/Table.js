@@ -9,8 +9,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -48,9 +46,7 @@ export default function StickyHeadTable(props) {
     const ropstenURL = "https://ropsten.etherscan.io/tx/";
     window.open(ropstenURL + transactionHash, "_blank");
   }
-  function clickhere() {
-    console.log("clicked hereee");
-  }
+
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>

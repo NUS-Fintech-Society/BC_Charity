@@ -1,5 +1,4 @@
 const Web3 = require("web3");
-var Contract = require("web3-eth-contract");
 const infura = require("./infura");
 const CharityChainJSON = require("../build/CharityChain.json");
 const OnboardingJSON = require("../build/Onboarding.json");

@@ -23,12 +23,6 @@ const web3 = contractFunctions.getWeb3();
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  const imageClasses = classNames(
-    classes.imgRaised,
-    classes.imgRoundedCircle,
-    classes.imgFluid
-  );
-  const [submitCount, setSubmitCount] = useState(0);
   const [nric, setNric] = useState("");
   const [submittedNRICHash, setNRICHash] = useState(
     "0x0000000000000000000000000000000000000000000000000000000000000000"
