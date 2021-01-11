@@ -106,6 +106,7 @@ export default function ProfilePage(props) {
                     <h3 className={classes.title}>{org.name}</h3>
                   </div>
                   <div>
+                    {/* eslint-disable-next-line */}
                     <a href='#' onClick={() => goToExplorer(org.contract)}>
                       view charity's contract on explorer
                     </a>

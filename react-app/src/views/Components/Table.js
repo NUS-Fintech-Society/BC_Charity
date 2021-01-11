@@ -95,6 +95,7 @@ export default function StickyHeadTable(props) {
                             ) : // Else if the cell is transaction hash and is valid, show link
                             column.id === "transactionHash" &&
                               row.transactionHash !== "nil" ? (
+                              // eslint-disable-next-line
                               <a
                                 href='#'
                                 onClick={() =>
@@ -107,7 +108,7 @@ export default function StickyHeadTable(props) {
                             column.id === "donor" && value ? (
                               value.slice(0, 10) + "..."
                             ) : (
-                            // Else display the value itself.
+                              // Else display the value itself.
                               value
                             )
                           }

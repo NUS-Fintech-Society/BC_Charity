@@ -255,6 +255,7 @@ export default function ProfilePage(props) {
   /**
    * Used by Wei Hong to add owner hehe.
    */
+  // eslint-disable-next-line
   async function addOwner() {
     const seanAddr = "0x1b13746A46FCC474e3d71Cd6678813C97fA945b1";
     // const charityContract = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
