@@ -9,16 +9,19 @@ const web3 = contractFunctions.getWeb3();
 const firestore = require("../../firebase");
 
 function processDonationRecords(records) {
-
   records.forEach(async (value) => {
     if (value.date.length === 7) {
       value.date = "0" + value.date;
     }
 
     // Add transaction hash in firestore records.
-    const donationHash = Web3.utils.sha3(value.donor + value.amount + value.date + value.message);
+    const donationHash = Web3.utils.sha3(
+      value.donor + value.amount + value.date + value.message
+    );
     const donation = await firestore.getDonation(donationHash);
-    value['transactionHash'] = (donation.exists) ? donation.data()['transactionHash'] : 'nil';
+    value["transactionHash"] = donation.exists
+      ? donation.data()["transactionHash"]
+      : "nil";
 
     // Format date into field strDate
     const months = ["Jan","Feb","Mar","Apr","May","Jun",
@@ -36,7 +39,6 @@ function processDonationRecords(records) {
 
   // Sort record in descending order of date
   records.sort((a, b) => {
-
     // Pad comparatees with 0 if required
     if (a.date.length === 7) {
       a.date = "0" + a.date;
@@ -46,11 +48,10 @@ function processDonationRecords(records) {
     }
 
     // Sort in order of year, month then day
-    const oppA = a.date.slice(4) + a.date.slice(2,4) + a.date.slice(0,2)
-    const oppB = b.date.slice(4) + b.date.slice(2,4) + b.date.slice(0,2)
-    return oppB - oppA
-  }
-  );
+    const oppA = a.date.slice(4) + a.date.slice(2, 4) + a.date.slice(0, 2);
+    const oppB = b.date.slice(4) + b.date.slice(2, 4) + b.date.slice(0, 2);
+    return oppB - oppA;
+  });
   return records;
 }
 
@@ -65,7 +66,6 @@ export class OrgRecordTable extends React.Component {
 
   async componentDidMount() {
     if (this.state.donations.length === 0) {
-
       // old method
       const result = await contractFunctions.getCharityDonations(
         this.state.contract,
@@ -89,7 +89,13 @@ export class OrgRecordTable extends React.Component {
       { id: "strAmount", label: "Amount", minWidth: 100, align: "right" },
       { id: "strDate", label: "Date", minWidth: 170, align: "left" },
       { id: "message", label: "Message", minWidth: 170, align: "left" },
-      { id: "transactionHash", label: "Transaction Hash", minWidth: 170, align: "left", render: rowData => <div>helloo</div> }
+      {
+        id: "transactionHash",
+        label: "Transaction Hash",
+        minWidth: 170,
+        align: "left",
+        render: (rowData) => <div>helloo</div>,
+      },
     ];
 
     return (

@@ -21,8 +21,8 @@ const useStyles = makeStyles(styles);
 export default function ProductSection() {
   const classes = useStyles();
   const charitiesList = {
-    cursor: 'pointer'
-  }
+    cursor: "pointer",
+  };
 
   return (
     <div className={classes.section}>
@@ -70,7 +70,12 @@ export default function ProductSection() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <h4 className={classes.title}>Our Charities</h4>
-            <Table rows={charities} columns={columns} isRedirect={true} style={charitiesList}></Table>
+            <Table
+              rows={charities}
+              columns={columns}
+              isRedirect={true}
+              style={charitiesList}
+            ></Table>
           </GridItem>
           <GridItem xs={12} sm={12} md={12}>
             <h4 className={classes.title}>Latest Donations</h4>

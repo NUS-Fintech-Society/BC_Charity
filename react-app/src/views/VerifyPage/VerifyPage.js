@@ -3,7 +3,6 @@ import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 
-
 // core components
 import Header from "components/Header/Header.js";
 import Button from "components/CustomButtons/Button.js";
@@ -79,11 +78,12 @@ export default function ProfilePage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <Button
-            href="/" 
+            href='/'
             style={{
-              marginLeft: '2em',
-              marginTop: '2em'
-            }}>
+              marginLeft: "2em",
+              marginTop: "2em",
+            }}
+          >
             ← back to home
           </Button>
           <div
@@ -95,7 +95,10 @@ export default function ProfilePage(props) {
             <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={6}>
                 <h2 className={classes.title}>Verify your donations.</h2>
-                <p>Don't worry, your NRICs are not recorded in the chain. We store your NRIC Hash instead.</p>
+                <p>
+                  Don't worry, your NRICs are not recorded in the chain. We
+                  store your NRIC Hash instead.
+                </p>
               </GridItem>
               <br></br>
               <br></br>
@@ -133,14 +136,15 @@ export default function ProfilePage(props) {
                       fullWidth: true,
                     }}
                   />
-                  <div style={{
+                  <div
+                    style={{
                       marginTop: "auto",
                       marginBottom: "auto",
                       marginLeft: "16px",
-                    }}>
-                  Your NRIC hash : {submittedNRICHash}
-                  
-                </div>
+                    }}
+                  >
+                    Your NRIC hash : {submittedNRICHash}
+                  </div>
                 </GridContainer>
                 <br></br>
                 <Button

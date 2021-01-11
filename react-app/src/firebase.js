@@ -23,12 +23,15 @@ export function getCharities() {
   var allCharities = [];
 
   //Populate list of all charities from firestore into allCharities
-  firestore.collection("onboarding/main/charities").get().then(function (querySnapshot) {
-    querySnapshot.forEach(function (doc) {
-      allCharities.push(doc.data());
+  firestore
+    .collection("onboarding/main/charities")
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        allCharities.push(doc.data());
+      });
     });
-  });
-  return allCharities
+  return allCharities;
 }
 //To retrieve a specific UEN
 export function searchByUEN(uen) {
@@ -54,34 +57,40 @@ export async function getDonations() {
   //   querySnapshot.forEach(function(doc) {
   //     console.log(doc.id, doc.data())
   //   })
-    const snapshot = await firestore.collection("donations").get()
-    return snapshot.docs.map(doc => doc.data());
-  
+  const snapshot = await firestore.collection("donations").get();
+  return snapshot.docs.map((doc) => doc.data());
 }
-
 
 /**
  * Add donation details to Firestore.
  * ! Also stores the transaction Hash of the mined transaction
- * @param {*} nricHash 
- * @param {*} amount 
- * @param {*} date 
- * @param {*} message 
+ * @param {*} nricHash
+ * @param {*} amount
+ * @param {*} date
+ * @param {*} message
  * @param {*} transactionHash transaction hash of mined transaction
  */
 export function addDonation(nricHash, amount, date, message, transactionHash) {
-  console.log({amount: amount, date: date})
-  const donationHash = Web3.utils.sha3(nricHash.toString() + amount.toString() + date.toString() + message.toString());
+  console.log({ amount: amount, date: date });
+  const donationHash = Web3.utils.sha3(
+    nricHash.toString() +
+      amount.toString() +
+      date.toString() +
+      message.toString()
+  );
   const donationDetails = {
     nricHash: nricHash,
     amount: amount,
     date: date,
     message: message,
-    transactionHash: transactionHash
-  }
+    transactionHash: transactionHash,
+  };
   console.log(donationDetails);
-  
-  return firestore.collection("donations").doc(donationHash).set(donationDetails);
+
+  return firestore
+    .collection("donations")
+    .doc(donationHash)
+    .set(donationDetails);
 }
 
 export async function getDonation(donationHash) {
