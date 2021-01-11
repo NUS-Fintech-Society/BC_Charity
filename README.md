@@ -68,7 +68,7 @@ The steps given here use ganache (which will host it only on your computer), whi
 1. !!! **FILL IN**
 
 Now that the react app can point to the blockchain, you can load up the locally hosted react app to view the blockchain data on our website.
-Now using Metamask, use the admin address used in deploying the charity to onboard charities, make transactions (more info (here)[https://www.trufflesuite.com/docs/truffle/getting-started/truffle-with-metamask]).
+Now using Metamask, use the admin address used in deploying the charity to onboard charities, make transactions (more info [here](https://www.trufflesuite.com/docs/truffle/getting-started/truffle-with-metamask)).
 
 ## Questions or Feedback
 
@@ -76,9 +76,9 @@ If you have questions or have any feedback, reach out to us through GitHub.
 
 ## Contributors
 
-- Bharath Sudheer (Team Lead) (@bharathcs)[https://github.com/bharathcs]
-- Ng Wei Hong (Assistant Team Lead) (@justweihong)[https://github.com/justweihong]
-- Benjamin Tan (@bentanjunrong)[https://github.com/bentanjunrong]
-- Gary Lim (@garysyndromes)[https://github.com/garysyndromes/]
-- Rachel Tan (@rxchtan)[https://github.com/rxchtan]
-- Sean Lee (@seanleeleelee)[https://github.com/seanleeleelee]
+- Bharath Sudheer (Team Lead) [@bharathcs](https://github.com/bharathcs)
+- Ng Wei Hong (Assistant Team Lead) [@justweihong)[https://github.com/justweihong)
+- Benjamin Tan [@bentanjunrong](https://github.com/bentanjunrong)
+- Gary Lim [@garysyndromes](https://github.com/garysyndromes/)
+- Rachel Tan [@rxchtan](https://github.com/rxchtan)
+- Sean Lee [@seanleeleelee](https://github.com/seanleeleelee)
