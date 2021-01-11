@@ -65,7 +65,7 @@ The steps given here use ganache (which will host it only on your computer), whi
 1. Add `ethr-contracts/truffle-config.js` to the ganache add projects section. Save and Restart.
 1. Add `.secret` file in `/ethr-contracts/` based on the mnemonic in Ganache.
 1. Run `truffle migrate`
-1. !!! **FILL IN**
+1. !!! **FILL IN** - Include infura, metamask, etc?
 
 Now that the react app can point to the blockchain, you can load up the locally hosted react app to view the blockchain data on our website.
 Now using Metamask, use the admin address used in deploying the charity to onboard charities, make transactions (more info [here](https://www.trufflesuite.com/docs/truffle/getting-started/truffle-with-metamask)).
@@ -77,7 +77,7 @@ If you have questions or have any feedback, reach out to us through GitHub.
 ## Contributors
 
 - Bharath Sudheer (Team Lead) [@bharathcs](https://github.com/bharathcs)
-- Ng Wei Hong (Assistant Team Lead) [@justweihong)[https://github.com/justweihong)
+- Ng Wei Hong (Assistant Team Lead) [@justweihong](https://github.com/justweihong)
 - Benjamin Tan [@bentanjunrong](https://github.com/bentanjunrong)
 - Gary Lim [@garysyndromes](https://github.com/garysyndromes/)
 - Rachel Tan [@rxchtan](https://github.com/rxchtan)
