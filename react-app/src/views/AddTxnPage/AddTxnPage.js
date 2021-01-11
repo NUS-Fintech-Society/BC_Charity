@@ -61,26 +61,26 @@ function validateNote(note) {
 function validateDate(dateString) {
   // Validates that the input string is a valid date formatted as "dd/mm/yyyy"
 
-    // First check for the pattern
+  // First check for the pattern
   if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) return false;
 
-    // Parse the date parts to integers
-    var parts = dateString.split("/");
-    var day = parseInt(parts[0], 10);
-    var month = parseInt(parts[1], 10);
-    var year = parseInt(parts[2], 10);
+  // Parse the date parts to integers
+  var parts = dateString.split("/");
+  var day = parseInt(parts[0], 10);
+  var month = parseInt(parts[1], 10);
+  var year = parseInt(parts[2], 10);
 
-    // Check the ranges of month and year
-  if (year < 1000 || year > 3000 || month == 0 || month > 12) return false;
+  // Check the ranges of month and year
+  if (year < 1000 || year > 3000 || month === 0 || month > 12) return false;
 
   var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-    // Adjust for leap years
-  if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
-      monthLength[1] = 29;
+  // Adjust for leap years
+  if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0))
+    monthLength[1] = 29;
 
-    // Check the range of the day
-    return day > 0 && day <= monthLength[month - 1];
+  // Check the range of the day
+  return day > 0 && day <= monthLength[month - 1];
 }
 
 const firestore = require("../../firebase");
@@ -103,7 +103,7 @@ export default function ProfilePage(props) {
     }
   };
   const org = getOrgInfo(uen);
-  if (org == -1) {
+  if (org === -1) {
     window.location.href = "/invalid-uen";
   }
 
@@ -202,9 +202,9 @@ export default function ProfilePage(props) {
   const validateHelperDate = () => {
     if (!validateDate(date)) {
       dateErrorMessageRef.current =
-          "Invalid Date. Date input should be in the format: DD/MM/YYYY." +
-          "\n" +
-          "Please include the '/'";
+        "Invalid Date. Date input should be in the format: DD/MM/YYYY." +
+        "\n" +
+        "Please include the '/'";
       setDateError(
         "Invalid Date. Date input should be in the format: DD/MM/YYYY"
       );
@@ -267,19 +267,19 @@ export default function ProfilePage(props) {
     //   "0x0000000000000000000000000000000000000000000000000000000000000001";
     const amount = Number(amt);
 
-      var parts = date.split("/");
-      var day = parts[0];
-      var month = parts[1];
-      var year = parts[2];
+    var parts = date.split("/");
+    var day = parts[0];
+    var month = parts[1];
+    var year = parts[2];
 
-      if (day.length === 1) {
-        day = "0" + day;
-      }
-      if (month.length === 1) {
-        month = "0" + month;
-      }
-      const dateFormatted = day + month + year;
-      // console.log(dateFormatted);
+    if (day.length === 1) {
+      day = "0" + day;
+    }
+    if (month.length === 1) {
+      month = "0" + month;
+    }
+    const dateFormatted = day + month + year;
+    // console.log(dateFormatted);
 
     addDonation(hash, amount, dateFormatted, note);
   }
@@ -308,10 +308,10 @@ export default function ProfilePage(props) {
         firestore
           .addDonation(nricHash, amount.toString(), date, message, hash)
           .then(() => {
-          const ropstenURL = "https://ropsten.etherscan.io/tx/";
+            const ropstenURL = "https://ropsten.etherscan.io/tx/";
             window.open(ropstenURL + hash, "_blank");
-          history.goBack();
-        });
+            history.goBack();
+          });
       })
       .on("confirmation", function (confirmationNumber, receipt) {
         // console.log("No: " + confirmationNumber + ", receipt: " + receipt);
@@ -422,14 +422,14 @@ export default function ProfilePage(props) {
               </GridItem>
               <GridItem xs={12} sm={12} md={6}>
                 <Input
-                    labelText='Date'
-                    id='date'
-                    name='date'
-                    placeholder='Date: DD/MM/YYYY'
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    onChange={(e) => onChangeHandlerDate(e)}
+                  labelText='Date'
+                  id='date'
+                  name='date'
+                  placeholder='Date: DD/MM/YYYY'
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  onChange={(e) => onChangeHandlerDate(e)}
                 />
                 <div style={{ fontSize: 12, color: "red" }}>{dateError}</div>
               </GridItem>

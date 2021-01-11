@@ -48,7 +48,7 @@ export default function ProfilePage(props) {
     }
   };
   const org = getOrgInfo(uen);
-  if (org == -1) {
+  if (org === -1) {
     window.location.href = "/invalid-uen";
   }
 
@@ -95,7 +95,12 @@ export default function ProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={require('../../assets/img/charities/' + org.img + '.jpg')} alt='...' className={imageClasses} style={charityLogo}/>
+                    <img
+                      src={require("../../assets/img/charities/" + org.img + ".jpg")}
+                      alt='...'
+                      className={imageClasses}
+                      style={charityLogo}
+                    />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{org.name}</h3>
@@ -123,7 +128,7 @@ export default function ProfilePage(props) {
                 <span></span>
 
                 {/* Display add transaction button if is owner */}
-                {ownerStatus == 1 ? (
+                {ownerStatus === 1 ? (
                   <Button
                     simple
                     color='success'
@@ -132,7 +137,7 @@ export default function ProfilePage(props) {
                   >
                     + Add a transaction
                   </Button>
-                ) : ownerStatus == 0 ? (
+                ) : ownerStatus === 0 ? (
                   // If not owner, show message
                   "Note: You are not the admin of this charity. Please contact the CharityChain's admin if this is a mistake."
                 ) : (

@@ -15,7 +15,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "assets/jss/material-kit-react/components/headerStyle.js";
-import logo from '../../assets/img/logo.png';
+import logo from "../../assets/img/logo.png";
 
 const useStyles = makeStyles(styles);
 
@@ -59,24 +59,25 @@ export default function Header(props) {
     [classes.appBar]: true,
     [classes[color]]: color,
     [classes.absolute]: absolute,
-    [classes.fixed]: fixed
+    [classes.fixed]: fixed,
   });
 
   const brandLogo = {
-    'height': '20px',
-    'width': '20px',
-    'margin-right': '7px'
+    height: "20px",
+    width: "20px",
+    "margin-right": "7px",
   };
   const brandText = {
-    'font-weight': '500',
-    'font-size': '1.1em'
-  }
+    "font-weight": "500",
+    "font-size": "1.1em",
+  };
 
   const brandComponent = (
-  <Button href="/" className={classes.title}>
-    <img src={logo} style={brandLogo}/>
-    <div style={brandText}>{brand}</div>
-  </Button>);
+    <Button href='/' className={classes.title}>
+      <img src={logo} style={brandLogo} alt='CharityChain Logo' />
+      <div style={brandText}>{brand}</div>
+    </Button>
+  );
 
   return (
     <AppBar className={appBarClasses}>
@@ -84,33 +85,33 @@ export default function Header(props) {
         {leftLinks !== undefined ? brandComponent : null}
         <div className={classes.flex}>
           {leftLinks !== undefined ? (
-            <Hidden smDown implementation="css">
+            <Hidden smDown implementation='css'>
               {leftLinks}
             </Hidden>
           ) : (
             brandComponent
           )}
         </div>
-        <Hidden smDown implementation="css">
+        <Hidden smDown implementation='css'>
           {rightLinks}
         </Hidden>
         <Hidden mdUp>
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
+            color='inherit'
+            aria-label='open drawer'
             onClick={handleDrawerToggle}
           >
             <Menu />
           </IconButton>
         </Hidden>
       </Toolbar>
-      <Hidden mdUp implementation="js">
+      <Hidden mdUp implementation='js'>
         <Drawer
-          variant="temporary"
+          variant='temporary'
           anchor={"right"}
           open={mobileOpen}
           classes={{
-            paper: classes.drawerPaper
+            paper: classes.drawerPaper,
           }}
           onClose={handleDrawerToggle}
         >
@@ -125,7 +126,7 @@ export default function Header(props) {
 }
 
 Header.defaultProp = {
-  color: "white"
+  color: "white",
 };
 
 Header.propTypes = {
@@ -138,7 +139,7 @@ Header.propTypes = {
     "transparent",
     "white",
     "rose",
-    "dark"
+    "dark",
   ]),
   rightLinks: PropTypes.node,
   leftLinks: PropTypes.node,
@@ -162,7 +163,7 @@ Header.propTypes = {
       "transparent",
       "white",
       "rose",
-      "dark"
-    ]).isRequired
-  })
+      "dark",
+    ]).isRequired,
+  }),
 };

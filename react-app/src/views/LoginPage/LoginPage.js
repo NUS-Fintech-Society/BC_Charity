@@ -50,7 +50,7 @@ export default function LoginPage(props) {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode + ": " + errorMessage);
-        if (errorCode == "auth/wrong-password") {
+        if (errorCode === "auth/wrong-password") {
           alert("Invalid password! Please try again.");
         } else if ((errorCode = "auth/too-many-requests")) {
           alert("Too many attempts! Please try again at a later time.");
