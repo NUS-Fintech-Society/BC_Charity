@@ -32,11 +32,11 @@ export default function HeaderLinks(props) {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // User is signed in.
-      console.log("IS SIGNED IN");
+      // console.log("IS SIGNED IN");
       setLoggedIn(user);
     } else {
       // No user is signed in.
-      console.log("IS SIGNED OUT");
+      // console.log("IS SIGNED OUT");
     }
   });
 
@@ -46,7 +46,7 @@ export default function HeaderLinks(props) {
       .signOut()
       .then(function () {
         // Sign-out successful.
-        console.log("Signing out");
+        // console.log("Signing out");
         // Refresh navbar
         window.location.reload(false);
       })
@@ -56,17 +56,17 @@ export default function HeaderLinks(props) {
       });
   return (
     <List className={classes.list}>
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <Button href='/' color='transparent' className={classes.navLink}>
           <HomeIcon className={classes.icons} /> Home
         </Button>
-      </ListItem>
+      </ListItem> */}
       <ListItem className={classes.listItem}>
         <Button href='/verify' color='transparent' className={classes.navLink}>
           <CheckCircleIcon className={classes.icons} /> Verify
         </Button>
       </ListItem>
-      { loggedIn ?
+      {/* { loggedIn ?
         (
           <ListItem className={classes.listItem}>
             <Button
@@ -87,7 +87,7 @@ export default function HeaderLinks(props) {
               <LockIcon className={classes.icons} /> Charity Log In
           </Button>
           </ListItem>
-        )}
+        )} */}
     </List>
   );
 }
