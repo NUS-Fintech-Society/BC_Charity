@@ -97,7 +97,7 @@ export default function ProfilePage(props) {
                   <div>
                     <img
                       src={require("../../assets/img/charities/" + org.img + ".jpg")}
-                      alt='...'
+                      alt='Organisation Logo'
                       className={imageClasses}
                       style={charityLogo}
                     />
