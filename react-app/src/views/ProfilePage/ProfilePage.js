@@ -19,7 +19,7 @@ import { OrgRecordTable } from "../Components/DonationsTable.js";
 
 const useStyles = makeStyles(styles);
 const { charities } = require("../../util/charities");
-const contractFunctions = require('../../contracts/utils/functions');
+const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
 // check if current wallet is one of charity's owner
@@ -48,26 +48,24 @@ export default function ProfilePage(props) {
     }
   };
   const org = getOrgInfo(uen);
-  if (org == -1) {
+  if (org === -1) {
     window.location.href = "/invalid-uen";
   }
 
   const [ownerStatus, setOwnerStatus] = useState(0);
-  checkOwner(org.contract, web3).then(status => setOwnerStatus(status))
+  checkOwner(org.contract, web3).then((status) => setOwnerStatus(status));
 
   function goToExplorer(contractAddress) {
     const ropstenURL = "https://ropsten.etherscan.io/address/";
-    window.open(ropstenURL + contractAddress, '_blank');
+    window.open(ropstenURL + contractAddress, "_blank");
   }
 
   const charityLogo = {
-    'height': '10em',
-    'width': '10em'
-  }
-
+    height: "10em",
+    width: "10em",
+  };
 
   return (
-    
     <div>
       <Header
         color='transparent'
@@ -83,33 +81,44 @@ export default function ProfilePage(props) {
       <Parallax small filter image={require("assets/img/background.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
-        <Button
-            href="/" 
+          <Button
+            href='/'
             style={{
-              marginLeft: '2em',
-              marginTop: '2em'
-            }}>
+              marginLeft: "2em",
+              marginTop: "2em",
+            }}
+          >
             ← back to home
           </Button>
           <div className={classes.container}>
-          
             <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={require('../../assets/img/charities/' + org.img + '.jpg')} alt='...' className={imageClasses} style={charityLogo}/>
+                    <img
+                      src={require("../../assets/img/charities/" + org.img + ".jpg")}
+                      alt='Organisation Logo'
+                      className={imageClasses}
+                      style={charityLogo}
+                    />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{org.name}</h3>
                   </div>
                   <div>
-                    <a href="#" onClick={() => goToExplorer(org.contract)}>view charity's contract on explorer</a>
+                    {/* eslint-disable-next-line */}
+                    <a href='#' onClick={() => goToExplorer(org.contract)}>
+                      view charity's contract on explorer
+                    </a>
                   </div>
                 </div>
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p>Note: If you have recently added a donation, please wait till transaction has been mined before refreshing this page.</p>
+              <p>
+                Note: If you have recently added a donation, please wait till
+                transaction has been mined before refreshing this page.
+              </p>
             </div>
             <h2 className={classes.title}>Donations Received</h2>
             <div>
@@ -120,24 +129,22 @@ export default function ProfilePage(props) {
                 <span></span>
 
                 {/* Display add transaction button if is owner */}
-                {ownerStatus == 1 ? 
-                <Button
-                  simple
-                  color='success'
-                  size='lg'
-                  onClick={() => history.push(org.UEN + '/addtxn')}
-                >
-                  + Add a transaction
-                </Button> : 
-
-                ownerStatus == 0 ? 
-
-                // If not owner, show message
-                "Note: You are not the admin of this charity. Please contact the CharityChain's admin if this is a mistake." :
-                
-                // If no valid Metamask or wallet provider
-                "Note: You do not have Metamask or an Ethereum wallet provider. If you are the charity admin, please configure a wallet provider."}
-
+                {ownerStatus === 1 ? (
+                  <Button
+                    simple
+                    color='success'
+                    size='lg'
+                    onClick={() => history.push(org.UEN + "/addtxn")}
+                  >
+                    + Add a transaction
+                  </Button>
+                ) : ownerStatus === 0 ? (
+                  // If not owner, show message
+                  "Note: You are not the admin of this charity. Please contact the CharityChain's admin if this is a mistake."
+                ) : (
+                  // If no valid Metamask or wallet provider
+                  "Note: You do not have Metamask or an Ethereum wallet provider. If you are the charity admin, please configure a wallet provider."
+                )}
               </GridItem>
             </GridContainer>
           </div>

@@ -9,8 +9,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -46,24 +44,22 @@ export default function StickyHeadTable(props) {
 
   function goToExplorer(transactionHash) {
     const ropstenURL = "https://ropsten.etherscan.io/tx/";
-    window.open(ropstenURL + transactionHash, '_blank')
+    window.open(ropstenURL + transactionHash, "_blank");
   }
-  function clickhere() {
-    console.log("clicked hereee")
-  }
+
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label='sticky table' style={props.style}>
           <TableHead>
-            <TableRow >
+            <TableRow>
               {props.columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ 
+                  style={{
                     minWidth: column.minWidth,
-                    maxWidth: column.maxWidth
+                    maxWidth: column.maxWidth,
                   }}
                 >
                   {column.label}
@@ -86,32 +82,35 @@ export default function StickyHeadTable(props) {
                           onClick={handleClick(
                             row.UEN,
                             column.label,
-                            props.isRedirect,
+                            props.isRedirect
                           )}
                           style={{
-                            cursor: props.isRedirect
-                              ? 'pointer'
-                              : 'auto'
+                            cursor: props.isRedirect ? "pointer" : "auto",
                           }}
                         >
                           {
                             // If the cell type is a number, format it
-                          column.format && typeof value === "number"
-                            ? column.format(value)
-
-                            // Else if the cell is transaction hash and is valid, show link
-                            : (column.id == "transactionHash" && row.transactionHash != "nil") 
-                            ? <a href="#" onClick={(() => goToExplorer(row.transactionHash))}>
-                              {value ? value.slice(0,10) + "..." : ""}
-                              </a> : 
-
-                            // Else if donor, shorten the donor address
-                            (column.id == "donor" && value ) 
-                            ? 
-                            (value.slice(0,10) + "...")
-                            
-                            // Else display the value itself.
-                            : value
+                            column.format && typeof value === "number" ? (
+                              column.format(value)
+                            ) : // Else if the cell is transaction hash and is valid, show link
+                            column.id === "transactionHash" &&
+                              row.transactionHash !== "nil" ? (
+                              // eslint-disable-next-line
+                              <a
+                                href='#'
+                                onClick={() =>
+                                  goToExplorer(row.transactionHash)
+                                }
+                              >
+                                {value ? value.slice(0, 10) + "..." : ""}
+                              </a>
+                            ) : // Else if donor, shorten the donor address
+                            column.id === "donor" && value ? (
+                              value.slice(0, 10) + "..."
+                            ) : (
+                              // Else display the value itself.
+                              value
+                            )
                           }
                         </TableCell>
                       );

@@ -9,10 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 
@@ -33,7 +30,11 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={4}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={require('../../../assets/img/faces/bharath.jpg')} alt="..." className={imageClasses} />
+                <img
+                  src={require("../../../assets/img/faces/bharath.jpg")}
+                  alt='Profile Picture'
+                  className={imageClasses}
+                />
               </GridItem>
               <h4 className={classes.cardTitle}>
                 Bharath Sudheer
@@ -45,19 +46,29 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={4}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={require('../../../assets/img/faces/weihong.jpg')} alt="..." className={imageClasses} />
+                <img
+                  src={require("../../../assets/img/faces/weihong.jpg")}
+                  alt='Profile Picture'
+                  className={imageClasses}
+                />
               </GridItem>
               <h4 className={classes.cardTitle}>
                 Ng Wei Hong
                 <br />
-                <small className={classes.smallTitle}>Assistant Team Lead</small>
+                <small className={classes.smallTitle}>
+                  Assistant Team Lead
+                </small>
               </h4>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={require('../../../assets/img/faces/ben.JPG')} alt="..." className={imageClasses} />
+                <img
+                  src={require("../../../assets/img/faces/ben.JPG")}
+                  alt='Profile Picture'
+                  className={imageClasses}
+                />
               </GridItem>
               <h4 className={classes.cardTitle}>
                 Benjamin Tan
@@ -69,7 +80,11 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={4}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={require('../../../assets/img/faces/gary.jpg')} alt="..." className={imageClasses} />
+                <img
+                  src={require("../../../assets/img/faces/gary.jpg")}
+                  alt='Profile Picture'
+                  className={imageClasses}
+                />
               </GridItem>
               <h4 className={classes.cardTitle}>
                 Gary Lim
@@ -81,7 +96,11 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={4}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={require('../../../assets/img/faces/rachel.jpg')} alt="..." className={imageClasses} />
+                <img
+                  src={require("../../../assets/img/faces/rachel.jpg")}
+                  alt='Profile Picture'
+                  className={imageClasses}
+                />
               </GridItem>
               <h4 className={classes.cardTitle}>
                 Rachel Tan
@@ -93,7 +112,11 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={4}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={require('../../../assets/img/faces/sean.jpg')} alt="..." className={imageClasses} />
+                <img
+                  src={require("../../../assets/img/faces/sean.jpg")}
+                  alt='Profile Picture'
+                  className={imageClasses}
+                />
               </GridItem>
               <h4 className={classes.cardTitle}>
                 Sean Lee

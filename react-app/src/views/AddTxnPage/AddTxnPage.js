@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -15,9 +15,7 @@ import Parallax from "components/Parallax/Parallax.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
-
 const useStyles = makeStyles(styles);
-
 
 function validateNric(nric) {
   let nricArr = nric.split("");
@@ -63,34 +61,28 @@ function validateNote(note) {
 function validateDate(dateString) {
   // Validates that the input string is a valid date formatted as "dd/mm/yyyy"
 
-    // First check for the pattern
-    if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
-      return false;
+  // First check for the pattern
+  if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) return false;
 
-    // Parse the date parts to integers
-    var parts = dateString.split("/");
-    var day = parseInt(parts[0], 10);
-    var month = parseInt(parts[1], 10);
-    var year = parseInt(parts[2], 10);
+  // Parse the date parts to integers
+  var parts = dateString.split("/");
+  var day = parseInt(parts[0], 10);
+  var month = parseInt(parts[1], 10);
+  var year = parseInt(parts[2], 10);
 
-    // Check the ranges of month and year
-    if(year < 1000 || year > 3000 || month == 0 || month > 12)
-      return false;
+  // Check the ranges of month and year
+  if (year < 1000 || year > 3000 || month === 0 || month > 12) return false;
 
-    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+  var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-    // Adjust for leap years
-    if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
-      monthLength[1] = 29;
+  // Adjust for leap years
+  if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0))
+    monthLength[1] = 29;
 
+  // Check the range of the day
+  return day > 0 && day <= monthLength[month - 1];
+}
 
-    // Check the range of the day
-    return day > 0 && day <= monthLength[month - 1];
-
-
-};
-
-const Web3 = require("web3");
 const firestore = require("../../firebase");
 const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
@@ -111,7 +103,7 @@ export default function ProfilePage(props) {
     }
   };
   const org = getOrgInfo(uen);
-  if (org == -1) {
+  if (org === -1) {
     window.location.href = "/invalid-uen";
   }
 
@@ -139,8 +131,6 @@ export default function ProfilePage(props) {
   const [date, setDate] = useState("");
   const [dateError, setDateError] = useState("");
   const dateErrorMessageRef = useRef("");
-
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
   const onChangeHandlerNric = (event) => {
     const { value } = event.currentTarget;
@@ -212,13 +202,13 @@ export default function ProfilePage(props) {
   const validateHelperDate = () => {
     if (!validateDate(date)) {
       dateErrorMessageRef.current =
-          "Invalid Date. Date input should be in the format: DD/MM/YYYY." +
-          "\n" +
-          "Please include the '/'";
+        "Invalid Date. Date input should be in the format: DD/MM/YYYY." +
+        "\n" +
+        "Please include the '/'";
       setDateError(
-          "Invalid Date. Date input should be in the format: DD/MM/YYYY");
+        "Invalid Date. Date input should be in the format: DD/MM/YYYY"
+      );
       // console.log(dateErrorMessageRef.current);
-
     }
 
     if (dateErrorMessageRef.current !== "") {
@@ -265,6 +255,7 @@ export default function ProfilePage(props) {
   /**
    * Used by Wei Hong to add owner hehe.
    */
+  // eslint-disable-next-line
   async function addOwner() {
     const seanAddr = "0x1b13746A46FCC474e3d71Cd6678813C97fA945b1";
     // const charityContract = "0xEeD494fdCD9287c4B223Fa8810A83E822Da0A150";
@@ -273,28 +264,28 @@ export default function ProfilePage(props) {
   }
 
   function addDonationHelper() {
-    const hash = web3.utils.sha3(nric)
+    const hash = web3.utils.sha3(nric);
     //   "0x0000000000000000000000000000000000000000000000000000000000000001";
     const amount = Number(amt);
 
-      var parts = date.split("/");
-      var day = parts[0];
-      var month = parts[1];
-      var year = parts[2];
+    var parts = date.split("/");
+    var day = parts[0];
+    var month = parts[1];
+    var year = parts[2];
 
-      if (day.length === 1) {
-        day = "0" + day;
-      }
-      if (month.length === 1) {
-        month = "0" + month;
-      }
-      const dateFormatted = day + month + year;
-      // console.log(dateFormatted);
+    if (day.length === 1) {
+      day = "0" + day;
+    }
+    if (month.length === 1) {
+      month = "0" + month;
+    }
+    const dateFormatted = day + month + year;
+    // console.log(dateFormatted);
 
-    addDonation(hash,amount,dateFormatted,note);
+    addDonation(hash, amount, dateFormatted, note);
   }
 
-  async function addDonation(hashString,amt,dateFormatted,note) {
+  async function addDonation(hashString, amt, dateFormatted, note) {
     // Parameters
     const nricHash = hashString;
     const amount = amt;
@@ -314,14 +305,14 @@ export default function ProfilePage(props) {
         web3
       )
       .on("transactionHash", function (hash) {
-
         // Add donation (with transaction hash) into Firestore
-        firestore.addDonation(nricHash, amount.toString(), date, message, hash).then(() => {
-          const ropstenURL = "https://ropsten.etherscan.io/tx/";
-          window.open(ropstenURL + hash,'_blank');
-          history.goBack();
-        });
-        
+        firestore
+          .addDonation(nricHash, amount.toString(), date, message, hash)
+          .then(() => {
+            const ropstenURL = "https://ropsten.etherscan.io/tx/";
+            window.open(ropstenURL + hash, "_blank");
+            history.goBack();
+          });
       })
       .on("confirmation", function (confirmationNumber, receipt) {
         // console.log("No: " + confirmationNumber + ", receipt: " + receipt);
@@ -360,7 +351,11 @@ export default function ProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={require('../../assets/img/charities/' + org.img + '.jpg')} alt='...' className={imageClasses} />
+                    <img
+                      src={require("../../assets/img/charities/" + org.img + ".jpg")}
+                      alt='Organisation Logo'
+                      className={imageClasses}
+                    />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{org.name}</h3>
@@ -369,7 +364,10 @@ export default function ProfilePage(props) {
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p>Note: You need to be a charity admin for the transaction to be processed successfully.</p>
+              <p>
+                Note: You need to be a charity admin for the transaction to be
+                processed successfully.
+              </p>
             </div>
             <div>
               <h3>Add Donation</h3>
@@ -425,14 +423,14 @@ export default function ProfilePage(props) {
               </GridItem>
               <GridItem xs={12} sm={12} md={6}>
                 <Input
-                    labelText='Date'
-                    id='date'
-                    name='date'
-                    placeholder='Date: DD/MM/YYYY'
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    onChange={(e) => onChangeHandlerDate(e)}
+                  labelText='Date'
+                  id='date'
+                  name='date'
+                  placeholder='Date: DD/MM/YYYY'
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  onChange={(e) => onChangeHandlerDate(e)}
                 />
                 <div style={{ fontSize: 12, color: "red" }}>{dateError}</div>
               </GridItem>

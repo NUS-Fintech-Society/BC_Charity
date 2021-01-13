@@ -3,7 +3,6 @@ import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 
-
 // core components
 import Header from "components/Header/Header.js";
 import Button from "components/CustomButtons/Button.js";
@@ -24,12 +23,6 @@ const web3 = contractFunctions.getWeb3();
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  const imageClasses = classNames(
-    classes.imgRaised,
-    classes.imgRoundedCircle,
-    classes.imgFluid
-  );
-  const [submitCount, setSubmitCount] = useState(0);
   const [nric, setNric] = useState("");
   const [submittedNRICHash, setNRICHash] = useState(
     "0x0000000000000000000000000000000000000000000000000000000000000000"
@@ -50,9 +43,10 @@ export default function ProfilePage(props) {
   }
 
   // Used by Admin to add owner
+  // eslint-disable-next-line
   function addNewOwner() {
     const walletAddress = "0x7af9D93643553CbA5D1d297C3cBB451dBfAd1d09";
-    const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
+    // const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
     // contractFunctions.addAllContractOwner(walletAddress, sendFrom, web3);
     contractFunctions.checkContractOwner(walletAddress, "0xE34a7f5fC9d653Fb510494E857A387aA1426a4E4", web3 ).then(console.log);
     contractFunctions.checkContractOwner(walletAddress, "0xda532bb1cdf942cB2802EEb70BdbB9375b9203D5", web3 ).then(console.log);
@@ -60,7 +54,6 @@ export default function ProfilePage(props) {
     contractFunctions.checkContractOwner(walletAddress, "0xB8746a8fad46aDbEA4FA188956ef38FDF6350960", web3 ).then(console.log);
     contractFunctions.checkContractOwner(walletAddress, "0xe853F05E05D0ab97CD46BCAcf422384781f0Ed61", web3 ).then(console.log);
   }
-
 
   return (
     <div>
@@ -79,11 +72,12 @@ export default function ProfilePage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <Button
-            href="/" 
+            href='/'
             style={{
-              marginLeft: '2em',
-              marginTop: '2em'
-            }}>
+              marginLeft: "2em",
+              marginTop: "2em",
+            }}
+          >
             ← back to home
           </Button>
           <div
@@ -95,7 +89,10 @@ export default function ProfilePage(props) {
             <GridContainer justify='center'>
               <GridItem xs={12} sm={12} md={6}>
                 <h2 className={classes.title}>Verify your donations.</h2>
-                <p>Don't worry, your NRICs are not recorded in the chain. We store your NRIC Hash instead.</p>
+                <p>
+                  Don't worry, your NRICs are not recorded in the chain. We
+                  store your NRIC Hash instead.
+                </p>
               </GridItem>
               <br></br>
               <br></br>
@@ -133,14 +130,15 @@ export default function ProfilePage(props) {
                       fullWidth: true,
                     }}
                   />
-                  <div style={{
+                  <div
+                    style={{
                       marginTop: "auto",
                       marginBottom: "auto",
                       marginLeft: "16px",
-                    }}>
-                  Your NRIC hash : {submittedNRICHash}
-                  
-                </div>
+                    }}
+                  >
+                    Your NRIC hash : {submittedNRICHash}
+                  </div>
                 </GridContainer>
                 <br></br>
                 <Button

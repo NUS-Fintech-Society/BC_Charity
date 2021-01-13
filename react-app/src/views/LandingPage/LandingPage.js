@@ -28,13 +28,15 @@ const useStyles = makeStyles(styles);
 /**
  * Only used when new contracts are deployed to get addresses.
  */
+// eslint-disable-next-line
 async function getContracts() {
   charities.charities.forEach(async (charity) => {
     const contract = await contractFunctions.getCharityAddress(charity.UEN, 3);
-    // console.log("UEN: " + charity.UEN + ", contract: " + contract);
+    console.log("UEN: " + charity.UEN + ", contract: " + contract);
   });
 }
 
+// eslint-disable-next-line
 function getCharities() {
   return charities.charities;
 }
@@ -42,9 +44,6 @@ function getCharities() {
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
-
-  // Get the list of charities.
-  const charities = getCharities();
 
   return (
     <div>
@@ -62,7 +61,6 @@ export default function LandingPage(props) {
       />
       <Parallax filter image={require("assets/img/background.jpg")}>
         <div className={classes.container}>
-        
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>Welcome to CharityChain.</h1>

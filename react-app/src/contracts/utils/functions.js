@@ -1,5 +1,4 @@
 const Web3 = require("web3");
-var Contract = require("web3-eth-contract");
 const infura = require("./infura");
 const CharityChainJSON = require("../build/CharityChain.json");
 const OnboardingJSON = require("../build/Onboarding.json");
@@ -44,23 +43,20 @@ export async function getWalletAddress(web3) {
 
 /**
  * Check if the current wallet is one of the charity's owner
- * @param {string} charityContract 
- * @param {Web3} web3 
+ * @param {string} charityContract
+ * @param {Web3} web3
  * @returns {number} 1 owner, 0 not owner, -1 wallet not configured
  */
 export async function checkOwner(charityContract, web3) {
-
   // Check for valid metamask or wallet provider
   if (!window.ethereum || !web3 || !web3.eth) {
     return -1;
-
   } else {
-
     // Get wallet address
     const walletAddress = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
-    const currentWallet =  walletAddress[0];
+    const currentWallet = walletAddress[0];
 
     // Check if owner
     const charityChainContract = new web3.eth.Contract(
@@ -69,9 +65,9 @@ export async function checkOwner(charityContract, web3) {
     );
     const isOwner = await charityChainContract.methods
       .checkOwner(currentWallet)
-      .call()
+      .call();
 
-    return isOwner ? 1 : 0
+    return isOwner ? 1 : 0;
   }
 }
 
@@ -319,8 +315,8 @@ export async function addAllContractOwner(walletAddress, sendFrom, web3) {
 /**
  * For Admin to check if a person is an charity owner.
  * @param {*} walletAddress person address in question
- * @param {*} charityAddress 
- * @param {*} web3 
+ * @param {*} charityAddress
+ * @param {*} web3
  */
 export async function checkContractOwner(walletAddress, charityAddress, web3) {
   const charityChainContract = new web3.eth.Contract(
