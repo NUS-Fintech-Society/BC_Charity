@@ -51,10 +51,6 @@ export function searchByUEN(uen) {
  * ! Also stores the transaction Hash of the mined transaction
  */
 export async function getDonations() {
-  // firestore.collection("donations").get().then(function(querySnapshot) {
-  //   querySnapshot.forEach(function(doc) {
-  //     console.log(doc.id, doc.data())
-  //   })
   const snapshot = await firestore.collection("donations").get();
   return snapshot.docs.map((doc) => doc.data());
 }
@@ -72,9 +68,9 @@ export function addDonation(nricHash, amount, date, message, transactionHash) {
   console.log({ amount: amount, date: date });
   const donationHash = Web3.utils.sha3(
     nricHash.toString() +
-      amount.toString() +
-      date.toString() +
-      message.toString()
+    amount.toString() +
+    date.toString() +
+    message.toString()
   );
   const donationDetails = {
     nricHash: nricHash,
