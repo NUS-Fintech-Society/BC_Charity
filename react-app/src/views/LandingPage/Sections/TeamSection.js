@@ -32,7 +32,7 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img
                   src={require("../../../assets/img/faces/bharath.jpg")}
-                  alt='Profile Picture'
+                  alt='Profile'
                   className={imageClasses}
                 />
               </GridItem>
@@ -48,7 +48,7 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img
                   src={require("../../../assets/img/faces/weihong.jpg")}
-                  alt='Profile Picture'
+                  alt='Profile'
                   className={imageClasses}
                 />
               </GridItem>
@@ -66,7 +66,7 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img
                   src={require("../../../assets/img/faces/ben.JPG")}
-                  alt='Profile Picture'
+                  alt='Profile'
                   className={imageClasses}
                 />
               </GridItem>
@@ -82,7 +82,7 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img
                   src={require("../../../assets/img/faces/gary.jpg")}
-                  alt='Profile Picture'
+                  alt='Profile'
                   className={imageClasses}
                 />
               </GridItem>
@@ -98,7 +98,7 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img
                   src={require("../../../assets/img/faces/rachel.jpg")}
-                  alt='Profile Picture'
+                  alt='Profile'
                   className={imageClasses}
                 />
               </GridItem>
@@ -114,7 +114,7 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img
                   src={require("../../../assets/img/faces/sean.jpg")}
-                  alt='Profile Picture'
+                  alt='Profile'
                   className={imageClasses}
                 />
               </GridItem>
