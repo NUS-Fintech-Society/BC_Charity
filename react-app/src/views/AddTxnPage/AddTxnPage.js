@@ -157,7 +157,6 @@ export default function ProfilePage(props) {
       nricErrorMessageRef.current =
         "Currently Entered NRIC: " + nric + "\nInvalid NRIC. e.g. S1234567X";
       setNricError("Invalid NRIC. e.g. S1234567X");
-      // console.log(nricErrorMessageRef.current);
     }
 
     if (nricErrorMessageRef.current !== "") {
@@ -174,7 +173,6 @@ export default function ProfilePage(props) {
         amt +
         "\nInvalid Amount. Amount must be greater than 0.00 e.g. 1.23";
       setAmtError("Invalid Amount. Amount must be greater than 0.00 e.g. 1.23");
-      // console.log(amtErrorMessageRef.current);
     }
     if (amtErrorMessageRef.current !== "") {
       return false;
@@ -189,7 +187,6 @@ export default function ProfilePage(props) {
       setNoteError(
         "Max 32 characters. Only accepts a-z,A-Z,0-9 and the following special characters: , ! . ? ; : - '"
       );
-      // console.log(noteErrorMessageRef.current);
     }
 
     if (noteErrorMessageRef.current !== "") {
@@ -208,7 +205,6 @@ export default function ProfilePage(props) {
       setDateError(
         "Invalid Date. Date input should be in the format: DD/MM/YYYY"
       );
-      // console.log(dateErrorMessageRef.current);
     }
 
     if (dateErrorMessageRef.current !== "") {
@@ -265,7 +261,6 @@ export default function ProfilePage(props) {
 
   function addDonationHelper() {
     const hash = web3.utils.sha3(nric);
-    //   "0x0000000000000000000000000000000000000000000000000000000000000001";
     const amount = Number(amt);
 
     var parts = date.split("/");
@@ -280,7 +275,6 @@ export default function ProfilePage(props) {
       month = "0" + month;
     }
     const dateFormatted = day + month + year;
-    // console.log(dateFormatted);
 
     addDonation(hash, amount, dateFormatted, note);
   }
@@ -315,18 +309,15 @@ export default function ProfilePage(props) {
           });
       })
       .on("confirmation", function (confirmationNumber, receipt) {
-        // console.log("No: " + confirmationNumber + ", receipt: " + receipt);
       })
       .on("receipt", function (receipt) {
         alert("Success! Transaction has been completed.");
-        // console.log(receipt);
       })
       .on("error", function (error, receipt) {
         // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
         alert(
           "Transaction rejected! Check that this waller address have the permission or have enough ethers."
         );
-        // console.log(receipt);
       });
   }
 
