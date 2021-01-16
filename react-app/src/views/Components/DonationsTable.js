@@ -22,8 +22,8 @@ function processDonationRecords(records) {
       : "nil";
 
     // Format date into field strDate
-    const months = ["Jan","Feb","Mar","Apr","May","Jun",
-    "Jul","Aug","Sep","Oct","Nov","Dec"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     value.date = String(value.date);
     let day = value.date.slice(0, 2);
     let mth = value.date.slice(2, 4);
@@ -72,7 +72,6 @@ export class OrgRecordTable extends React.Component {
       await setTimeout(async () => {
         const processedDonations = await processDonationRecords(result);
         this.setState({ donations: processedDonations });
-        // console.log("set state")
         //TODO: Have this work without the 2000 ms
       }, 3000);
     }
@@ -174,8 +173,6 @@ export class UserRecordTable extends React.Component {
   }
 
   render() {
-    // console.log(this.props.nricHash);
-    // console.log(this.props.nricHash === this.state.nricHash);
     if (this.props.nricHash !== this.state.nricHash) {
       this.refreshDonations();
     }

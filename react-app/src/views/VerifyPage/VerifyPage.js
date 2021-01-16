@@ -28,18 +28,13 @@ export default function ProfilePage(props) {
     "0x0000000000000000000000000000000000000000000000000000000000000000"
   );
   const onChangeHandlerNRIC = async (event) => {
-    // console.log("onChangeHandlerNRIC");
     await setNric(event.target.value);
-    // console.log(nric);
-    // console.log("fin: onChangeHandlerNRIC");
   };
 
   function onSubmitNRIC() {
-    // console.log("onSubmitNRIC");
     if (String(nric).length > 0) {
       setNRICHash(web3.utils.sha3(nric.toUpperCase()));
     }
-    // console.log("fin: onSubmitNRIC");
   }
 
   // Used by Admin to add owner
@@ -48,11 +43,11 @@ export default function ProfilePage(props) {
     const walletAddress = "0x7af9D93643553CbA5D1d297C3cBB451dBfAd1d09";
     // const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
     // contractFunctions.addAllContractOwner(walletAddress, sendFrom, web3);
-    contractFunctions.checkContractOwner(walletAddress, "0xE34a7f5fC9d653Fb510494E857A387aA1426a4E4", web3 ).then(console.log);
-    contractFunctions.checkContractOwner(walletAddress, "0xda532bb1cdf942cB2802EEb70BdbB9375b9203D5", web3 ).then(console.log);
-    contractFunctions.checkContractOwner(walletAddress, "0x1Ed8BD5b9FfeC35A8F1a5fad3993bb6B8Fc3180B", web3 ).then(console.log);
-    contractFunctions.checkContractOwner(walletAddress, "0xB8746a8fad46aDbEA4FA188956ef38FDF6350960", web3 ).then(console.log);
-    contractFunctions.checkContractOwner(walletAddress, "0xe853F05E05D0ab97CD46BCAcf422384781f0Ed61", web3 ).then(console.log);
+    contractFunctions.checkContractOwner(walletAddress, "0xE34a7f5fC9d653Fb510494E857A387aA1426a4E4", web3).then(console.log);
+    contractFunctions.checkContractOwner(walletAddress, "0xda532bb1cdf942cB2802EEb70BdbB9375b9203D5", web3).then(console.log);
+    contractFunctions.checkContractOwner(walletAddress, "0x1Ed8BD5b9FfeC35A8F1a5fad3993bb6B8Fc3180B", web3).then(console.log);
+    contractFunctions.checkContractOwner(walletAddress, "0xB8746a8fad46aDbEA4FA188956ef38FDF6350960", web3).then(console.log);
+    contractFunctions.checkContractOwner(walletAddress, "0xe853F05E05D0ab97CD46BCAcf422384781f0Ed61", web3).then(console.log);
   }
 
   return (

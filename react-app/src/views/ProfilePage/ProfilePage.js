@@ -142,9 +142,9 @@ export default function ProfilePage(props) {
                   // If not owner, show message
                   "Note: You are not the admin of this charity. Please contact the CharityChain's admin if this is a mistake."
                 ) : (
-                  // If no valid Metamask or wallet provider
-                  "Note: You do not have Metamask or an Ethereum wallet provider. If you are the charity admin, please configure a wallet provider."
-                )}
+                      // If no valid Metamask or wallet provider
+                      "Note: You do not have Metamask or an Ethereum wallet provider. If you are the charity admin, please configure a wallet provider."
+                    )}
               </GridItem>
             </GridContainer>
           </div>

@@ -4,7 +4,7 @@ import "firebase/firestore";
 const Web3 = require("web3");
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyBWdeiAxDlaFnERx6DshIytm0g27pl0uHU",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "team2-blockchain.firebaseapp.com",
   projectId: "team2-blockchain",
   storageBucket: "team2-blockchain.appspot.com",
