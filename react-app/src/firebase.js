@@ -31,7 +31,11 @@ export function getCharities() {
     });
   return allCharities;
 }
-//To retrieve a specific UEN
+
+/**
+ * Retrieves a specific UEN
+ * @param uen is the uen to search for.
+ */
 export function searchByUEN(uen) {
   var charity = [];
   firestore

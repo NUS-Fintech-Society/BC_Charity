@@ -1,19 +1,16 @@
 /*eslint-disable*/
 import React from "react";
 // react components for routing our app without refresh
-
-// @material-ui/core components
+// core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-
+import Button from "components/CustomButtons/Button.js";
 // @material-ui/icons
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-
-// core components
-import Button from "components/CustomButtons/Button.js";
-
+// assets
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+
 
 const useStyles = makeStyles(styles);
 import firebase from "firebase";
@@ -25,11 +22,9 @@ export default function HeaderLinks() {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // User is signed in.
-      // console.log("IS SIGNED IN");
       setLoggedIn(user);
     } else {
       // No user is signed in.
-      // console.log("IS SIGNED OUT");
     }
   });
 
