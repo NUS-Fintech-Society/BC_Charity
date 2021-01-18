@@ -31,14 +31,17 @@ export default function ProfilePage(props) {
     await setNric(event.target.value);
   };
 
+    /**
+     * Hashes input nric and set the state to the hash.
+     */
   function onSubmitNRIC() {
     if (String(nric).length > 0) {
       setNRICHash(web3.utils.sha3(nric.toUpperCase()));
     }
   }
-
-  // Used by Admin to add owner
-  // eslint-disable-next-line
+    /**
+     * Used by Admin to add owner.
+     */
   function addNewOwner() {
     const walletAddress = "0x7af9D93643553CbA5D1d297C3cBB451dBfAd1d09";
     // const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
@@ -119,7 +122,6 @@ export default function ProfilePage(props) {
                     labelText='Your NRIC'
                     id='nric'
                     onChange={onChangeHandlerNRIC}
-                    name='nric'
                     type='text'
                     formControlProps={{
                       fullWidth: true,
