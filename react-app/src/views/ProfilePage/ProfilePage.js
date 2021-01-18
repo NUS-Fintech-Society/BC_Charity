@@ -22,7 +22,9 @@ const { charities } = require("../../util/charities");
 const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
-// check if current wallet is one of charity's owner
+/**
+ * Check if current wallet is one of charity's owner
+ */
 async function checkOwner(charityContract, web3) {
   const result = await contractFunctions.checkOwner(charityContract, web3);
   return result;
@@ -106,7 +108,6 @@ export default function ProfilePage(props) {
                     <h3 className={classes.title}>{org.name}</h3>
                   </div>
                   <div>
-                    {/* eslint-disable-next-line */}
                     <a href='#' onClick={() => goToExplorer(org.contract)}>
                       view charity's contract on explorer
                     </a>
