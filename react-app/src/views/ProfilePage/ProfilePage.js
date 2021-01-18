@@ -14,7 +14,6 @@ import Parallax from "components/Parallax/Parallax.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
-// Table
 import { OrgRecordTable } from "../Components/DonationsTable.js";
 
 const useStyles = makeStyles(styles);
@@ -108,6 +107,7 @@ export default function ProfilePage(props) {
                     <h3 className={classes.title}>{org.name}</h3>
                   </div>
                   <div>
+                    {/* eslint-disable-next-line */}
                     <a href='#' onClick={() => goToExplorer(org.contract)}>
                       view charity's contract on explorer
                     </a>
