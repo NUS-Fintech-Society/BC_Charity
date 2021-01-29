@@ -18,7 +18,7 @@ Never again will donors have doubts about being scammed or wonder if the donatio
 ## Features
 
 - (Verify) List all transactions made from any NRIC. Simply click on "Verify" and key in your NRIC to retrieve all relevant transactions.
-- (Add Transaction) As a charity, call your smart contract and make the record using this website. 
+- (Add Transaction) As a charity, call your smart contract and record the donations you receive using this website. 
 - (Org Page) Get a comprehensive summary of the donations that charities have been receiving. Find out the amount of every donation, and see the notes and dedications that go with them.
 
 ## BuildSetup
