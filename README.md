@@ -1,7 +1,9 @@
-# Charity
+# Charity Chain
+
+Charity Chain is a brand-new website that seeks to solve the problem of rising donation scams in Singapore in recent years. For example, during the COVID-19 Circuit Breaker period, the public had been warned of scammers who may take advantage of the situation and solicit donations from unsuspecting members of the public by impersonating organisations such as the World Health Organization or other legitimate charities. Scammers posing as charities is not an uncommon sight in Singapore, which is why there is a need to solve this problem.
 
 Charities need your support, and we want to help them give you full confidence in your donations.
-With our blockchain solution, charities can publicly and irrevocably commit the reciept of the donation for the world to see.
+With our blockchain solution, charities can publicly and irrevocably commit the receipt of their donations for the world to see.
 Donors can rest easy knowing that their donation was recieved and is accounted for as a matter of public record.
 Never again will donors have doubts about being scammed or wonder if the donation they made really went to the charity of their choice.
 
