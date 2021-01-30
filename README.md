@@ -25,10 +25,12 @@ Never again will donors have doubts about being scammed or wonder if the donatio
 
 2. Add a Transaction
 - As a charity, call your smart contract and record the donations you receive using this website. 
+- Charity admins simply need to configure a wallet provider (e.g. Metamask or Ethereum) to commit the receipt of their donations to the blockchain.
 
 3. Organisation Page
 - Get a comprehensive summary of the donations that charities have been receiving. 
 - Find out the amount of every donation, and see the notes and dedications that go with them.
+- Retrieve more details of every commit to the bloackchain by Viewing the charity's contract on the explorer.
 
 ## BuildSetup
 
