@@ -11,8 +11,8 @@ Never again will donors have doubts about being scammed or wonder if the donatio
 
 - [Charity](#charity)
   - [Table of Contents](#table-of-contents)
-  - [BuildSetup](#buildsetup)
   - [Features](#features)
+  - [BuildSetup](#buildsetup)
   - [File Structure](#file-structure)
   - [Questions or Feedback](#questions-or-feedback)
   - [Contributors](#contributors)
