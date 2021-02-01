@@ -14,7 +14,6 @@ import Parallax from "components/Parallax/Parallax.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
-// Table
 import { OrgRecordTable } from "../Components/DonationsTable.js";
 
 const useStyles = makeStyles(styles);
@@ -22,7 +21,9 @@ const { charities } = require("../../util/charities");
 const contractFunctions = require("../../contracts/utils/functions");
 const web3 = contractFunctions.getWeb3();
 
-// check if current wallet is one of charity's owner
+/**
+ * Check if current wallet is one of charity's owner
+ */
 async function checkOwner(charityContract, web3) {
   const result = await contractFunctions.checkOwner(charityContract, web3);
   return result;

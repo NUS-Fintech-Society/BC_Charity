@@ -17,6 +17,11 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 const useStyles = makeStyles(styles);
 
+/**
+ *To Validate nric field input
+ * @param nric is taken from nric input field.
+ * @returns {boolean} depending on whether nric is valid. i.e. All caps and containing 7 numbers.
+ */
 function validateNric(nric) {
   let nricArr = nric.split("");
   if (nricArr.length !== 9) {
@@ -25,7 +30,6 @@ function validateNric(nric) {
   for (let i = 0; i < nricArr.length; i++) {
     let value = nricArr[i];
     if (i === 0 || i === 8) {
-      // check if value = capital letter
       if (!/[A-Z]/.test(value)) {
         return false;
       }
@@ -36,6 +40,11 @@ function validateNric(nric) {
   return true;
 }
 
+/**
+ *To Validate amount field input
+ * @param amt is taken from amt input field.
+ * @returns {boolean} depending on whether amount is valid. i.e. amount greater than 0.
+ */
 function validateAmt(amt) {
   if (isNaN(amt) || amt <= 0 || amt - Math.floor(amt) !== 0) {
     return false;
@@ -43,6 +52,11 @@ function validateAmt(amt) {
   return true;
 }
 
+/**
+ *To Validate note field input
+ * @param note is taken from note input field.
+ * @returns {boolean} depending on whether note is valid. i.e. note entered must be less than 32 characters containing only a-z A-Z , ! . ? ; : - '
+ */
 function validateNote(note) {
   let noteArr = note.split("");
   let value;
@@ -57,10 +71,12 @@ function validateNote(note) {
   }
   return true;
 }
-
+/**
+ *To Validate date field input
+ * @param dateString is taken from date input field.
+ * @returns {boolean} depending on whether date is valid. i.e. date entered must be valid date formatted as "dd/mm/yyyy"
+ */
 function validateDate(dateString) {
-  // Validates that the input string is a valid date formatted as "dd/mm/yyyy"
-
   // First check for the pattern
   if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) return false;
 
@@ -107,7 +123,6 @@ export default function ProfilePage(props) {
     window.location.href = "/invalid-uen";
   }
 
-  //others
 
   const classes = useStyles();
   const { ...rest } = props;
@@ -116,6 +131,8 @@ export default function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+
+  // Hooks to track input nric, amount, note and date.
   const [nric, setNric] = useState("");
   const [nricError, setNricError] = useState("");
   const nricErrorMessageRef = useRef("");
@@ -152,6 +169,10 @@ export default function ProfilePage(props) {
     setDate(value);
   };
 
+  /**
+   *Helper function to validate nric field input. Sets the error message for the nric input field if input is not valid.
+   * @returns {boolean} depending on whether nric is valid. i.e. All caps and containing 7 numbers.
+   */
   const validateHelperNric = () => {
     if (!validateNric(nric)) {
       nricErrorMessageRef.current =
@@ -166,6 +187,10 @@ export default function ProfilePage(props) {
     return true;
   };
 
+  /**
+   *Helper function to validate amount field input. Sets the error message for the amount input field if input is not valid.
+   * @returns {boolean} depending on whether amount is valid. i.e. amount greater than 0.
+   */
   const validateHelperAmt = () => {
     if (!validateAmt(amt)) {
       amtErrorMessageRef.current =
@@ -180,6 +205,10 @@ export default function ProfilePage(props) {
     return true;
   };
 
+  /**
+   *Helper function to validate note field input. Sets the error message for the note input field if input is not valid.
+   * @returns {boolean} depending on whether note is valid. i.e. note entered must be less than 32 characters containing only a-z A-Z , ! . ? ; : - '
+   */
   const validateHelperNote = () => {
     if (!validateNote(note)) {
       noteErrorMessageRef.current =
@@ -196,6 +225,10 @@ export default function ProfilePage(props) {
     return true;
   };
 
+  /**
+   *Helper function to validate date field input. Sets the error message for the date input field if input is not valid.
+   * @returns {boolean} depending on whether date is valid. i.e. date entered must be valid date formatted as "dd/mm/yyyy"
+   */
   const validateHelperDate = () => {
     if (!validateDate(date)) {
       dateErrorMessageRef.current =
@@ -214,6 +247,10 @@ export default function ProfilePage(props) {
     return true;
   };
 
+  /**
+   *On Submit, this will call the validation functions of the input fields. If input is valid, no error message will be shown.
+   * and upon successful validation of all fields, the input fields and error messages will be cleared. And a new donation will be recorded.
+   */
   function handleSubmit() {
     const isValidNric = validateHelperNric();
     const isValidAmt = validateHelperAmt();
@@ -221,20 +258,15 @@ export default function ProfilePage(props) {
     const isValidDate = validateHelperDate();
 
     if (isValidNric) {
-      //TODO: clear form
-      // console.log("Successful NRIC: " + nric);
       setNricError("");
     }
     if (isValidAmt) {
-      // console.log("Successful Amount: " + amt);
       setAmtError("");
     }
     if (isValidNote) {
-      // console.log("Note: " + note);
       setNoteError("");
     }
     if (isValidDate) {
-      // console.log("Successful Date: " + date);
       setDateError("");
     }
 
@@ -249,7 +281,7 @@ export default function ProfilePage(props) {
   }
 
   /**
-   * Used by Wei Hong to add owner hehe.
+   * Adding a new owner
    */
   // eslint-disable-next-line
   async function addOwner() {
@@ -258,7 +290,9 @@ export default function ProfilePage(props) {
     const sendFrom = "0xF87d7aee9C262249C5ebb1424a2FDE86A68D1c14";
     contractFunctions.addAllContractOwner(seanAddr, sendFrom, web3);
   }
-
+  /**
+   * Helper function to addDonation. Formats the input to pass to addDonation function.
+   */
   function addDonationHelper() {
     const hash = web3.utils.sha3(nric);
     const amount = Number(amt);
@@ -279,8 +313,14 @@ export default function ProfilePage(props) {
     addDonation(hash, amount, dateFormatted, note);
   }
 
+  /**
+   * Adds a new donation to the blockchain. Parameters are formatted in addDonationHelper().
+   * @param hashString hashed nric string
+   * @param amt amount donated
+   * @param dateFormatted formatted date
+   * @param note note
+   */
   async function addDonation(hashString, amt, dateFormatted, note) {
-    // Parameters
     const nricHash = hashString;
     const amount = amt;
     const date = dateFormatted;
@@ -369,7 +409,6 @@ export default function ProfilePage(props) {
                 <Input
                   labelText='NRIC (Case Sensitive)'
                   id='nric'
-                  name='nric'
                   placeholder='NRIC (Case Sensitive)'
                   formControlProps={{
                     fullWidth: true,
@@ -382,7 +421,6 @@ export default function ProfilePage(props) {
                 <Input
                   labelText='Amount'
                   id='amount'
-                  name='amount'
                   placeholder='Amount (dollars)'
                   formControlProps={{
                     fullWidth: true,
@@ -397,7 +435,6 @@ export default function ProfilePage(props) {
                 <Input
                   labelText='Note'
                   id='note'
-                  name='note'
                   placeholder='Note'
                   multiline='true'
                   formControlProps={{
@@ -416,7 +453,6 @@ export default function ProfilePage(props) {
                 <Input
                   labelText='Date'
                   id='date'
-                  name='date'
                   placeholder='Date: DD/MM/YYYY'
                   formControlProps={{
                     fullWidth: true,

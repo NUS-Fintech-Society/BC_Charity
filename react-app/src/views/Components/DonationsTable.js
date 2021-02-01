@@ -6,6 +6,11 @@ const web3Sha3 = require("web3").utils.sha3;
 const web3 = contractFunctions.getWeb3();
 const firestore = require("../../firebase");
 
+/**
+ * Formats donation records.
+ * @param records is the records from smart contract
+ * @returns formatted record to be used
+ */
 function processDonationRecords(records) {
   records.forEach(async (value) => {
     if (value.date.length === 7) {
@@ -81,7 +86,6 @@ export class OrgRecordTable extends React.Component {
     // console.log("render...")
     // console.log(this.state.donations);
     const columnHeader = [
-      // Amount Date Donor Message
       { id: "donor", label: "Donor", minWidth: 170, align: "left" },
       { id: "strAmount", label: "Amount", minWidth: 100, align: "right" },
       { id: "strDate", label: "Date", minWidth: 170, align: "left" },
